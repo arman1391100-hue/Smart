@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>کی باهوش‌تره؟</title>
+<style>
+:root{--bg:#f3f0ff;--bg2:#ffeef6;--card:#ffffff;--tx:#241b3a;--mu:#6b6384;--ac:#7c3aed;--acx:#fff;--ok:#16a34a;--no:#e11d48;--bd:#e3dcf7;--c1:#3b82f6;--c2:#ec4899;--c3:#f59e0b;--c4:#10b981;--c5:#7c3aed;--o1:#3b82f6;--o2:#8b5cf6;--o3:#f59e0b;--o4:#06b6d4;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14102a;--bg2:#2a1038;--card:#201a3a;--tx:#f4efff;--mu:#a79fc4;--ac:#a78bfa;--acx:#fff;--bd:#3a3160;--c1:#60a5fa;--c2:#f472b6;--c3:#fbbf24;--c4:#34d399;--c5:#a78bfa;--o1:#60a5fa;--o2:#a78bfa;--o3:#fbbf24;--o4:#22d3ee}}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:linear-gradient(160deg,var(--bg),var(--bg2)) fixed;color:var(--tx);font:16px/1.6 Vazirmatn,Tahoma,"Segoe UI",sans-serif}
+#app{max-width:520px;margin:0 auto;padding:16px}
+h1{text-align:center;margin:8px 0 16px;font-size:30px;background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.card{background:var(--card);border:1px solid var(--bd);border-top:4px solid var(--c1);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:0 4px 14px rgba(124,58,237,.08)}
+.card:nth-of-type(4n+2){border-top-color:var(--c2)}.card:nth-of-type(4n+3){border-top-color:var(--c3)}.card:nth-of-type(4n){border-top-color:var(--c4)}
+.lb{color:var(--mu);font-size:14px;margin:0 0 6px;font-weight:600}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+button,input{font:inherit;color:inherit}
+.b{flex:1;min-width:70px;padding:10px 8px;border-radius:12px;border:2px solid var(--bd);background:var(--card);cursor:pointer;transition:transform .1s}
+.b:active,.o:active,.go:active{transform:scale(.97)}
+.b.on,.go{background:linear-gradient(135deg,var(--c5),var(--c2));color:#fff;border-color:transparent;font-weight:700}
+.b.d0{border-color:#10b981}.b.d1{border-color:#f59e0b}.b.d2{border-color:#f97316}.b.d3{border-color:#9333ea}
+.b.d0.on{background:linear-gradient(135deg,#10b981,#34d399)}.b.d1.on{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#3b2a00}.b.d2.on{background:linear-gradient(135deg,#f97316,#ef4444)}.b.d3.on{background:linear-gradient(135deg,#6d28d9,#1e1b4b)}
+.go{width:100%;padding:14px;border-radius:14px;border:0;font-size:18px;cursor:pointer;margin-top:6px;box-shadow:0 6px 16px rgba(124,58,237,.3)}
+input{width:100%;padding:10px;border-radius:12px;border:2px solid var(--bd);background:var(--bg);margin-top:6px}
+input:focus{outline:0;border-color:var(--c1)}
+.bar{height:10px;background:var(--bd);border-radius:10px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--c4),var(--c3),var(--c2));width:100%}
+.q{font-size:21px;font-weight:700;margin:14px 0;text-align:center;min-height:60px}
+.o{display:block;width:100%;text-align:right;padding:14px;margin-bottom:8px;border-radius:14px;border:2px solid var(--oc,var(--bd));background:color-mix(in srgb,var(--oc,var(--bd)) 14%,var(--card));cursor:pointer;font-weight:600}
+.o:nth-of-type(4n+1){--oc:var(--o1)}.o:nth-of-type(4n+2){--oc:var(--o2)}.o:nth-of-type(4n+3){--oc:var(--o3)}.o:nth-of-type(4n){--oc:var(--o4)}
+.o.cr{border-color:var(--tx);border-width:3px;background:color-mix(in srgb,var(--tx) 14%,var(--card))}.o.wr{border-style:dashed;border-color:var(--tx);opacity:.6}.o.dim{opacity:.4}
+.o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 30%,var(--card))}
+.o.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 30%,var(--card))}
+.o.ty{text-align:center;cursor:default}
+.ti{font-size:20px;text-align:center;padding:14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.chip{padding:4px 10px;border-radius:20px;background:color-mix(in srgb,var(--c1) 14%,var(--card));border:1px solid var(--c1);font-size:14px}
+.chip:nth-child(5n+2){border-color:var(--c2);background:color-mix(in srgb,var(--c2) 14%,var(--card))}.chip:nth-child(5n+3){border-color:var(--c3);background:color-mix(in srgb,var(--c3) 14%,var(--card))}.chip:nth-child(5n+4){border-color:var(--c4);background:color-mix(in srgb,var(--c4) 14%,var(--card))}.chip:nth-child(5n){border-color:var(--c5);background:color-mix(in srgb,var(--c5) 14%,var(--card))}
+.code{font:700 40px monospace;letter-spacing:8px;text-align:center;direction:ltr;color:var(--c2)}
+.c{text-align:center}.mu{color:var(--mu)}
+.rk{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--bd)}
+.o.cr,.o.ok{animation:pop .45s}.o.wr{animation:shake .4s}
+@keyframes pop{40%{transform:scale(1.04)}}@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.bar.low i{background:var(--no)}#tt.low{color:var(--no);font-weight:700}
+.big{font-size:56px;text-align:center;line-height:1.2}
+.cf{position:fixed;top:-30px;font-size:24px;pointer-events:none;z-index:9;animation:fall 2.6s linear forwards}
+@keyframes fall{to{transform:translateY(115vh) rotate(540deg)}}
+@media(prefers-reduced-motion:reduce){.o,.cf{animation:none}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// بانک سوال: [سوال، پاسخ درست، سه گزینه غلط]
+const BANK=[
+["پایتخت ایران کدام شهر است؟","تهران","اصفهان","شیراز","تبریز"],
+["بزرگ‌ترین سیاره منظومه شمسی؟","مشتری","زحل","زمین","مریخ"],
+["سراینده شاهنامه کیست؟","فردوسی","حافظ","سعدی","مولوی"],
+["تخت جمشید در کدام استان است؟","فارس","یزد","کرمان","خوزستان"],
+["فرمول شیمیایی آب؟","H2O","CO2","O2","NaCl"],
+["بلندترین قله جهان؟","اورست","دماوند","کی‌۲","مون‌بلان"],
+["بزرگ‌ترین قاره جهان؟","آسیا","آفریقا","اروپا","آمریکای شمالی"],
+["شش‌ضلعی چند ضلع دارد؟","۶","۵","۷","۸"],
+["نقاش تابلوی مونالیزا؟","لئوناردو داوینچی","پیکاسو","ون‌گوگ","میکل‌آنژ"],
+["جذر عدد ۱۴۴ چند است؟","۱۲","۱۴","۱۱","۱۳"],
+["سریع‌ترین حیوان خشکی؟","یوزپلنگ","شیر","اسب","پلنگ"],
+["بزرگ‌ترین اقیانوس جهان؟","آرام","اطلس","هند","منجمد شمالی"],
+["نخستین فرود انسان بر ماه در چه سالی بود؟","۱۹۶۹","۱۹۵۷","۱۹۷۵","۱۹۶۱"],
+["پایتخت فرانسه؟","پاریس","لیون","رم","مادرید"],
+["نماد شیمیایی طلا؟","Au","Ag","Fe","Gd"],
+["گلستان اثر کدام شاعر است؟","سعدی","حافظ","نظامی","عطار"],
+["حاصل ۷ × ۸؟","۵۶","۵۴","۴۸","۶۳"],
+["سیاره سرخ کدام است؟","مریخ","زهره","عطارد","نپتون"],
+["دریاچه ارومیه در کدام بخش ایران است؟","شمال غرب","جنوب","شرق","مرکز"],
+["زبان رسمی برزیل؟","پرتغالی","اسپانیایی","انگلیسی","فرانسوی"],
+["ایران چند استان دارد؟","۳۱","۲۸","۳۰","۳۲"],
+["مخترع تلفن؟","گراهام بل","ادیسون","تسلا","نیوتن"],
+["بزرگ‌ترین عضو بدن انسان؟","پوست","کبد","قلب","ریه"],
+["رود نیل در کدام قاره است؟","آفریقا","آسیا","اروپا","آمریکا"],
+["پایتخت ژاپن؟","توکیو","کیوتو","اوزاکا","سئول"],
+["نزدیک‌ترین ستاره به زمین؟","خورشید","آلفا قنطورس","ستاره قطبی","شعرای یمانی"],
+["خیام اهل کدام شهر بود؟","نیشابور","شیراز","طوس","ری"],
+["رنگین‌کمان چند رنگ دارد؟","۷","۶","۸","۵"],
+["فراوان‌ترین گاز هوا؟","نیتروژن","اکسیژن","گاز کربنیک","هیدروژن"],
+["پایتخت ترکیه؟","آنکارا","استانبول","ازمیر","بورسا"],
+["سرعت نور تقریباً چقدر است؟","۳۰۰ هزار km/s","۳۰ هزار km/s","۳ میلیون km/s","۳ هزار km/s"],
+["المپیک ۲۰۱۶ در کدام شهر برگزار شد؟","ریودوژانیرو","لندن","پکن","توکیو"],
+["در یک تیم فوتبال چند بازیکن داخل زمین‌اند؟","۱۱","۱۰","۹","۱۲"],
+["آرامگاه حافظ در کدام شهر است؟","شیراز","اصفهان","مشهد","تبریز"],
+["عدد π تقریباً چند است؟","۳٫۱۴","۲٫۷۱","۱٫۶۲","۴٫۱۳"],
+["بزرگ‌ترین کشور جهان از نظر مساحت؟","روسیه","چین","کانادا","آمریکا"],
+["نخستین ماه سال شمسی؟","فروردین","مهر","دی","اسفند"],
+["بدن انسان بالغ چند استخوان دارد؟","۲۰۶","۱۰۸","۳۰۰","۱۵۰"],
+["نور خورشید به ساخت کدام ویتامین کمک می‌کند؟","D","C","A","B12"],
+["گیاهان در فتوسنتز کدام گاز را جذب می‌کنند؟","گاز کربنیک","اکسیژن","نیتروژن","هلیم"],
+["قله دماوند در کدام رشته‌کوه است؟","البرز","زاگرس","هیمالیا","آلپ"],
+["نویسنده «بوف کور» کیست؟","صادق هدایت","نیما یوشیج","احمد شاملو","جلال آل‌احمد"],
+["کوچک‌ترین عدد اول؟","۲","۱","۳","۰"],
+["آب در چند درجه سانتی‌گراد می‌جوشد؟","۱۰۰","۹۰","۸۰","۱۲۰"],
+["پایتخت ایتالیا؟","رم","میلان","ناپل","ونیز"],
+["کدام فلز در دمای اتاق مایع است؟","جیوه","آهن","مس","سرب"],
+["یک ساعت چند ثانیه است؟","۳۶۰۰","۱۸۰۰","۶۰۰۰","۳۶۰"],
+["اسب رخش متعلق به کدام پهلوان است؟","رستم","سهراب","اسفندیار","سیاوش"],
+["سبک‌ترین عنصر جدول تناوبی؟","هیدروژن","هلیم","لیتیم","اکسیژن"],
+["پایتخت مصر؟","قاهره","اسکندریه","جیزه","لوکسور"],
+["پایتخت کانادا؟","اتاوا","تورنتو","ونکوور","مونترال",1],
+["کوچک‌ترین قاره از نظر مساحت؟","اقیانوسیه","اروپا","قطب جنوب","آمریکای جنوبی",1],
+["واحد اندازه‌گیری نیرو؟","نیوتن","ژول","وات","پاسکال",1],
+["نویسنده «جنگ و صلح»؟","تولستوی","داستایفسکی","چخوف","گورکی",1],
+["عنصری با نماد Fe؟","آهن","فلوئور","فسفر","فرمیوم",1],
+["نویسنده «مثنوی معنوی»؟","مولوی","عطار","سنایی","نظامی",1],
+["بنیان‌گذار شاهنشاهی هخامنشی؟","کوروش بزرگ","داریوش","خشایارشا","اردشیر",2],
+["بنیان‌گذار سلسله صفوی؟","شاه اسماعیل","شاه عباس","نادرشاه","کریم‌خان",2],
+["تعداد عنصرهای شناخته‌شده جدول تناوبی؟","۱۱۸","۹۲","۱۵۰","۱۰۰",2],
+["دیوار برلین در چه سالی فرو ریخت؟","۱۹۸۹","۱۹۷۹","۱۹۹۱","۱۹۸۵",2],
+["نویسنده «بیست هزار فرسنگ زیر دریا»؟","ژول ورن","اچ. جی. ولز","مارک تواین","کانن دویل",2],
+["پایتخت قزاقستان؟","آستانه","آلماتی","تاشکند","بیشکک",2],
+["بزرگ‌ترین قمر مشتری؟","گانیمد","اروپا","آیو","تیتان",2],
+["مساحت دایره‌ای به شعاع r؟","πr²","2πr","πd²","r²/2",2],
+["کاشف پنی‌سیلین؟","الکساندر فلمینگ","لویی پاستور","ماری کوری","ادوارد جنر",2],
+["عنصر با عدد اتمی ۶؟","کربن","اکسیژن","نیتروژن","بور",2],
+["شهر کاشان در کدام استان است؟","اصفهان","قم","مرکزی","سمنان",2]];
+const BANKE=[
+["What is the capital of France?","Paris","Lyon","Rome","Madrid"],
+["Which planet is the largest?","Jupiter","Saturn","Earth","Mars"],
+["Who wrote Romeo and Juliet?","Shakespeare","Dickens","Homer","Tolstoy"],
+["Chemical formula of water?","H2O","CO2","O2","NaCl"],
+["Highest mountain on Earth?","Everest","K2","Mont Blanc","Kilimanjaro"],
+["Largest continent?","Asia","Africa","Europe","North America"],
+["How many sides does a hexagon have?","6","5","7","8"],
+["Who painted the Mona Lisa?","Leonardo da Vinci","Picasso","Van Gogh","Michelangelo"],
+["Square root of 144?","12","14","11","13"],
+["Fastest land animal?","Cheetah","Lion","Horse","Leopard"],
+["Largest ocean?","Pacific","Atlantic","Indian","Arctic"],
+["Year of the first Moon landing?","1969","1957","1975","1961"],
+["Chemical symbol of gold?","Au","Ag","Fe","Gd"],
+["What is 7 x 8?","56","54","48","63"],
+["Which is the Red Planet?","Mars","Venus","Mercury","Neptune"],
+["Official language of Brazil?","Portuguese","Spanish","English","French"],
+["Who invented the telephone?","Graham Bell","Edison","Tesla","Newton"],
+["Largest organ of the human body?","Skin","Liver","Heart","Lungs"],
+["The Nile is in which continent?","Africa","Asia","Europe","America"],
+["Capital of Japan?","Tokyo","Kyoto","Osaka","Seoul"],
+["Closest star to Earth?","The Sun","Alpha Centauri","Polaris","Sirius"],
+["How many colors in a rainbow?","7","6","8","5"],
+["Most abundant gas in air?","Nitrogen","Oxygen","Carbon dioxide","Hydrogen"],
+["Capital of Turkey?","Ankara","Istanbul","Izmir","Bursa"],
+["Speed of light is about?","300,000 km/s","30,000 km/s","3,000,000 km/s","3,000 km/s"],
+["Host city of the 2016 Olympics?","Rio de Janeiro","London","Beijing","Tokyo"],
+["Players per football team on the pitch?","11","10","9","12"],
+["Approximate value of pi?","3.14","2.71","1.62","4.13"],
+["Largest country by area?","Russia","China","Canada","USA"],
+["Bones in an adult human body?","206","108","300","150"],
+["Sunlight helps make which vitamin?","D","C","A","B12"],
+["Plants absorb which gas?","Carbon dioxide","Oxygen","Nitrogen","Helium"],
+["Smallest prime number?","2","1","3","0"],
+["Water boils at (C)?","100","90","80","120"],
+["Capital of Italy?","Rome","Milan","Naples","Venice"],
+["Which metal is liquid at room temperature?","Mercury","Iron","Copper","Lead"],
+["Seconds in one hour?","3600","1800","6000","360"],
+["Lightest element?","Hydrogen","Helium","Lithium","Oxygen"],
+["Capital of Egypt?","Cairo","Alexandria","Giza","Luxor"],
+["Who wrote 1984?","George Orwell","Aldous Huxley","Ray Bradbury","H. G. Wells"],
+["Capital of Australia?","Canberra","Sydney","Melbourne","Perth"],
+["Which gas do humans need to breathe?","Oxygen","Helium","Neon","Methane"],
+["How many continents are there?","7","5","6","8"],
+["Who developed the theory of relativity?","Einstein","Newton","Galileo","Bohr"],
+["Longest river in South America?","Amazon","Orinoco","Parana","Magdalena"],
+["Which planet has prominent rings?","Saturn","Mars","Mercury","Venus"],
+["Capital of Germany?","Berlin","Munich","Hamburg","Vienna"],
+["Hardest natural substance?","Diamond","Gold","Iron","Quartz"],
+["Which is the largest mammal?","Blue whale","Elephant","Giraffe","Hippo"],
+["How many days in a leap year?","366","365","364","367"],
+["Capital of Canada?","Ottawa","Toronto","Vancouver","Montreal",1],
+["Smallest continent by area?","Oceania","Europe","Antarctica","South America",1],
+["SI unit of force?","Newton","Joule","Watt","Pascal",1],
+["Who wrote War and Peace?","Tolstoy","Dostoevsky","Chekhov","Gorky",1],
+["Which element has the symbol Fe?","Iron","Fluorine","Phosphorus","Fermium",1],
+["Who wrote The Odyssey?","Homer","Virgil","Sophocles","Plato",1],
+["Who painted The Starry Night?","Van Gogh","Monet","Munch","Dali",1],
+["Founder of the Achaemenid Empire?","Cyrus the Great","Darius I","Xerxes","Artaxerxes",2],
+["In which year did the Berlin Wall fall?","1989","1979","1991","1985",2],
+["Who wrote Twenty Thousand Leagues Under the Sea?","Jules Verne","H. G. Wells","Mark Twain","Conan Doyle",2],
+["Capital of Kazakhstan?","Astana","Almaty","Tashkent","Bishkek",2],
+["Largest moon of Jupiter?","Ganymede","Europa","Io","Titan",2],
+["Who discovered penicillin?","Alexander Fleming","Louis Pasteur","Marie Curie","Edward Jenner",2],
+["Element with atomic number 6?","Carbon","Oxygen","Nitrogen","Boron",2],
+["Area of a circle with radius r?","πr²","2πr","πd²","r²/2",2],
+["Approx. number of known chemical elements?","118","92","150","100",2],
+["Which empire built Machu Picchu?","Inca","Aztec","Maya","Olmec",2]];
+const NEWQ=[
+['his','نخستین انسانی که پا روی ماه گذاشت کیست؟','نیل آرمسترانگ','یوری گاگارین','باز آلدرین','جان گلن','Who was the first person to walk on the Moon?','Neil Armstrong','Yuri Gagarin','Buzz Aldrin','John Glenn',0],
+['his','جنگ جهانی دوم در چه سالی پایان یافت؟','۱۹۴۵','۱۹۳۹','۱۹۱۸','۱۹۵۰','In what year did World War II end?','1945','1939','1918','1950',0],
+['his','انقلاب فرانسه در چه سالی آغاز شد؟','۱۷۸۹','۱۷۷۶','۱۸۱۵','۱۸۴۸','In what year did the French Revolution begin?','1789','1776','1815','1848',1],
+['his','دیوار برلین در چه سالی فروریخت؟','۱۹۸۹','۱۹۹۱','۱۹۷۹','۱۹۶۱','In what year did the Berlin Wall fall?','1989','1991','1979','1961',1],
+['his','کدام تمدن اهرام جیزه را ساخت؟','مصر باستان','مایا','روم باستان','بین‌النهرین','Which civilization built the Pyramids of Giza?','Ancient Egypt','Maya','Ancient Rome','Mesopotamia',0],
+['his','کشتی تایتانیک در چه سالی غرق شد؟','۱۹۱۲','۱۹۰۵','۱۹۲۰','۱۸۹۸','In what year did the Titanic sink?','1912','1905','1920','1898',1],
+['his','کوروش بزرگ بنیان‌گذار کدام شاهنشاهی بود؟','هخامنشی','ساسانی','اشکانی','سلجوقی','Cyrus the Great founded which empire?','Achaemenid','Sasanian','Parthian','Seljuk',1],
+['his','اسکندر مقدونی پادشاه کدام سرزمین بود؟','مقدونیه','اسپارت','روم','مصر','Alexander the Great was king of which land?','Macedon','Sparta','Rome','Egypt',1],
+['sci','نزدیک‌ترین سیاره به خورشید کدام است؟','عطارد','زهره','مریخ','زمین','Which planet is closest to the Sun?','Mercury','Venus','Mars','Earth',0],
+['sci','سرعت نور تقریباً چند کیلومتر بر ثانیه است؟','۳۰۰٬۰۰۰','۳۰٬۰۰۰','۱۵۰٬۰۰۰','۳٬۰۰۰٬۰۰۰','About how fast is light, in km per second?','300,000','30,000','150,000','3,000,000',1],
+['sci','کدام گاز بیشترین سهم را در جو زمین دارد؟','نیتروژن','اکسیژن','دی‌اکسید کربن','آرگون','Which gas makes up most of Earth\'s atmosphere?','Nitrogen','Oxygen','Carbon dioxide','Argon',1],
+['sci','بدن انسان بالغ چند استخوان دارد؟','۲۰۶','۱۸۶','۲۳۰','۳۰۶','How many bones does an adult human have?','206','186','230','306',1],
+['sci','واحد اندازه‌گیری نیرو چیست؟','نیوتن','ژول','وات','پاسکال','What is the SI unit of force?','Newton','Joule','Watt','Pascal',1],
+['sci','بزرگ‌ترین عضو بدن انسان کدام است؟','پوست','کبد','ریه','قلب','What is the largest organ of the human body?','Skin','Liver','Lung','Heart',0],
+['sci','گیاهان برای فتوسنتز کدام گاز را جذب می‌کنند؟','دی‌اکسید کربن','اکسیژن','نیتروژن','هیدروژن','Which gas do plants absorb for photosynthesis?','Carbon dioxide','Oxygen','Nitrogen','Hydrogen',0],
+['sci','مولکول DNA چه چیزی را در خود نگه می‌دارد؟','اطلاعات ژنتیکی','انرژی سلول','اکسیژن خون','آب بدن','What does DNA store?','Genetic information','Cell energy','Blood oxygen','Body water',1],
+['spo','هر تیم فوتبال چند بازیکن هم‌زمان در زمین دارد؟','۱۱','۹','۱۰','۱۲','How many players does a football (soccer) team field at once?','11','9','10','12',0],
+['spo','جام جهانی فوتبال ۲۰۲۲ در کدام کشور برگزار شد؟','قطر','روسیه','برزیل','آلمان','Which country hosted the 2022 FIFA World Cup?','Qatar','Russia','Brazil','Germany',0],
+['spo','قهرمان جام جهانی فوتبال ۲۰۲۲ کدام تیم بود؟','آرژانتین','فرانسه','برزیل','کرواسی','Who won the 2022 FIFA World Cup?','Argentina','France','Brazil','Croatia',1],
+['spo','المپیک تابستانی ۲۰۲۴ در کدام شهر برگزار شد؟','پاریس','توکیو','لس‌آنجلس','لندن','Which city hosted the 2024 Summer Olympics?','Paris','Tokyo','Los Angeles','London',1],
+['spo','در بسکتبال هر تیم چند بازیکن در زمین دارد؟','۵','۶','۷','۴','How many players per team are on court in basketball?','5','6','7','4',0],
+['spo','مسافت یک ماراتن حدود چند کیلومتر است؟','۴۲','۲۱','۵۰','۳۰','About how long is a marathon, in km?','42','21','50','30',1],
+['spo','تورنمنت ویمبلدون روی کدام سطح برگزار می‌شود؟','چمن','خاک رس','سطح سخت','پارکت','Which surface is Wimbledon played on?','Grass','Clay','Hard court','Carpet',1],
+['spo','در شطرنج کدام مهره فقط مورب حرکت می‌کند؟','فیل','رخ','اسب','وزیر','In chess, which piece moves only diagonally?','Bishop','Rook','Knight','Queen',1],
+['art','«بینوایان» اثر کدام نویسنده است؟','ویکتور هوگو','تولستوی','داستایوفسکی','چارلز دیکنز','Who wrote "Les Misérables"?','Victor Hugo','Tolstoy','Dostoevsky','Charles Dickens',1],
+['art','«بوف کور» نوشته کیست؟','صادق هدایت','جلال آل‌احمد','بزرگ علوی','نیما یوشیج','Who wrote "The Blind Owl"?','Sadegh Hedayat','Jalal Al-e-Ahmad','Bozorg Alavi','Nima Yooshij',1],
+['art','کارگردان فیلم «جدایی نادر از سیمین» کیست؟','اصغر فرهادی','عباس کیارستمی','مجید مجیدی','جعفر پناهی','Who directed "A Separation"?','Asghar Farhadi','Abbas Kiarostami','Majid Majidi','Jafar Panahi',0],
+['art','«جنگ و صلح» نوشته کدام نویسنده است؟','لئو تولستوی','داستایوفسکی','آنتون چخوف','ماکسیم گورکی','Who wrote "War and Peace"?','Leo Tolstoy','Dostoevsky','Anton Chekhov','Maxim Gorky',1],
+['art','نویسنده‌ی مجموعه‌ی «هری پاتر» کیست؟','جی. کی. رولینگ','تالکین','سی. اس. لوئیس','روآلد دال','Who wrote the Harry Potter books?','J. K. Rowling','Tolkien','C. S. Lewis','Roald Dahl',0],
+['art','کارگردان فیلم «تایتانیک» (۱۹۹۷) کیست؟','جیمز کامرون','استیون اسپیلبرگ','کریستوفر نولان','مارتین اسکورسیزی','Who directed "Titanic" (1997)?','James Cameron','Steven Spielberg','Christopher Nolan','Martin Scorsese',1],
+['art','«گلستان» اثر کدام شاعر و نویسنده است؟','سعدی','حافظ','مولوی','نظامی','Who wrote the Persian classic "Gulistan"?','Saadi','Hafez','Rumi','Nizami',0],
+['art','سمفونی نهم با «سرود شادی» اثر کیست؟','بتهوون','موتسارت','باخ','شوپن','Who composed the Ninth Symphony with the "Ode to Joy"?','Beethoven','Mozart','Bach','Chopin',1]];
+// بانک‌های اختصاصی آره/نه و تشریحی برای همه‌ی سطح‌ها
+const YNX=[["sci", 2, "سرعت نور در خلأ تقریباً ۳۰۰٬۰۰۰ کیلومتر بر ثانیه است.", "The speed of light in a vacuum is about 300,000 km/s.", "سرعت نور در خلأ تقریباً ۳۰۰٬۰۰۰ متر بر ثانیه است.", "The speed of light in a vacuum is about 300,000 m/s."], ["sci", 2, "فوتون جرم سکون ندارد.", "A photon has no rest mass.", "فوتون جرم سکونی برابر با جرم الکترون دارد.", "A photon has the same rest mass as an electron."], ["sci", 2, "پروتئین‌ها از آمینواسیدها ساخته می‌شوند.", "Proteins are built from amino acids.", "پروتئین‌ها از اسیدهای چرب ساخته می‌شوند.", "Proteins are built from fatty acids."], ["sci", 2, "ریبوزوم محل ساخت پروتئین در سلول است.", "The ribosome is where proteins are made in the cell.", "ریبوزوم محل تولید ATP در سلول است.", "The ribosome is where ATP is made in the cell."], ["sci", 2, "⁦pH⁩ آب خالص در ۲۵ درجه‌ی سانتی‌گراد برابر ۷ است.", "The pH of pure water at 25 °C is 7.", "⁦pH⁩ آب خالص در ۲۵ درجه‌ی سانتی‌گراد برابر ۱۰ است.", "The pH of pure water at 25 °C is 10."], ["sci", 2, "سدیم در گروه فلزات قلیایی جدول تناوبی است.", "Sodium is an alkali metal.", "سدیم در گروه گازهای نجیب جدول تناوبی است.", "Sodium is a noble gas."], ["geo", 2, "طولانی‌ترین رود اروپا ولگاست.", "The Volga is the longest river in Europe.", "طولانی‌ترین رود اروپا دانوب است.", "The Danube is the longest river in Europe."], ["geo", 2, "تنگه‌ی بسفر شهر استانبول را به دو بخش اروپایی و آسیایی تقسیم می‌کند.", "The Bosphorus divides Istanbul into a European and an Asian part.", "تنگه‌ی هرمز شهر استانبول را به دو بخش اروپایی و آسیایی تقسیم می‌کند.", "The Strait of Hormuz divides Istanbul into a European and an Asian part."], ["geo", 2, "قله‌ی ⁦K2⁩ دومین قله‌ی بلند جهان است.", "K2 is the second-highest mountain in the world.", "قله‌ی ⁦K2⁩ بلندترین قله‌ی جهان است.", "K2 is the highest mountain in the world."], ["geo", 2, "پایتخت رسمی تانزانیا دودوما است.", "The official capital of Tanzania is Dodoma.", "پایتخت رسمی تانزانیا دارالسلام است.", "The official capital of Tanzania is Dar es Salaam."], ["geo", 2, "پایتخت رسمی ساحل عاج یاموسوکرو است.", "The official capital of Ivory Coast is Yamoussoukro.", "پایتخت رسمی ساحل عاج آبیجان است.", "The official capital of Ivory Coast is Abidjan."], ["geo", 2, "دریاچه‌ی بایکال عمیق‌ترین دریاچه‌ی جهان است.", "Lake Baikal is the deepest lake in the world.", "دریاچه‌ی ویکتوریا عمیق‌ترین دریاچه‌ی جهان است.", "Lake Victoria is the deepest lake in the world."], ["his", 2, "نبرد پلاسی در سال ۱۷۵۷ رخ داد.", "The Battle of Plassey took place in 1757.", "نبرد پلاسی در سال ۱۸۵۷ رخ داد.", "The Battle of Plassey took place in 1857."], ["his", 2, "پیمان وستفالی جنگ سی‌ساله را پایان داد.", "The Peace of Westphalia ended the Thirty Years' War.", "پیمان وستفالی جنگ صدساله را پایان داد.", "The Peace of Westphalia ended the Hundred Years' War."], ["his", 2, "داریوش بزرگ فرمان نوشتن کتیبه‌ی بیستون را داد.", "Darius the Great ordered the Behistun inscription.", "خشایارشا فرمان نوشتن کتیبه‌ی بیستون را داد.", "Xerxes ordered the Behistun inscription."], ["his", 2, "سلسله‌ی صفوی را شاه اسماعیل اول بنیان گذاشت.", "Shah Ismail I founded the Safavid dynasty.", "سلسله‌ی صفوی را شاه عباس اول بنیان گذاشت.", "Shah Abbas I founded the Safavid dynasty."], ["his", 2, "امیرکبیر دارالفنون را بنیان گذاشت.", "Amir Kabir founded Dar ul-Funun.", "میرزا حسین‌خان سپهسالار دارالفنون را بنیان گذاشت.", "Mirza Hossein Khan Sepahsalar founded Dar ul-Funun."], ["art", 2, "رمان «بوف کور» اثر صادق هدایت است.", "\"The Blind Owl\" was written by Sadegh Hedayat.", "رمان «بوف کور» اثر صادق چوبک است.", "\"The Blind Owl\" was written by Sadegh Chubak."], ["art", 2, "رمان «سووشون» نوشته‌ی سیمین دانشور است.", "\"Savushun\" was written by Simin Daneshvar.", "رمان «سووشون» نوشته‌ی فروغ فرخزاد است.", "\"Savushun\" was written by Forugh Farrokhzad."], ["art", 2, "«کمدی الهی» را دانته نوشت.", "Dante wrote the \"Divine Comedy\".", "«کمدی الهی» را پترارک نوشت.", "Petrarch wrote the \"Divine Comedy\"."], ["art", 2, "«شازده کوچولو» نوشته‌ی آنتوان دو سنت‌اگزوپری است.", "\"The Little Prince\" was written by Antoine de Saint-Exupéry.", "«شازده کوچولو» نوشته‌ی ژول ورن است.", "\"The Little Prince\" was written by Jules Verne."], ["tec", 2, "نخستین وب‌سایت جهان را تیم برنرز-لی ساخت.", "Tim Berners-Lee created the first website.", "نخستین وب‌سایت جهان را لینوس توروالدز ساخت.", "Linus Torvalds created the first website."], ["tec", 2, "زبان پایتون را گیدو ون روسوم ساخت.", "Guido van Rossum created Python.", "زبان پایتون را دنیس ریچی ساخت.", "Dennis Ritchie created Python."], ["tec", 2, "⁦RAM⁩ حافظه‌ی فرار است.", "RAM is volatile memory.", "⁦ROM⁩ حافظه‌ی فرار است.", "ROM is volatile memory."], ["sci", 3, "تنگستن بالاترین نقطه‌ی ذوب را در میان فلزات دارد.", "Tungsten has the highest melting point of all metals.", "آهن بالاترین نقطه‌ی ذوب را در میان فلزات دارد.", "Iron has the highest melting point of all metals."], ["sci", 3, "اصل عدم قطعیت را هایزنبرگ مطرح کرد.", "Heisenberg formulated the uncertainty principle.", "اصل عدم قطعیت را شرودینگر مطرح کرد.", "Schrödinger formulated the uncertainty principle."], ["sci", 3, "قضایای ناتمامیت را کورت گودل ثابت کرد.", "Kurt Gödel proved the incompleteness theorems.", "قضایای ناتمامیت را آلن تورینگ ثابت کرد.", "Alan Turing proved the incompleteness theorems."], ["sci", 3, "بوزون هیگز از طریق میدان هیگز به ذرات جرم می‌دهد.", "The Higgs field gives mass to particles through the Higgs mechanism.", "بوزون هیگز حامل نیروی هسته‌ای قوی است.", "The Higgs boson carries the strong nuclear force."], ["sci", 3, "مشتق ⁦ln(x)⁩ برابر ⁦1/x⁩ است.", "The derivative of ln(x) is 1/x.", "مشتق ⁦ln(x)⁩ برابر ⁦x⁩ است.", "The derivative of ln(x) is x."], ["sci", 3, "عدد نپر (e) تقریباً ۲٫۷۲ است.", "Euler's number e is approximately 2.72.", "عدد نپر (e) تقریباً ۳٫۱۴ است.", "Euler's number e is approximately 3.14."], ["sci", 3, "دوازده‌وجهی منتظم ۱۲ وجه دارد.", "A regular dodecahedron has 12 faces.", "دوازده‌وجهی منتظم ۲۰ وجه دارد.", "A regular dodecahedron has 20 faces."], ["sci", 3, "مریم میرزاخانی در سال ۲۰۱۴ مدال فیلدز گرفت.", "Maryam Mirzakhani won the Fields Medal in 2014.", "مریم میرزاخانی در سال ۲۰۱۰ مدال فیلدز گرفت.", "Maryam Mirzakhani won the Fields Medal in 2010."], ["geo", 3, "پایتخت بوتان تیمپو است.", "The capital of Bhutan is Thimphu.", "پایتخت بوتان پارو است.", "The capital of Bhutan is Paro."], ["geo", 3, "پایتخت سورینام پاراماریبو است.", "The capital of Suriname is Paramaribo.", "پایتخت سورینام جورج‌تاون است.", "The capital of Suriname is Georgetown."], ["geo", 3, "بزرگ‌ترین بیابان جهان (با احتساب قطبی) جنوبگان است.", "Antarctica is the largest desert on Earth (counting polar deserts).", "بزرگ‌ترین بیابان جهان (با احتساب قطبی) صحرای بزرگ آفریقاست.", "The Sahara is the largest desert on Earth (counting polar deserts)."], ["geo", 3, "پایتخت مغولستان اولان‌باتور است.", "The capital of Mongolia is Ulaanbaatar.", "پایتخت مغولستان ارکخان است.", "The capital of Mongolia is Orkhon."], ["geo", 3, "قزاقستان بزرگ‌ترین کشور محصور در خشکی است.", "Kazakhstan is the largest landlocked country.", "مغولستان بزرگ‌ترین کشور محصور در خشکی است.", "Mongolia is the largest landlocked country."], ["his", 3, "فتح قسطنطنیه به دست عثمانی‌ها در سال ۱۴۵۳ رخ داد.", "The Ottomans conquered Constantinople in 1453.", "فتح قسطنطنیه به دست عثمانی‌ها در سال ۱۴۹۲ رخ داد.", "The Ottomans conquered Constantinople in 1492."], ["his", 3, "کنگره‌ی وین پس از شکست ناپلئون برگزار شد.", "The Congress of Vienna was held after Napoleon's defeat.", "کنگره‌ی وین پیش از انقلاب فرانسه برگزار شد.", "The Congress of Vienna was held before the French Revolution."], ["his", 3, "نبرد واترلو در سال ۱۸۱۵ رخ داد.", "The Battle of Waterloo took place in 1815.", "نبرد واترلو در سال ۱۸۰۵ رخ داد.", "The Battle of Waterloo took place in 1805."], ["his", 3, "ماری کوری نخستین زنی بود که جایزه‌ی نوبل گرفت.", "Marie Curie was the first woman to win a Nobel Prize.", "ایرن ژولیو-کوری نخستین زنی بود که جایزه‌ی نوبل گرفت.", "Irène Joliot-Curie was the first woman to win a Nobel Prize."], ["art", 3, "«منطق‌الطیر» اثر عطار نیشابوری است.", "\"The Conference of the Birds\" is by Attar of Nishapur.", "«منطق‌الطیر» اثر نظامی گنجوی است.", "\"The Conference of the Birds\" is by Nizami Ganjavi."], ["art", 3, "«آیین بهار» را استراوینسکی ساخت.", "Stravinsky composed \"The Rite of Spring\".", "«آیین بهار» را چایکوفسکی ساخت.", "Tchaikovsky composed \"The Rite of Spring\"."], ["art", 3, "«استاد و مارگاریتا» نوشته‌ی بولگاکف است.", "\"The Master and Margarita\" was written by Bulgakov.", "«استاد و مارگاریتا» نوشته‌ی نابوکوف است.", "\"The Master and Margarita\" was written by Nabokov."], ["art", 3, "«جای خالی سلوچ» نوشته‌ی محمود دولت‌آبادی است.", "\"The Empty Place of Soluch\" was written by Mahmoud Dowlatabadi.", "«جای خالی سلوچ» نوشته‌ی جلال آل‌احمد است.", "\"The Empty Place of Soluch\" was written by Jalal Al-e-Ahmad."], ["art", 3, "«تاریخ بیهقی» را ابوالفضل بیهقی نوشت.", "\"Tarikh-e Beyhaqi\" was written by Abolfazl Beyhaqi.", "«تاریخ بیهقی» را ابوریحان بیرونی نوشت.", "\"Tarikh-e Beyhaqi\" was written by Abu Rayhan Biruni."], ["sci", 3, "کوچک‌ترین عدد اول بزرگ‌تر از ۱۰۰ برابر ۱۰۱ است.", "The smallest prime greater than 100 is 101.", "کوچک‌ترین عدد اول بزرگ‌تر از ۱۰۰ برابر ۱۰۳ است.", "The smallest prime greater than 100 is 103."], ["sci", 3, "حاصل ۱۷ × ۲۳ برابر ۳۹۱ است.", "17 × 23 equals 391.", "حاصل ۱۷ × ۲۳ برابر ۳۸۱ است.", "17 × 23 equals 381."]],TYX=[["geo", 0, "پایتخت ایران کجاست؟", "What is the capital of Iran?", "تهران", "Tehran"], ["geo", 0, "پایتخت فرانسه کجاست؟", "What is the capital of France?", "پاریس", "Paris"], ["geo", 0, "پایتخت ژاپن کجاست؟", "What is the capital of Japan?", "توکیو", "Tokyo", ["tokio"]], ["geo", 0, "پایتخت ایتالیا کجاست؟", "What is the capital of Italy?", "رم", "Rome", ["roma"]], ["geo", 0, "پایتخت اسپانیا کجاست؟", "What is the capital of Spain?", "مادرید", "Madrid"], ["geo", 0, "پایتخت مصر کجاست؟", "What is the capital of Egypt?", "قاهره", "Cairo"], ["sci", 0, "کدام سیاره به خورشید نزدیک‌تر از همه است؟", "Which planet is closest to the Sun?", "عطارد", "Mercury", ["تیر"]], ["sci", 0, "بزرگ‌ترین سیاره‌ی منظومه‌ی شمسی کدام است؟", "What is the largest planet in the Solar System?", "مشتری", "Jupiter"], ["sci", 0, "کدام سیاره به «سیاره‌ی سرخ» معروف است؟", "Which planet is called the Red Planet?", "مریخ", "Mars"], ["sci", 0, "فرمول شیمیایی آب چیست؟", "What is the chemical formula of water?", "H₂O", "H₂O", ["h2o"]], ["sci", 0, "نماد شیمیایی طلا چیست؟", "What is the chemical symbol of gold?", "Au", "Au"], ["sci", 0, "نماد شیمیایی نقره چیست؟", "What is the chemical symbol of silver?", "Ag", "Ag"], ["gen", 0, "یک سال غیرکبیسه چند روز است؟", "How many days are in a non-leap year?", "۳۶۵", "365"], ["gen", 0, "یک مثلث چند ضلع دارد؟", "How many sides does a triangle have?", "۳", "3", ["سه", "three"]], ["gen", 0, "حاصل ۷ × ۸ چند است؟", "What is 7 × 8?", "۵۶", "56"], ["gen", 0, "حاصل ۱۲ × ۱۲ چند است؟", "What is 12 × 12?", "۱۴۴", "144"], ["geo", 0, "بزرگ‌ترین اقیانوس جهان کدام است؟", "What is the largest ocean in the world?", "اقیانوس آرام", "Pacific Ocean", ["آرام", "pacific"]], ["geo", 0, "طولانی‌ترین رود آفریقا کدام است؟", "What is the longest river in Africa?", "نیل", "Nile", ["رود نیل"]], ["geo", 0, "بلندترین قله‌ی جهان کدام است؟", "What is the highest mountain in the world?", "اورست", "Mount Everest", ["قله اورست", "everest"]], ["geo", 0, "بلندترین قله‌ی ایران کدام است؟", "What is the highest mountain in Iran?", "دماوند", "Mount Damavand", ["damavand"]], ["art", 0, "شاهنامه را چه کسی سرود؟", "Who composed the Shahnameh?", "فردوسی", "Ferdowsi", ["ferdosi"]], ["art", 0, "«گلستان» و «بوستان» اثر کیست؟", "Who wrote the \"Gulistan\" and the \"Bustan\"?", "سعدی", "Saadi", ["sadi", "سعدی شیرازی"]], ["art", 0, "کدام شاعر به «لسان‌الغیب» معروف است؟", "Which poet is known as \"Lisan al-Ghayb\"?", "حافظ", "Hafez", ["hafiz", "حافظ شیرازی"]], ["his", 0, "نخستین رئیس‌جمهور آمریکا که بود؟", "Who was the first president of the United States?", "جورج واشنگتن", "George Washington", ["واشنگتن", "washington"]], ["nat", 0, "کدام جانور «پادشاه جنگل» لقب دارد؟", "Which animal is called the \"king of the jungle\"?", "شیر", "Lion"], ["nat", 0, "سریع‌ترین جانور خشکی کدام است؟", "What is the fastest land animal?", "یوزپلنگ", "Cheetah", ["یوز", "cheetah"]], ["nat", 0, "بزرگ‌ترین پستاندار جهان کدام است؟", "What is the largest mammal in the world?", "نهنگ آبی", "Blue whale"], ["geo", 0, "زبان رسمی برزیل کدام است؟", "What is the official language of Brazil?", "پرتغالی", "Portuguese"], ["geo", 0, "واحد پول ژاپن چیست؟", "What is the currency of Japan?", "ین", "Yen"], ["spo", 0, "در هر تیم فوتبال چند بازیکن هم‌زمان در زمین هستند؟", "How many players per side are on the pitch in football?", "۱۱", "11", ["یازده", "eleven"]], ["geo", 2, "پایتخت قزاقستان کجاست؟", "What is the capital of Kazakhstan?", "آستانه", "Astana", ["nursultan", "nur-sultan", "نورسلطان"]], ["geo", 2, "پایتخت استرالیا کجاست؟", "What is the capital of Australia?", "کانبرا", "Canberra"], ["geo", 2, "پایتخت کانادا کجاست؟", "What is the capital of Canada?", "اتاوا", "Ottawa"], ["geo", 2, "پایتخت نیوزیلند کجاست؟", "What is the capital of New Zealand?", "ولینگتون", "Wellington"], ["geo", 2, "پایتخت برزیل کجاست؟", "What is the capital of Brazil?", "برازیلیا", "Brasília", ["brasilia"]], ["geo", 2, "پایتخت سوئیس کجاست؟", "What is the capital of Switzerland?", "برن", "Bern", ["berne"]], ["geo", 2, "پایتخت مجارستان کجاست؟", "What is the capital of Hungary?", "بوداپست", "Budapest"], ["geo", 2, "پایتخت لهستان کجاست؟", "What is the capital of Poland?", "ورشو", "Warsaw", ["warszawa"]], ["geo", 2, "پایتخت نروژ کجاست؟", "What is the capital of Norway?", "اسلو", "Oslo"], ["geo", 2, "پایتخت پرتغال کجاست؟", "What is the capital of Portugal?", "لیسبون", "Lisbon", ["lisboa"]], ["geo", 2, "پایتخت ویتنام کجاست؟", "What is the capital of Vietnam?", "هانوی", "Hanoi"], ["geo", 2, "پایتخت پاکستان کجاست؟", "What is the capital of Pakistan?", "اسلام‌آباد", "Islamabad", ["اسلام آباد"]], ["geo", 2, "پایتخت عربستان سعودی کجاست؟", "What is the capital of Saudi Arabia?", "ریاض", "Riyadh"], ["geo", 2, "پایتخت آرژانتین کجاست؟", "What is the capital of Argentina?", "بوئنوس آیرس", "Buenos Aires", ["بوینس آیرس"]], ["sci", 2, "کدام گاز بیشترین سهم را در جو زمین دارد؟", "Which gas makes up most of Earth's atmosphere?", "نیتروژن", "Nitrogen", ["ازت"]], ["sci", 2, "کدام سیاره به حلقه‌های مشهورش شناخته می‌شود؟", "Which planet is famous for its rings?", "زحل", "Saturn"], ["sci", 2, "فراوان‌ترین عنصر پوسته‌ی زمین (از نظر جرم) کدام است؟", "Which element is the most abundant in Earth's crust (by mass)?", "اکسیژن", "Oxygen"], ["sci", 2, "فرمول شیمیایی نمک خوراکی چیست؟", "What is the chemical formula of table salt?", "NaCl", "NaCl"], ["tec", 2, "تلفن را چه کسی اختراع کرد؟", "Who is credited with inventing the telephone?", "الکساندر گراهام بل", "Alexander Graham Bell", ["گراهام بل", "bell"]], ["sci", 2, "پنی‌سیلین را چه کسی کشف کرد؟", "Who discovered penicillin?", "الکساندر فلمینگ", "Alexander Fleming", ["فلمینگ", "fleming"]], ["art", 2, "نمایشنامه‌ی «هملت» را چه کسی نوشت؟", "Who wrote the play \"Hamlet\"?", "ویلیام شکسپیر", "William Shakespeare", ["شکسپیر", "shakespeare"]], ["art", 2, "نقاش «مونالیزا» کیست؟", "Who painted the \"Mona Lisa\"?", "لئوناردو داوینچی", "Leonardo da Vinci", ["داوینچی", "da vinci", "davinci", "leonardo"]], ["art", 2, "«سمفونی نهم» اثر کدام آهنگساز است؟", "Which composer wrote the \"Ninth Symphony\" with the \"Ode to Joy\"?", "بتهوون", "Beethoven", ["لودویگ فان بتهوون"]], ["spo", 2, "قهرمان جام جهانی فوتبال ۲۰۱۰ کدام تیم بود؟", "Who won the 2010 FIFA World Cup?", "اسپانیا", "Spain"], ["spo", 2, "المپیک تابستانی ۲۰۰۸ در کدام شهر برگزار شد؟", "Which city hosted the 2008 Summer Olympics?", "پکن", "Beijing", ["beijing"]], ["his", 2, "کدام شهر پایتخت زندیان بود؟", "Which city was the capital of the Zand dynasty?", "شیراز", "Shiraz"], ["his", 2, "پایتخت صفویان در دوران شاه عباس اول کدام شهر بود؟", "Which city did Shah Abbas I make the Safavid capital?", "اصفهان", "Isfahan", ["esfahan"]], ["his", 2, "نخستین انسانی که به فضا رفت چه کسی بود؟", "Who was the first human in space?", "یوری گاگارین", "Yuri Gagarin", ["گاگارین", "gagarin"]], ["spc", 2, "نخستین ماهواره‌ی مصنوعی جهان چه نام داشت؟", "What was the first artificial satellite called?", "اسپوتنیک", "Sputnik", ["اسپوتنیک ۱", "sputnik 1"]]];
+function facts(){var HX0=[];const fk=cfg.lang=='fa',R=[],Y=[],TYP=[],cap=s=>s.charAt(0).toUpperCase()+s.slice(1),P=s=>s.split(';').map(l=>l.split('|')),yr=y=>fk?String(y).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]):String(y),L=z=>fk?z[0]:z[1],
+F=(k,x,q,a,pool)=>{const d=shuf([...new Set(pool)].filter(z=>z!=a)).slice(0,3);R.push({k,x,r:[q,a,...d]})};
+const E=P(EL),N=[1,2,3,6,7,8,11,12,13,14,15,16,17,19,20,26,29,30,47,79,80,82,50,28,10,18,53,92,78,74];
+E.forEach((p,i)=>{const n=L(p);F('sci',+p[3],fk?`عدد اتمی ${n} چند است؟`:`What is the atomic number of ${n}?`,fa(N[i]),N.map(fa));F('sci',+p[3],fk?`کدام عنصر عدد اتمی ${fa(N[i])} دارد؟`:`Which element has atomic number ${N[i]}?`,n,E.map(L))});
+const H=P("1914|آغاز جنگ جهانی اول|the start of World War I;1939|آغاز جنگ جهانی دوم|the start of World War II;1945|پایان جنگ جهانی دوم|the end of World War II;1789|آغاز انقلاب فرانسه|the start of the French Revolution;1776|اعلام استقلال آمریکا|the American Declaration of Independence;1492|رسیدن کلمب به قاره\u200cی آمریکا|Columbus reaching the Americas;1453|فتح قسطنطنیه به دست عثمانی\u200cها|the Ottoman conquest of Constantinople;1969|فرود انسان روی ماه|the first Moon landing;1989|فروریختن دیوار برلین|the fall of the Berlin Wall;1991|فروپاشی اتحاد جماهیر شوروی|the dissolution of the Soviet Union;1912|غرق\u200cشدن کشتی تایتانیک|the sinking of the Titanic;1917|انقلاب اکتبر روسیه|the Russian October Revolution;1066|نبرد هستینگز|the Battle of Hastings;1215|امضای ماگنا کارتا|the signing of the Magna Carta;1517|آغاز اصلاحات پروتستان|the start of the Protestant Reformation;1815|نبرد واترلو|the Battle of Waterloo;1861|آغاز جنگ داخلی آمریکا|the start of the American Civil War;1903|نخستین پرواز برادران رایت|the Wright brothers' first flight;1957|پرتاب اسپوتنیک ۱|the launch of Sputnik 1;1961|نخستین پرواز انسان به فضا|the first human spaceflight;2001|حملات ۱۱ سپتامبر|the September 11 attacks;1979|انقلاب اسلامی ایران|the Iranian Revolution;1906|انقلاب مشروطه ایران|the Persian Constitutional Revolution;1896|نخستین المپیک مدرن|the first modern Olympic Games;1908|عرضه\u200cی خودروی فورد مدل تی|the Ford Model T;1876|اختراع تلفن|the invention of the telephone;1879|ساخت لامپ رشته\u200cای کاربردی ادیسون|Edison's practical light bulb;1543|انتشار نظریه\u200cی خورشیدمرکزی کوپرنیک|the publication of Copernicus's heliocentric theory;1687|انتشار اصول ریاضی نیوتن|Newton's Principia;1859|انتشار «خاستگاه گونه\u200cها» اثر داروین|Darwin's On the Origin of Species;1905|انتشار نسبیت خاص اینشتین|Einstein's special relativity;1953|کشف ساختار مارپیچ DNA|the discovery of the DNA double helix;1928|کشف پنی\u200cسیلین|the discovery of penicillin;1990|پرتاب تلسکوپ فضایی هابل|the launch of the Hubble Space Telescope;2007|معرفی نخستین آیفون|the first iPhone");H.forEach(p=>{const y=+p[0],e=fk?p[1]:p[2],x=y<1800?2:y<1950?1:1;F('his',x,fk?`${e} در چه سالی رخ داد؟`:`In which year did this happen: ${e}?`,yr(y),[y+1,y-1,y+3,y-3,y+10,y-10].map(yr));F('his',x,fk?`کدام رویداد در سال ${yr(y)} رخ داد؟`:`Which event happened in ${y}?`,e,H.map(z=>fk?z[1]:z[2]))});
+const A=P('فردوسی|Ferdowsi|شاهنامه|Shahnameh;حافظ|Hafez|دیوان غزلیات|Divan of Hafez;سعدی|Saadi|بوستان|Bustan;مولوی|Rumi|مثنوی معنوی|Masnavi;نظامی|Nizami|خسرو و شیرین|Khosrow and Shirin;عطار نیشابوری|Attar of Nishapur|منطق\u200cالطیر|The Conference of the Birds;خیام|Omar Khayyam|رباعیات|Rubaiyat;جلال آل\u200cاحمد|Jalal Al-e-Ahmad|غرب\u200cزدگی|Gharbzadegi;صمد بهرنگی|Samad Behrangi|ماهی سیاه کوچولو|The Little Black Fish;محمود دولت\u200cآبادی|Mahmoud Dowlatabadi|کلیدر|Kelidar;فروغ فرخزاد|Forugh Farrokhzad|تولدی دیگر|Another Birth;شکسپیر|Shakespeare|هملت|Hamlet;لئو تولستوی|Leo Tolstoy|آنا کارنینا|Anna Karenina;داستایوفسکی|Dostoevsky|جنایت و مکافات|Crime and Punishment;ویکتور هوگو|Victor Hugo|گوژپشت نتردام|The Hunchback of Notre-Dame;چارلز دیکنز|Charles Dickens|آرزوهای بزرگ|Great Expectations;جین آستین|Jane Austen|غرور و تعصب|Pride and Prejudice;ارنست همینگوی|Ernest Hemingway|پیرمرد و دریا|The Old Man and the Sea;جورج اورول|George Orwell|۱۹۸۴|1984;گابریل گارسیا مارکز|Gabriel García Márquez|صد سال تنهایی|One Hundred Years of Solitude;میگل د سروانتس|Miguel de Cervantes|دن کیشوت|Don Quixote;فرانتس کافکا|Franz Kafka|مسخ|The Metamorphosis;آلبر کامو|Albert Camus|بیگانه|The Stranger;هرمان ملویل|Herman Melville|موبی دیک|Moby-Dick;مارک تواین|Mark Twain|ماجراهای تام سایر|The Adventures of Tom Sawyer;آگاتا کریستی|Agatha Christie|قتل در قطار سریع\u200cالسیر شرق|Murder on the Orient Express;دانته آلیگیری|Dante Alighieri|کمدی الهی|The Divine Comedy;گوته|Goethe|فاوست|Faust;ویلیام گلدینگ|William Golding|ارباب مگس\u200cها|Lord of the Flies;پائولو کوئیلو|Paulo Coelho|کیمیاگر|The Alchemist;آنتوان دو سنت\u200cاگزوپری|Antoine de Saint-Exupéry|شازده کوچولو|The Little Prince;جی. آر. آر. تالکین|J. R. R. Tolkien|ارباب حلقه\u200cها|The Lord of the Rings;ماری شلی|Mary Shelley|فرانکنشتاین|Frankenstein;اسکار وایلد|Oscar Wilde|تصویر دوریان گری|The Picture of Dorian Gray;هومر|Homer|ایلیاد|The Iliad');A.forEach(p=>{const a=fk?p[0]:p[1],w=fk?p[2]:p[3];F('art',1,fk?`«${w}» اثر کیست؟`:`Who wrote "${w}"?`,a,A.map(z=>fk?z[0]:z[1]));F('art',1,fk?`کدام اثر از ${a} است؟`:`Which work is by ${a}?`,w,A.map(z=>fk?z[2]:z[3]))});
+const W=P('1930|اروگوئه|Uruguay;1934|ایتالیا|Italy;1938|ایتالیا|Italy;1950|اروگوئه|Uruguay;1954|آلمان غربی|West Germany;1958|برزیل|Brazil;1962|برزیل|Brazil;1966|انگلیس|England;1970|برزیل|Brazil;1974|آلمان غربی|West Germany;1978|آرژانتین|Argentina;1982|ایتالیا|Italy;1986|آرژانتین|Argentina;1990|آلمان غربی|West Germany;1994|برزیل|Brazil;1998|فرانسه|France;2002|برزیل|Brazil;2006|ایتالیا|Italy;2010|اسپانیا|Spain;2014|آلمان|Germany;2018|فرانسه|France;2022|آرژانتین|Argentina');W.forEach(p=>F('spo',+p[0]<1990?2:1,fk?`قهرمان جام جهانی فوتبال ${yr(p[0])} کدام تیم بود؟`:`Who won the ${p[0]} FIFA World Cup?`,L(p.slice(1)),W.map(z=>L(z.slice(1)))));
+const O=P('1896|آتن|Athens;1900|پاریس|Paris;1904|سنت\u200cلوئیس|St. Louis;1908|لندن|London;1912|استکهلم|Stockholm;1920|آنتورپ|Antwerp;1924|پاریس|Paris;1928|آمستردام|Amsterdam;1932|لس\u200cآنجلس|Los Angeles;1936|برلین|Berlin;1948|لندن|London;1952|هلسینکی|Helsinki;1956|ملبورن|Melbourne;1960|رم|Rome;1964|توکیو|Tokyo;1968|مکزیکوسیتی|Mexico City;1972|مونیخ|Munich;1976|مونترال|Montreal;1980|مسکو|Moscow;1984|لس\u200cآنجلس|Los Angeles;1988|سئول|Seoul;1992|بارسلونا|Barcelona;1996|آتلانتا|Atlanta;2000|سیدنی|Sydney;2004|آتن|Athens;2008|پکن|Beijing;2012|لندن|London;2016|ریودوژانیرو|Rio de Janeiro');O.forEach(p=>F('spo',+p[0]<1990?2:1,fk?`المپیک تابستانی ${yr(p[0])} در کدام شهر برگزار شد؟`:`Which city hosted the ${p[0]} Summer Olympics?`,L(p.slice(1)),O.map(z=>L(z.slice(1)))));
+const T=(k,s,fq,eq,f2,e2,sf,se,nm)=>{const Q=P(s),S=Q.map(z=>fk?z[0]:z[1]),A=Q.map(z=>fk?z[2]:z[3]);Q.forEach((p,i)=>{const q1=(fk?fq:eq).replace('{s}',S[i]);if(!nm)F(k,1,q1,A[i],A);TYP.push({k,x:1,q:q1,a:[p[2],p[3]]});if(f2){const q2=(fk?f2:e2).replace('{s}',A[i]);if(!nm)F(k,1,q2,S[i],S);TYP.push({k,x:1,q:q2,a:[p[0],p[1]]})}
+if(sf){let j=(i+1+i%4)%Q.length;for(let c=0;c<Q.length&&A[j]==A[i];c++)j=(j+1)%Q.length;const st=a=>cap((fk?sf:se).split('{s}').join(S[i]).split('{a}').join(a));Y.push({k,x:1,t:st(A[i]),v:true},{k,x:1,t:st(A[j]),v:false})}})};
+T('geo','ایران|Iran|ریال|Rial;ژاپن|Japan|ین|Yen;بریتانیا|the United Kingdom|پوند|Pound;ترکیه|Turkey|لیر|Lira;هند|India|روپیه|Rupee;روسیه|Russia|روبل|Ruble;چین|China|یوان|Yuan;سوئیس|Switzerland|فرانک|Franc;کره جنوبی|South Korea|وون|Won;برزیل|Brazil|رئال|Real;مکزیک|Mexico|پزو|Peso;سوئد|Sweden|کرون|Krona;لهستان|Poland|زلوتی|Zloty;آفریقای جنوبی|South Africa|رند|Rand;تایلند|Thailand|بات|Baht;ویتنام|Vietnam|دونگ|Dong;آمریکا|the USA|دلار|Dollar','واحد پول {s} چیست؟','What is the currency of {s}?','{s} واحد پول کدام کشور است؟','{s} is the currency of which country?','واحد پول {s}، {a} است.','The currency of {s} is the {a}.');
+T('geo','ایران|Iran|فارسی|Persian;آلمان|Germany|آلمانی|German;فرانسه|France|فرانسوی|French;اسپانیا|Spain|اسپانیایی|Spanish;ایتالیا|Italy|ایتالیایی|Italian;روسیه|Russia|روسی|Russian;ژاپن|Japan|ژاپنی|Japanese;چین|China|چینی|Chinese;ترکیه|Turkey|ترکی|Turkish;برزیل|Brazil|پرتغالی|Portuguese;مصر|Egypt|عربی|Arabic;یونان|Greece|یونانی|Greek;هلند|the Netherlands|هلندی|Dutch;سوئد|Sweden|سوئدی|Swedish;لهستان|Poland|لهستانی|Polish;کره جنوبی|South Korea|کره\u200cای|Korean;تایلند|Thailand|تایلندی|Thai;ویتنام|Vietnam|ویتنامی|Vietnamese','زبان رسمی {s} کدام است؟','What is the official language of {s}?',0,0,'زبان رسمی {s}، {a} است.','The official language of {s} is {a}.');
+T('geo',"برج ایفل|the Eiffel Tower|پاریس|Paris;برج کج|the Leaning Tower|پیزا|Pisa;کولوسئوم|the Colosseum|رم|Rome;بیگ\u200cبن|Big Ben|لندن|London;ساگرادا فامیلیا|the Sagrada Família|بارسلونا|Barcelona;تاج\u200cمحل|the Taj Mahal|آگرا|Agra;برج خلیفه|the Burj Khalifa|دبی|Dubai;مجسمه\u200cی آزادی|the Statue of Liberty|نیویورک|New York;کاخ گلستان|the Golestan Palace|تهران|Tehran;میدان نقش جهان|Naqsh-e Jahan Square|اصفهان|Isfahan;برج آزادی|Azadi Tower|تهران|Tehran;آرامگاه حافظ|Hafez's Tomb|شیراز|Shiraz;سی\u200cوسه\u200cپل|Si-o-se-pol|اصفهان|Isfahan;موزه\u200cی لوور|the Louvre|پاریس|Paris;کاخ باکینگهام|Buckingham Palace|لندن|London;دروازه\u200cی براندنبورگ|the Brandenburg Gate|برلین|Berlin;میدان سرخ|Red Square|مسکو|Moscow;ایاصوفیه|Hagia Sophia|استانبول|Istanbul",'{s} در کدام شهر است؟','In which city is {s}?',0,0,'{s} در {a} قرار دارد.','{s} is in {a}.');
+const ANI='شیر|Lion|پستاندار|Mammal;نهنگ آبی|Blue whale|پستاندار|Mammal;دلفین|Dolphin|پستاندار|Mammal;خفاش|Bat|پستاندار|Mammal;خرس قطبی|Polar bear|پستاندار|Mammal;کانگورو|Kangaroo|پستاندار|Mammal;فیل|Elephant|پستاندار|Mammal;زرافه|Giraffe|پستاندار|Mammal;گرگ|Wolf|پستاندار|Mammal;پلاتیپوس|Platypus|پستاندار|Mammal;پنگوئن|Penguin|پرنده|Bird;عقاب|Eagle|پرنده|Bird;شترمرغ|Ostrich|پرنده|Bird;کیوی|Kiwi|پرنده|Bird;کبوتر|Pigeon|پرنده|Bird;جغد|Owl|پرنده|Bird;مار کبری|Cobra|خزنده|Reptile;لاک\u200cپشت|Turtle|خزنده|Reptile;تمساح|Crocodile|خزنده|Reptile;آفتاب\u200cپرست|Chameleon|خزنده|Reptile;مارمولک|Lizard|خزنده|Reptile;اژدهای کومودو|Komodo dragon|خزنده|Reptile;قورباغه|Frog|دوزیست|Amphibian;سمندر|Salamander|دوزیست|Amphibian;وزغ|Toad|دوزیست|Amphibian;آکسولوتل|Axolotl|دوزیست|Amphibian;کوسه|Shark|ماهی|Fish;ماهی قزل\u200cآلا|Salmon|ماهی|Fish;اسب\u200cدریایی|Seahorse|ماهی|Fish;تن\u200cماهی|Tuna|ماهی|Fish;ماهی قرمز|Goldfish|ماهی|Fish;پروانه|Butterfly|حشره|Insect;زنبور عسل|Honeybee|حشره|Insect;مورچه|Ant|حشره|Insect;سنجاقک|Dragonfly|حشره|Insect;سوسک|Beetle|حشره|Insect;مگس|Fly|حشره|Insect;ملخ|Grasshopper|حشره|Insect';T('nat',ANI,'{s} جزو کدام گروه جانوران است؟','Which animal group does {s} belong to?');
+T('tec','مایکروسافت|Microsoft|بیل گیتس|Bill Gates;اپل|Apple|استیو جابز|Steve Jobs;آمازون|Amazon|جف بزوس|Jeff Bezos;فیس\u200cبوک|Facebook|مارک زاکربرگ|Mark Zuckerberg;علی\u200cبابا|Alibaba|جک ما|Jack Ma;اسپیس\u200cایکس|SpaceX|ایلان ماسک|Elon Musk;لینوکس|Linux|لینوس تروالدز|Linus Torvalds;وب جهان\u200cگستر|the World Wide Web|تیم برنرز-لی|Tim Berners-Lee;پایتون|Python|گیدو ون روسوم|Guido van Rossum;جاوااسکریپت|JavaScript|برندن آیک|Brendan Eich;زبان C|the C language|دنیس ریچی|Dennis Ritchie;جاوا|Java|جیمز گاسلینگ|James Gosling','یکی از بنیان‌گذاران یا سازندگان {s} کیست؟','Who is one of the founders or creators of {s}?','{s} از بنیان‌گذاران یا سازندگان کدام یک از این‌هاست؟','{s} is a founder or creator of which of these?','{a} از بنیان‌گذاران یا سازندگان {s} است.','{a} is one of the founders or creators of {s}.');
+T('tec','HTML|HTML|HyperText Markup Language|HyperText Markup Language;CPU|CPU|Central Processing Unit|Central Processing Unit;RAM|RAM|Random Access Memory|Random Access Memory;USB|USB|Universal Serial Bus|Universal Serial Bus;GPS|GPS|Global Positioning System|Global Positioning System;URL|URL|Uniform Resource Locator|Uniform Resource Locator;PDF|PDF|Portable Document Format|Portable Document Format;SQL|SQL|Structured Query Language|Structured Query Language;LED|LED|Light Emitting Diode|Light Emitting Diode;DNS|DNS|Domain Name System|Domain Name System;HTTP|HTTP|HyperText Transfer Protocol|HyperText Transfer Protocol;ROM|ROM|Read-Only Memory|Read-Only Memory;SSD|SSD|Solid State Drive|Solid State Drive;GPU|GPU|Graphics Processing Unit|Graphics Processing Unit;VPN|VPN|Virtual Private Network|Virtual Private Network','{s} مخفف چیست؟','What does {s} stand for?','کدام اختصار به معنای «{s}» است؟','Which abbreviation stands for "{s}"?');
+const SY=(l,g)=>cap(fk?`${l} ${g} است.`:`${l} is ${g}.`),OF=[1,3,7,11],pick=(I,ok,s,n)=>{const r=[];for(let j=0;j<I.length&&r.length<n;j++){const z=I[(s+j)%I.length];if(ok(z)&&!r.includes(z))r.push(z)}return r};
+const CMP=(k,I,qa,qb,x,st)=>I.forEach((it,i)=>OF.forEach(o=>{const g=[it,I[(i+o)%I.length],I[(i+2*o+1)%I.length],I[(i+3*o+2)%I.length]];if(new Set(g.map(z=>z.v)).size<4||new Set(g).size<4)return;if(st){const[u,w]=g,a1=u.v<w.v?u:w,b1=u.v<w.v?w:u,sy=(a,b)=>cap((fk?st.split('|')[0]:st.split('|')[1]).replace('{a}',a.l).replace('{b}',b.l));Y.push({k,x,t:sy(a1,b1),v:true},{k,x,t:sy(b1,a1),v:false})}const lo=g.reduce((a,b)=>b.v<a.v?b:a),hi=g.reduce((a,b)=>b.v>a.v?b:a);[[qa,lo],[qb,hi]].forEach(([q,a])=>R.push({k,x,r:[q,a.l,...g.filter(z=>z!=a).map(z=>z.l)]}))}));
+const GRP=(k,I,G)=>I.forEach((it,i)=>OF.forEach((o,oi)=>{{const sg=(it.g+1+oi)%G.length;Y.push({k,x:0,t:SY(it.l,G[sg]),v:sg==it.g});if(oi==0)Y.push({k,x:0,t:SY(it.l,G[it.g]),v:true})}const s=(i*7+o*13)%I.length,out=pick(I,z=>z.g!=it.g,s,3),g2=I[(i+o)%I.length].g,inn=pick(I,z=>z.g==g2,s,3),od=pick(I,z=>z.g!=g2,(s+5)%I.length,1);if(out.length<3||inn.length<3||!od.length)return;
+R.push({k,x:0,r:[(fk?'کدام یک از این‌ها {g} است؟':'Which of these is {g}?').replace('{g}',G[it.g]),it.l,...out.map(z=>z.l)]});R.push({k,x:1,r:[(fk?'کدام یک از این‌ها {g} نیست؟':'Which of these is not {g}?').replace('{g}',G[g2]),od[0].l,...inn.map(z=>z.l)]})}));
+const art=w=>/^[aeiou]/i.test(w)?'an ':'a ';
+CMP('sci',E.map((p,i)=>({l:L(p),v:N[i]})),fk?'کدام عنصر عدد اتمی کوچک‌تری دارد؟':'Which element has the smallest atomic number?',fk?'کدام عنصر عدد اتمی بزرگ‌تری دارد؟':'Which element has the largest atomic number?',1,'{a} عدد اتمی کوچک‌تری از {b} دارد.|{a} has a smaller atomic number than {b}.');
+CMP('his',H.map(p=>({l:fk?p[1]:p[2],v:+p[0]})),fk?'کدام رویداد زودتر رخ داد؟':'Which event happened first?',fk?'کدام رویداد دیرتر رخ داد؟':'Which event happened last?',1,'{a} زودتر از {b} رخ داد.|{a} happened before {b}.');
+{const Q=P(ANI),gs=[...new Set(Q.map(p=>p[2]))],gE=gs.map(g=>Q.find(p=>p[2]==g)[3]);GRP('nat',Q.map(p=>({l:L([p[0],p[1]]),g:gs.indexOf(p[2])})),fk?gs:gE.map(g=>art(g)+g.toLowerCase()))}
+{const C=P(CT).map(p=>({l:fk?p[0]:p[2],g:+p[4]}));GRP('geo',C,(fk?CF:CE).map(c=>(fk?'در قاره‌ی ':'in ')+c))}
+GRP('art',A.map((p,i)=>({l:L(p),g:i<11?0:1})),fk?['ایرانی','غیرایرانی']:['Iranian','non-Iranian']);
+{const Q=P('Python|Python|0;Java|Java|0;JavaScript|JavaScript|0;C++|C++|0;Rust|Rust|0;Go|Go|0;Ruby|Ruby|0;PHP|PHP|0;Windows|Windows|1;Linux|Linux|1;macOS|macOS|1;Android|Android|1;iOS|iOS|1;Ubuntu|Ubuntu|1;Chrome|Chrome|2;Firefox|Firefox|2;Safari|Safari|2;Edge|Edge|2;Opera|Opera|2;MySQL|MySQL|3;PostgreSQL|PostgreSQL|3;MongoDB|MongoDB|3;SQLite|SQLite|3;RAM|RAM|4;GPU|GPU|4;SSD|SSD|4;CPU|CPU|4;Motherboard|مادربرد|4'),gn=[['زبان برنامه‌نویسی','programming language'],['سیستم‌عامل','operating system'],['مرورگر','browser'],['پایگاه‌داده','database'],['قطعه‌ی سخت‌افزاری','hardware component']];GRP('tec',Q.map(p=>({l:L(p),g:+p[2]})),gn.map(g=>fk?g[0]:art(g[1])+g[1]))}
+{const HQ=HX0=P("622|هجرت پیامبر اسلام (آغاز تقویم هجری)|the Hijra (start of the Islamic calendar);800|تاج\u200cگذاری شارلمانی|Charlemagne's coronation;1206|تأسیس امپراتوری مغول به دست چنگیزخان|Genghis Khan founding the Mongol Empire;1258|سقوط بغداد به دست مغول\u200cها|the Mongol sack of Baghdad;1347|رسیدن مرگ سیاه به اروپا|the Black Death reaching Europe;1501|آغاز حکومت صفویان|the founding of the Safavid dynasty;1519|آغاز سفر دور دنیای ماژلان|the start of Magellan's circumnavigation;1588|شکست آرمادای اسپانیا|the defeat of the Spanish Armada;1620|رسیدن کشتی میفلاور به آمریکا|the Mayflower landing;1648|پیمان وستفالی|the Peace of Westphalia;1666|آتش\u200cسوزی بزرگ لندن|the Great Fire of London;1736|آغاز پادشاهی نادرشاه|the start of Nader Shah's reign;1783|نخستین پرواز انسان با بالن|the first manned balloon flight;1804|تاج\u200cگذاری ناپلئون|Napoleon's coronation as emperor;1848|بهار ملت‌ها (انقلاب‌های اروپا)|the Spring of Nations (the European revolutions);1865|پایان جنگ داخلی آمریکا|the end of the American Civil War;1869|افتتاح کانال سوئز|the opening of the Suez Canal;1871|اتحاد آلمان|the unification of Germany;1918|پایان جنگ جهانی اول|the end of World War I;1925|آغاز سلسله\u200cی پهلوی|the start of the Pahlavi dynasty;1929|سقوط بورس وال\u200cاستریت|the Wall Street Crash;1933|به قدرت رسیدن هیتلر|Hitler becoming Chancellor;1947|استقلال هند|Indian independence;1949|تأسیس جمهوری خلق چین|the founding of the People's Republic of China;1963|ترور جان اف. کندی|the assassination of John F. Kennedy;1986|فاجعه\u200cی چرنوبیل|the Chernobyl disaster;1994|ریاست\u200cجمهوری ماندلا در آفریقای جنوبی|Mandela becoming president of South Africa;1996|تولد گوسفند دالی|the birth of Dolly the sheep;2003|تکمیل پروژه\u200cی ژنوم انسان|the completion of the Human Genome Project;2004|راه\u200cاندازی فیس\u200cبوک|the launch of Facebook;2008|آغاز بحران مالی جهانی|the start of the global financial crisis;2020|اعلام همه\u200cگیری کووید ۱۹ از سوی سازمان جهانی بهداشت|the WHO declaring the COVID-19 pandemic"),F2=fk?1:2;HQ.forEach(p=>{const y=+p[0],e=fk?p[1]:p[2];F('his',1,fk?`${e} در چه سالی رخ داد؟`:`In which year did this happen: ${e}?`,yr(y),[y+1,y-1,y+3,y-3,y+10,y-10].map(yr));F('his',1,fk?`کدام رویداد در سال ${yr(y)} رخ داد؟`:`Which event happened in ${y}?`,e,HQ.map(z=>fk?z[1]:z[2]))});
+CMP('his',HQ.concat(H).map(p=>({l:fk?p[1]:p[2],v:+p[0]})),fk?'کدام رویداد زودتر رخ داد؟':'Which event happened first?',fk?'کدام رویداد دیرتر رخ داد؟':'Which event happened last?',1,'{a} زودتر از {b} رخ داد.|{a} happened before {b}.')}
+{const PL=P('عطارد|Mercury|1|4879;زهره|Venus|2|12104;زمین|Earth|3|12742;مریخ|Mars|4|6779;مشتری|Jupiter|5|139820;زحل|Saturn|6|116460;اورانوس|Uranus|7|50724;نپتون|Neptune|8|49244');CMP('sci',PL.map(p=>({l:L(p),v:+p[3]})),fk?'کدام سیاره کوچک‌تر است؟':'Which planet is smaller?',fk?'کدام سیاره بزرگ‌تر است؟':'Which planet is larger?',1,'{a} از {b} کوچک‌تر است.|{a} is smaller than {b}.');CMP('sci',PL.map(p=>({l:L(p),v:+p[2]})),fk?'کدام سیاره به خورشید نزدیک‌تر است؟':'Which planet is closer to the Sun?',fk?'کدام سیاره از خورشید دورتر است؟':'Which planet is farther from the Sun?',0,'{a} به خورشید نزدیک‌تر از {b} است.|{a} is closer to the Sun than {b}.');GRP('sci',PL.map((p,i)=>({l:L(p),g:i<4?0:1})),fk?['سیاره‌ی سنگی','سیاره‌ی غول‌پیکر']:['a rocky planet','a giant planet'])}
+T('sci','نیرو|Force|نیوتن|Newton;انرژی|Energy|ژول|Joule;توان|Power|وات|Watt;فشار|Pressure|پاسکال|Pascal;بسامد|Frequency|هرتز|Hertz;جریان الکتریکی|Electric current|آمپر|Ampere;مقاومت الکتریکی|Electrical resistance|اهم|Ohm;ولتاژ|Voltage|ولت|Volt;دما|Temperature|کلوین|Kelvin;بار الکتریکی|Electric charge|کولن|Coulomb','یکای اندازه‌گیری {s} چیست؟','What is the SI unit of {s}?','{s} یکای کدام کمیت است؟','Which quantity is measured in {s}?','یکای اندازه‌گیری {s}، {a} است.','The SI unit of {s} is the {a}.');
+T('sci','نیوتن|Isaac Newton|قانون گرانش|The law of gravitation;اینشتین|Albert Einstein|نظریه\u200cی نسبیت|Relativity;داروین|Charles Darwin|نظریه\u200cی تکامل|Evolution;ماری کوری|Marie Curie|پولونیوم و رادیوم|Polonium and radium;مندلیف|Dmitri Mendeleev|جدول تناوبی|The periodic table;فلمینگ|Alexander Fleming|پنی\u200cسیلین|Penicillin;ابن\u200cسینا|Avicenna|القانون فی الطب|The Canon of Medicine;خوارزمی|Al-Khwarizmi|جبر|Algebra;پاستور|Louis Pasteur|پاستوریزاسیون|Pasteurization;ادیسون|Thomas Edison|لامپ رشته\u200cای|The practical light bulb;گراهام بل|Alexander Graham Bell|تلفن|The telephone;کپلر|Johannes Kepler|قوانین حرکت سیارات|Laws of planetary motion;فارادی|Michael Faraday|القای الکترومغناطیسی|Electromagnetic induction','{s} با کدام کشف یا کار علمی شناخته می‌شود؟','What is {s} best known for?','کدام دانشمند با «{s}» شناخته می‌شود؟','Who is best known for: {s}?','{s} با {a} شناخته می‌شود.','{s} is best known for {a}.');
+T('gen','فروردین|Farvardin|۱|1;اردیبهشت|Ordibehesht|۲|2;خرداد|Khordad|۳|3;تیر|Tir|۴|4;مرداد|Mordad|۵|5;شهریور|Shahrivar|۶|6;مهر|Mehr|۷|7;آبان|Aban|۸|8;آذر|Azar|۹|9;دی|Dey|۱۰|10;بهمن|Bahman|۱۱|11;اسفند|Esfand|۱۲|12','{s} ماه چندم سال شمسی است؟','Which month of the Iranian year is {s}?','کدام ماه شمسی ماه شماره‌ی {s} است؟','Which Iranian month has the number {s}?','{s} ماه شماره‌ی {a} سال شمسی است.','{s} is month number {a} of the Iranian year.');
+GRP('gen',P('فروردین|Farvardin|۱|1;اردیبهشت|Ordibehesht|۲|2;خرداد|Khordad|۳|3;تیر|Tir|۴|4;مرداد|Mordad|۵|5;شهریور|Shahrivar|۶|6;مهر|Mehr|۷|7;آبان|Aban|۸|8;آذر|Azar|۹|9;دی|Dey|۱۰|10;بهمن|Bahman|۱۱|11;اسفند|Esfand|۱۲|12').map((p,i)=>({l:L(p),g:i/3|0})),fk?['ماه بهار','ماه تابستان','ماه پاییز','ماه زمستان']:['a spring month','a summer month','an autumn month','a winter month']);
+T('gen','مثلث|triangle|۳|3;چهارضلعی|quadrilateral|۴|4;پنج\u200cضلعی|pentagon|۵|5;شش\u200cضلعی|hexagon|۶|6;هفت\u200cضلعی|heptagon|۷|7;هشت\u200cضلعی|octagon|۸|8;نه\u200cضلعی|nonagon|۹|9;ده\u200cضلعی|decagon|۱۰|10','{s} چند ضلع دارد؟','How many sides does a {s} have?','کدام شکل {s} ضلع دارد؟','Which shape has {s} sides?','{s} دارای {a} ضلع است.','A {s} has {a} sides.');
+T('gen','XIV|XIV|۱۴|14;IX|IX|۹|9;XL|XL|۴۰|40;XC|XC|۹۰|90;L|L|۵۰|50;C|C|۱۰۰|100;D|D|۵۰۰|500;M|M|۱۰۰۰|1000;XIX|XIX|۱۹|19;XXIV|XXIV|۲۴|24','عدد رومی {s} برابر چند است؟','What number is the Roman numeral {s}?','کدام عدد رومی معادل {s} است؟','Which Roman numeral equals {s}?','{s} در اعداد رومی برابر {a} است.','{s} in Roman numerals equals {a}.');
+T('gen','پیتزا|Pizza|ایتالیا|Italy;سوشی|Sushi|ژاپن|Japan;تاکو|Taco|مکزیک|Mexico;قورمه\u200cسبزی|Ghormeh sabzi|ایران|Iran;پایلا|Paella|اسپانیا|Spain;کیمچی|Kimchi|کره جنوبی|South Korea;گولاش|Goulash|مجارستان|Hungary;فیش اند چیپس|Fish and chips|بریتانیا|the United Kingdom;پد تای|Pad Thai|تایلند|Thailand;اسپاگتی|Spaghetti|ایتالیا|Italy','غذای {s} اهل کدام کشور است؟','Which country is {s} from?',0,0,'{s} اهل {a} است.','{s} is from {a}.');
+T('spo','مسی|Lionel Messi|فوتبال|Football;کریستیانو رونالدو|Cristiano Ronaldo|فوتبال|Football;علی دایی|Ali Daei|فوتبال|Football;مایکل جردن|Michael Jordan|بسکتبال|Basketball;روجر فدرر|Roger Federer|تنیس|Tennis;رافائل نادال|Rafael Nadal|تنیس|Tennis;اوسین بولت|Usain Bolt|دوومیدانی|Athletics;مایکل فلپس|Michael Phelps|شنا|Swimming;لوئیس همیلتون|Lewis Hamilton|فرمول ۱|Formula 1;محمدعلی کلی|Muhammad Ali|بوکس|Boxing;تایگر وودز|Tiger Woods|گلف|Golf;حسن یزدانی|Hassan Yazdani|کشتی|Wrestling;هادی ساعی|Hadi Saei|تکواندو|Taekwondo;حسین رضازاده|Hossein Rezazadeh|وزنه\u200cبرداری|Weightlifting','{s} در کدام رشته‌ی ورزشی مشهور است؟','Which sport is {s} famous for?',0,0,'{s} در رشته‌ی {a} مشهور است.','{s} is famous for {a}.');
+T('spo','فوتبال|football|۱۱|11;بسکتبال|basketball|۵|5;والیبال|volleyball|۶|6;هندبال|handball|۷|7;بیسبال|baseball|۹|9;راگبی|rugby union|۱۵|15;واترپلو|water polo|۷|7','در {s} هر تیم چند بازیکن هم‌زمان در زمین دارد؟','How many players per team are on the field at once in {s}?',0,0,'در {s} هر تیم {a} بازیکن هم‌زمان در زمین دارد.','In {s}, each team has {a} players on the field at once.');
+GRP('spo',P('فوتبال|Football|0;بسکتبال|Basketball|0;والیبال|Volleyball|0;هندبال|Handball|0;تنیس|Tennis|0;کاراته|Karate|1;جودو|Judo|1;تکواندو|Taekwondo|1;بوکس|Boxing|1;کشتی|Wrestling|1;شنا|Swimming|2;واترپلو|Water polo|2;قایقرانی|Rowing|2;شیرجه|Diving|2;موج\u200cسواری|Surfing|2;اسکی|Skiing|3;هاکی روی یخ|Ice hockey|3;اسنوبرد|Snowboarding|3;اسکیت نمایشی|Figure skating|3;کرلینگ|Curling|3').map(p=>({l:L(p),g:+p[2]})),fk?['ورزش توپی','ورزش رزمی','ورزش آبی','ورزش زمستانی']:['a ball sport','a combat sport','a water sport','a winter sport']);
+T('art','لئوناردو داوینچی|Leonardo da Vinci|مونالیزا|Mona Lisa;ون\u200cگوگ|Van Gogh|شب پرستاره|The Starry Night;پیکاسو|Picasso|گرنیکا|Guernica;کلود مونه|Claude Monet|تأثر، طلوع خورشید|Impression, Sunrise;میکل\u200cآنژ|Michelangelo|سقف کلیسای سیستین|The Sistine Chapel ceiling;سالوادور دالی|Salvador Dalí|پایداری حافظه|The Persistence of Memory;ادوارد مونک|Edvard Munch|جیغ|The Scream;رامبرانت|Rembrandt|گشت شبانه|The Night Watch;کمال\u200cالملک|Kamal-ol-Molk|تالار آینه|Hall of Mirrors;یوهانس ورمیر|Johannes Vermeer|دختری با گوشواره\u200cی مروارید|Girl with a Pearl Earring;گوستاو کلیمت|Gustav Klimt|بوسه|The Kiss','کدام اثر از {s} است؟','Which work is by {s}?','«{s}» اثر کدام نقاش است؟','Who created "{s}"?','{a} اثر {s} است.','{a} is a work by {s}.');
+T('art',"کریستوفر نولان|Christopher Nolan|تلقین|Inception;استیون اسپیلبرگ|Steven Spielberg|فهرست شیندلر|Schindler's List;کوئنتین تارانتینو|Quentin Tarantino|داستان عامه\u200cپسند|Pulp Fiction;مارتین اسکورسیزی|Martin Scorsese|راننده تاکسی|Taxi Driver;آلفرد هیچکاک|Alfred Hitchcock|روانی|Psycho;استنلی کوبریک|Stanley Kubrick|درخشش|The Shining;عباس کیارستمی|Abbas Kiarostami|طعم گیلاس|Taste of Cherry;مجید مجیدی|Majid Majidi|بچه\u200cهای آسمان|Children of Heaven;اصغر فرهادی|Asghar Farhadi|فروشنده|The Salesman;جعفر پناهی|Jafar Panahi|دایره|The Circle",'کدام فیلم از {s} است؟','Which film is by {s}?','«{s}» ساخته‌ی کدام کارگردان است؟','Who directed "{s}"?','{a} ساخته‌ی {s} است.','{a} is a film by {s}.');
+GRP('art',P('لئوناردو داوینچی|Leonardo da Vinci|مونالیزا|Mona Lisa;ون\u200cگوگ|Van Gogh|شب پرستاره|The Starry Night;پیکاسو|Picasso|گرنیکا|Guernica;کلود مونه|Claude Monet|تأثر، طلوع خورشید|Impression, Sunrise;میکل\u200cآنژ|Michelangelo|سقف کلیسای سیستین|The Sistine Chapel ceiling;سالوادور دالی|Salvador Dalí|پایداری حافظه|The Persistence of Memory;ادوارد مونک|Edvard Munch|جیغ|The Scream;رامبرانت|Rembrandt|گشت شبانه|The Night Watch;کمال\u200cالملک|Kamal-ol-Molk|تالار آینه|Hall of Mirrors;یوهانس ورمیر|Johannes Vermeer|دختری با گوشواره\u200cی مروارید|Girl with a Pearl Earring;گوستاو کلیمت|Gustav Klimt|بوسه|The Kiss').map(p=>({l:L(p),g:0})).concat(P("کریستوفر نولان|Christopher Nolan|تلقین|Inception;استیون اسپیلبرگ|Steven Spielberg|فهرست شیندلر|Schindler's List;کوئنتین تارانتینو|Quentin Tarantino|داستان عامه\u200cپسند|Pulp Fiction;مارتین اسکورسیزی|Martin Scorsese|راننده تاکسی|Taxi Driver;آلفرد هیچکاک|Alfred Hitchcock|روانی|Psycho;استنلی کوبریک|Stanley Kubrick|درخشش|The Shining;عباس کیارستمی|Abbas Kiarostami|طعم گیلاس|Taste of Cherry;مجید مجیدی|Majid Majidi|بچه\u200cهای آسمان|Children of Heaven;اصغر فرهادی|Asghar Farhadi|فروشنده|The Salesman;جعفر پناهی|Jafar Panahi|دایره|The Circle").map(p=>({l:L(p),g:1})),A.map(p=>({l:L(p),g:2}))),fk?['نقاش','فیلم‌ساز','نویسنده یا شاعر']:['a painter','a film director','a writer or poet']);
+GRP('nat',P('شیر|Lion|0;گرگ|Wolf|0;خرس قطبی|Polar bear|0;کوسه|Shark|0;عقاب|Eagle|0;فیل|Elephant|1;زرافه|Giraffe|1;اسب|Horse|1;گاو|Cow|1;پاندا|Panda|1;گوزن|Deer|1;خرس قهوه\u200cای|Brown bear|2;خوک|Pig|2;موش|Rat|2;کلاغ|Crow|2;راکون|Raccoon|2').map(p=>({l:L(p),g:+p[2]})),fk?['گوشتخوار','گیاهخوار','همه‌چیزخوار']:['a carnivore','a herbivore','an omnivore']);
+T('nat','کانگورو|Kangaroo|استرالیا|Australia;پاندای غول\u200cپیکر|Giant panda|چین|China;کیوی|Kiwi|نیوزیلند|New Zealand;لاما|Llama|آمریکای جنوبی|South America;کومودو|Komodo dragon|اندونزی|Indonesia;یوزپلنگ آسیایی|Asiatic cheetah|ایران|Iran;پنگوئن امپراتور|Emperor penguin|جنوبگان|Antarctica;لمور|Lemur|ماداگاسکار|Madagascar','زیستگاه طبیعی {s} کجاست؟','Where does {s} live naturally?',0,0,'{s} در {a} زندگی می‌کند.','{s} lives in {a}.');
+CMP('nat',P('نهنگ آبی|Blue whale|150000;فیل آفریقایی|African elephant|6000;اسب\u200cآبی|Hippopotamus|1500;زرافه|Giraffe|1200;خرس قطبی|Polar bear|450;شیر|Lion|190;کانگورو|Kangaroo|70;گرگ|Wolf|40;گربه\u200cی خانگی|Domestic cat|4;گنجشک|Sparrow|0.03').map(p=>({l:L(p),v:+p[2]})),fk?'کدام جانور سبک‌تر است؟':'Which animal is lighter?',fk?'کدام جانور سنگین‌تر است؟':'Which animal is heavier?',1,'{a} سبک‌تر از {b} است.|{a} is lighter than {b}.');
+T('tec','اپل|Apple|آمریکا|the USA;سامسونگ|Samsung|کره جنوبی|South Korea;سونی|Sony|ژاپن|Japan;نوکیا|Nokia|فنلاند|Finland;هوآوی|Huawei|چین|China;زیمنس|Siemens|آلمان|Germany;اسپاتیفای|Spotify|سوئد|Sweden;فیلیپس|Philips|هلند|the Netherlands','شرکت {s} اهل کدام کشور است؟','Which country is {s} from?',0,0,'{s} اهل {a} است.','{s} is from {a}.');
+T('tec','iPhone|iPhone|اپل|Apple;PlayStation|PlayStation|سونی|Sony;Xbox|Xbox|مایکروسافت|Microsoft;Galaxy|Galaxy|سامسونگ|Samsung;Kindle|Kindle|آمازون|Amazon;YouTube|YouTube|گوگل|Google;Instagram|Instagram|متا|Meta;Windows|Windows|مایکروسافت|Microsoft','{s} محصول کدام شرکت است؟','Which company makes {s}?',0,0,'{s} محصول {a} است.','{s} is made by {a}.');
+T('tec','.jpg|.jpg|تصویر|Image;.png|.png|تصویر|Image;.mp3|.mp3|صوت|Audio;.pdf|.pdf|سند|Document;.exe|.exe|برنامه\u200cی اجرایی|Executable program;.zip|.zip|فایل فشرده|Compressed archive;.mp4|.mp4|ویدیو|Video','پسوند {s} مربوط به چه نوع فایلی است؟','What kind of file is {s}?',0,0,'{s} یک فایل {a} است.','{s} is a(n) {a} file.');
+CMP('tec',P('Microsoft|Microsoft|1975;Apple|Apple|1976;Amazon|Amazon|1994;Netflix|Netflix|1997;Google|Google|1998;Wikipedia|Wikipedia|2001;Facebook|Facebook|2004;YouTube|YouTube|2005;Twitter|Twitter|2006;iPhone|iPhone|2007;Android|Android|2008;Bitcoin|Bitcoin|2009;Instagram|Instagram|2010;ChatGPT|ChatGPT|2022').map(p=>({l:L(p),v:+p[2]})),fk?'کدام زودتر تأسیس یا عرضه شد؟':'Which was founded or released first?',fk?'کدام دیرتر تأسیس یا عرضه شد؟':'Which was founded or released last?',1,'{a} زودتر از {b} تأسیس یا عرضه شد.|{a} was founded or released before {b}.');
+{const E2=E.length;E.forEach((p,i)=>{const n=L(p),w=(i+3)%E2;Y.push({k:'sci',x:1,t:cap(fk?`عدد اتمی ${n} برابر ${fa(N[i])} است.`:`${n} has atomic number ${N[i]}.`),v:true},{k:'sci',x:1,t:cap(fk?`عدد اتمی ${n} برابر ${fa(N[w])} است.`:`${n} has atomic number ${N[w]}.`),v:false});TYP.push({k:'sci',x:1,q:fk?`کدام عنصر عدد اتمی ${fa(N[i])} دارد؟`:`Which element has atomic number ${N[i]}?`,a:[p[0],p[1]]})})}
+H.concat(HX0).forEach((p,i,Z)=>{const y=+p[0],e=fk?p[1]:p[2],y2=y+[3,7,12,20][i%4];Y.push({k:'his',x:1,t:cap(fk?`${e} در سال ${yr(y)} رخ داد.`:`${e} happened in ${y}.`),v:true},{k:'his',x:1,t:cap(fk?`${e} در سال ${yr(y2)} رخ داد.`:`${e} happened in ${y2}.`),v:false});TYP.push({k:'his',x:1,q:fk?`${e} در چه سالی رخ داد؟`:`In which year did this happen: ${e}?`,a:[yr(y),String(y)]})});
+[[W,'قهرمان جام جهانی فوتبال {y} {a} بود.','{a} won the {y} FIFA World Cup.','قهرمان جام جهانی فوتبال {y} کدام تیم بود؟','Who won the {y} FIFA World Cup?'],[O,'المپیک تابستانی {y} در {a} برگزار شد.','The {y} Summer Olympics were held in {a}.','المپیک تابستانی {y} در کدام شهر برگزار شد؟','Which city hosted the {y} Summer Olympics?']].forEach(([Z,sf,se,qf,qe])=>Z.forEach((p,i)=>{const y=yr(p[0]),a=L(p.slice(1)),b=L(Z[(i+3)%Z.length].slice(1)),st=x=>cap((fk?sf:se).replace('{y}',y).replace('{a}',x));Y.push({k:'spo',x:1,t:st(a),v:true},{k:'spo',x:1,t:st(b),v:b==a});TYP.push({k:'spo',x:1,q:(fk?qf:qe).replace('{y}',y),a:[p[1],p[2]]})}));
+T('geo',P(CT).map(p=>[p[0],p[2],p[1],p[3]].join('|')).join(';'),'پایتخت {s} کدام شهر است؟','What is the capital of {s}?','{s} پایتخت کدام کشور است؟','{s} is the capital of which country?','پایتخت {s}، {a} است.','The capital of {s} is {a}.',1);
+T('spc','اسپوتنیک ۱|Sputnik 1|۱۹۵۷|1957;وستوک ۱|Vostok 1|۱۹۶۱|1961;آپولو ۱۱|Apollo 11|۱۹۶۹|1969;سالیوت ۱|Salyut 1|۱۹۷۱|1971;ویجر ۱|Voyager 1|۱۹۷۷|1977;شاتل کلمبیا|Space Shuttle Columbia|۱۹۸۱|1981;تلسکوپ هابل|the Hubble Space Telescope|۱۹۹۰|1990;نخستین بخش ایستگاه فضایی بین\u200cالمللی|the first ISS module|۱۹۹۸|1998;مریخ\u200cنورد کنجکاوی|the Curiosity rover|۲۰۱۱|2011;تلسکوپ جیمز وب|the James Webb Space Telescope|۲۰۲۱|2021','{s} در چه سالی پرتاب شد؟','In which year was {s} launched?','کدام پرتاب در سال {s} انجام شد؟','Which launch happened in {s}?','{s} در سال {a} پرتاب شد.','{s} was launched in {a}.');
+CMP('spc',P('اسپوتنیک ۱|Sputnik 1|۱۹۵۷|1957;وستوک ۱|Vostok 1|۱۹۶۱|1961;آپولو ۱۱|Apollo 11|۱۹۶۹|1969;سالیوت ۱|Salyut 1|۱۹۷۱|1971;ویجر ۱|Voyager 1|۱۹۷۷|1977;شاتل کلمبیا|Space Shuttle Columbia|۱۹۸۱|1981;تلسکوپ هابل|the Hubble Space Telescope|۱۹۹۰|1990;نخستین بخش ایستگاه فضایی بین\u200cالمللی|the first ISS module|۱۹۹۸|1998;مریخ\u200cنورد کنجکاوی|the Curiosity rover|۲۰۱۱|2011;تلسکوپ جیمز وب|the James Webb Space Telescope|۲۰۲۱|2021').map(p=>({l:L(p),v:+p[3]})),fk?'کدام زودتر پرتاب شد؟':'Which launched first?',fk?'کدام دیرتر پرتاب شد؟':'Which launched last?',1,'{a} زودتر از {b} پرتاب شد.|{a} launched before {b}.');
+T('spc','نخستین انسان در فضا|the first human in space|یوری گاگارین|Yuri Gagarin;نخستین انسانی که روی ماه قدم گذاشت|the first person on the Moon|نیل آرمسترانگ|Neil Armstrong;نخستین زن در فضا|the first woman in space|والنتینا ترشکوا|Valentina Tereshkova;نخستین حیوان در مدار زمین|the first animal in Earth orbit|لایکا|Laika;نخستین آمریکایی در فضا|the first American in space|آلن شپرد|Alan Shepard;نخستین آمریکایی که دور زمین چرخید|the first American to orbit Earth|جان گلن|John Glenn;دومین انسان روی ماه|the second person on the Moon|باز آلدرین|Buzz Aldrin','{s} چه کسی (یا چه چیزی) بود؟','Who (or what) was {s}?',0,0,'{a} {s} بود.','{a} was {s}.');
+T('spc','سیاره\u200cی سرخ|the Red Planet|مریخ|Mars;سیاره\u200cی دارای حلقه\u200cهای مشهور|the planet with the famous rings|زحل|Saturn;بزرگ\u200cترین سیاره|the largest planet|مشتری|Jupiter;کوچک\u200cترین سیاره|the smallest planet|عطارد|Mercury;داغ\u200cترین سیاره|the hottest planet|زهره|Venus;دورترین سیاره از خورشید|the farthest planet from the Sun|نپتون|Neptune;سیاره\u200cای که روی آن زندگی می\u200cکنیم|the planet we live on|زمین|Earth','{s} کدام سیاره است؟','Which planet is {s}?','{s} همان کدام وصف است؟','Which description fits {s}?','{a} همان {s} است.','{a} is {s}.');
+T('fod','ویتامین C|Vitamin C|مرکبات|Citrus fruits;ویتامین D|Vitamin D|نور خورشید|Sunlight;ویتامین A|Vitamin A|هویج|Carrots;کلسیم|Calcium|شیر|Milk;آهن|Iron|گوشت قرمز|Red meat;پتاسیم|Potassium|موز|Bananas;پروتئین|Protein|تخم\u200cمرغ|Eggs;امگا ۳|Omega-3|ماهی|Fish','یک منبع خوب {s} کدام است؟','What is a good source of {s}?',0,0,'{a} منبع خوبی از {s} است.','{a} is a good source of {s}.');
+GRP('fod',P('سیب|Apple|0;موز|Banana|0;پرتقال|Orange|0;انگور|Grapes|0;هلو|Peach|0;هویج|Carrot|1;کاهو|Lettuce|1;اسفناج|Spinach|1;کلم|Cabbage|1;ترب|Radish|1;برنج|Rice|2;گندم|Wheat|2;جو|Barley|2;ذرت|Corn|2;یولاف|Oats|2;شیر|Milk|3;پنیر|Cheese|3;ماست|Yogurt|3;کره|Butter|3;خامه|Cream|3').map(p=>({l:L(p),g:+p[2]})),fk?['میوه','سبزی','غله','لبنیات']:['a fruit','a vegetable','a grain','a dairy product']);
+T('geo','رود نیل|the Nile|آفریقا|Africa;رود آمازون|the Amazon|آمریکای جنوبی|South America;رود دانوب|the Danube|اروپا|Europe;رود یانگ\u200cتسه|the Yangtze|آسیا|Asia;رود می\u200cسی\u200cسی\u200cپی|the Mississippi|آمریکای شمالی|North America;رود راین|the Rhine|اروپا|Europe;صحرای بزرگ|the Sahara|آفریقا|Africa;صحرای گوبی|the Gobi Desert|آسیا|Asia;صحرای آتاکاما|the Atacama Desert|آمریکای جنوبی|South America','{s} در کدام قاره است؟','Which continent is {s} in?',0,0,'{s} در {a} قرار دارد.','{s} is in {a}.');
+T('geo','اهرام ثلاثه|the Pyramids of Giza|مصر|Egypt;ماچوپیچو|Machu Picchu|پرو|Peru;دیوار بزرگ|the Great Wall|چین|China;پترا|Petra|اردن|Jordan;آنگکور وات|Angkor Wat|کامبوج|Cambodia;استون\u200cهنج|Stonehenge|بریتانیا|the United Kingdom;مسیح منجی|Christ the Redeemer|برزیل|Brazil;تخت\u200cجمشید|Persepolis|ایران|Iran;چغازنبیل|Chogha Zanbil|ایران|Iran;اپرای سیدنی|the Sydney Opera House|استرالیا|Australia;کاخ ورسای|the Palace of Versailles|فرانسه|France;کرملین|the Kremlin|روسیه|Russia;قصر الحمرا|the Alhambra|اسپانیا|Spain;آکروپولیس|the Acropolis|یونان|Greece;چیچن ایتزا|Chichen Itza|مکزیک|Mexico;قلعه‌ی نویشوانشتاین|Neuschwanstein Castle|آلمان|Germany;کوه فوجی|Mount Fuji|ژاپن|Japan;کوه تیبل|Table Mountain|آفریقای جنوبی|South Africa','{s} در کدام کشور قرار دارد؟','Which country is {s} in?',0,0,'{s} در {a} قرار دارد.','{s} is in {a}.');
+T('sci','آب|water|H₂O|H₂O;نمک خوراکی|table salt|NaCl|NaCl;دی\u200cاکسید کربن|carbon dioxide|CO₂|CO₂;اکسیژن|oxygen|O₂|O₂;متان|methane|CH₄|CH₄;آمونیاک|ammonia|NH₃|NH₃;ازن|ozone|O₃|O₃;گلوکز|glucose|C₆H₁₂O₆|C₆H₁₂O₆','فرمول شیمیایی {s} چیست؟','What is the chemical formula of {s}?','کدام ماده فرمول {s} دارد؟','Which substance has the formula {s}?','فرمول شیمیایی {s}، {a} است.','The chemical formula of {s} is {a}.');
+T('his','ناپلئون|Napoleon|فرانسه|France;اسکندر|Alexander the Great|مقدونیه|Macedon;چنگیزخان|Genghis Khan|مغولستان|Mongolia;ژولیوس سزار|Julius Caesar|روم|Rome;آتاتورک|Atatürk|ترکیه|Turkey;گاندی|Gandhi|هند|India;چرچیل|Churchill|بریتانیا|the United Kingdom;ماندلا|Mandela|آفریقای جنوبی|South Africa;آبراهام لینکلن|Abraham Lincoln|آمریکا|the USA','کدام کشور یا سرزمین با {s} پیوند دارد؟','Which country or land is {s} linked with?',0,0,'{s} با {a} پیوند دارد.','{s} is linked with {a}.');
+GRP('art',P('ویولن|Violin|0;گیتار|Guitar|0;سنتور|Santur|0;تار|Tar|0;هارپ|Harp|0;فلوت|Flute|1;ترومپت|Trumpet|1;نی|Ney|1;کلارینت|Clarinet|1;ساکسیفون|Saxophone|1;تمبک|Tombak|2;طبل|Drum|2;سنج|Cymbals|2;زیلوفون|Xylophone|2;دایره|Daf|2').map(p=>({l:L(p),g:+p[2]})),fk?['ساز زهی','ساز بادی','ساز کوبه‌ای']:['a string instrument','a wind instrument','a percussion instrument']);
+T('nat','گربه|cat|بچه\u200cگربه|kitten;سگ|dog|توله|puppy;اسب|horse|کره|foal;گاو|cow|گوساله|calf;گوسفند|sheep|بره|lamb;مرغ|hen|جوجه|chick;قورباغه|frog|بچه\u200cقورباغه|tadpole;شیر|lion|توله\u200cشیر|cub','نام بچه‌ی {s} چیست؟','What is a baby {s} called?',0,0,'{a} نام بچه‌ی {s} است.','A baby {s} is called a {a}.');
+CMP('tec',P('C|C|1972;C++|C++|1985;Python|Python|1991;Java|Java|1995;Go|Go|2009;Rust|Rust|2010;Kotlin|Kotlin|2011;Swift|Swift|2014').map(p=>({l:L(p),v:+p[2]})),fk?'کدام زبان زودتر ساخته شد؟':'Which language appeared first?',fk?'کدام زبان دیرتر ساخته شد؟':'Which language appeared last?',1,'{a} زودتر از {b} ساخته شد.|{a} appeared before {b}.');
+T('spo','سومو|Sumo|ژاپن|Japan;جودو|Judo|ژاپن|Japan;تکواندو|Taekwondo|کره جنوبی|South Korea;کریکت|Cricket|انگلستان|England;بسکتبال|Basketball|آمریکا|the USA;شطرنج|Chess|هند|India;پولو|Polo|ایران|Iran;هاکی روی یخ|Ice hockey|کانادا|Canada','خاستگاه {s} کدام کشور است؟','Which country did {s} originate in?',0,0,'{s} در {a} ریشه دارد.','{s} originated in {a}.');
+YNX.forEach(p=>Y.push({k:p[0],x:p[1],t:fk?p[2]:p[3],v:true},{k:p[0],x:p[1],t:fk?p[4]:p[5],v:false}));TYX.forEach(p=>TYP.push({k:p[0],x:p[1],q:fk?p[2]:p[3],a:[p[4],p[5]].concat(p[6]||[])}));R.Y=Y;R.TY=TYP;return R}
+const CATS=['gen','geo','sci','his','spo','art','nat','tec','spc','fod'];
+const CN={fa:{all:'همه',gen:'عمومی',geo:'جغرافیا',sci:'علوم',his:'تاریخ',spo:'ورزش',art:'هنر و ادبیات',nat:'طبیعت و جانوران',tec:'فناوری',spc:'فضا و نجوم',fod:'خوراک و تغذیه',cat:'موضوع سوال‌ها',lb:'رکوردها',d:'امروز',w:'این هفته',a:'همیشه',b:'بهترین نتیجه‌ی شما',e:'هنوز بازی ثبت نشده.',bk:'بازگشت',qt:'سبک سوال',mc:'چندگزینه‌ای',yn:'آره یا نه',rev:'معکوس',ty:'تشریحی',th:'پاسخ را تایپ کنید.',rh:'یک جمله نشان داده می‌شود. باید برعکسِ جواب درست را بزنید: اگر درست است «نه» و اگر غلط است «آره».',yh:'یک جمله نشان داده می‌شود؛ فقط با «آره» یا «نه» جواب بدهید.',note:'رکوردها فقط روی همین دستگاه ذخیره می‌شوند.'},en:{all:'All',gen:'General',geo:'Geography',sci:'Science',his:'History',spo:'Sports',art:'Arts & Literature',nat:'Nature & Animals',tec:'Technology',spc:'Space',fod:'Food & Nutrition',cat:'Question topic',lb:'Records',d:'Today',w:'This week',a:'All time',b:'Your best score',e:'No games recorded yet.',bk:'Back',qt:'Question style',mc:'Multiple choice',yn:'Yes or No',rev:'Reverse',ty:'Typed',th:'Type your answer.',rh:'A statement is shown. Answer the opposite of the truth: tap No if it is true, Yes if it is false.',yh:'A statement is shown. Answer only Yes or No.',note:'Records are stored on this device only.'}};
+let view='',lbT='d',lastK='',hp=null,AC=null;
+const $=s=>document.querySelector(s),app=$('#app');
+const bank=()=>cfg.lang=='fa'?BANK:BANKE;
+const DFA=[0,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,1,2,1,1,0,0,0,2,0,1,1,1,1,0,0,0,0,0,1,1,1,1,1,1,0,0,1,1,1,0,0],DFE=[0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,0,1,1,1,1,0,0,0,1,1,1,1,0,0,1,1,0,0,1,1,0,0,0,1,0,0,1,0,0];
+let srch=false,lob=null,pend=null,reg=0;const regs={};
+function dirs(){document.documentElement.dir=cfg.lang=='fa'?'rtl':'ltr';document.documentElement.lang=cfg.lang}
+const L={fa:{title:'🧠 کی باهوش‌تره؟',modes:['تک‌نفره','با هوش مصنوعی','محلی (یک دستگاه)','نزدیک (همین وای‌فای)','آنلاین با دوستان'],near:'📡 جستجوی بازیکن نزدیک',nearHint:'دو نفر که به یک وای‌فای یا یک اینترنت وصل‌اند، هر دو این دکمه را بزنند تا بازی شروع شود. اگر همدیگر را پیدا نکردند، از «آنلاین با دوستان» با کد اتاق استفاده کنید.',nonear:'این حالت فقط روی سرور اختصاصی بازی کار می‌کند.',lv4:['آسان','متوسط','سخت','غیرممکن 💀'],dqh:'هر چند سطح را که خواستید با هم انتخاب کنید.',imph:'سوال‌های «غیرممکن» بیشتر تشریحی‌اند: جواب را تایپ کنید.',submit:'ثبت پاسخ',typeHere:'پاسخ را بنویسید…',cans:'پاسخ درست',nq:'تعداد سوال',lvl:'سطح هوش مصنوعی',lv:['آسان','متوسط','سخت'],np:'تعداد بازیکن (حداکثر ۵)',pn:'بازیکن',pl:'بازیکن',yn:'نام شما',nm:'نام',room:'بازی آنلاین (تا ۵ نفر)',rand:'🔍 جستجوی حریف تصادفی',create:'ساخت اتاق جدید',code:'کد اتاق دوست',join:'ورود به اتاق',start:'شروع بازی',searching:'در حال جستجوی حریف…',cancel:'لغو جستجو',lobby:'اتاق بازی',giveCode:'کد اتاق را به دوستان بدهید',players:'بازیکنان',you:'شما',qs:'سوال',wait1:'منتظر ورود حداقل یک دوست…',begin:'شروع بازی',wait2:'منتظر شروع بازی توسط میزبان…',exit:'خروج',end:'🏆 پایان بازی',yourScore:'امتیاز شما',tie:'مساوی!',winner:'برنده:',again:'بازی دوباره',turn:'نوبت:',answered:'پاسخ ثبت شد؛ منتظر بقیه…',qn:'سوال',sec:'ثانیه',noroom:'اتصال به سرور بازی برقرار نشد. حالت آنلاین فقط وقتی کار می‌کند که بازی را از آدرس خودِ سرور بازی باز کرده باشید.',badcode:'کد اتاق معتبر نیست.',fail:'اتصال ناموفق بود.',nf:'اتاقی با این کد پیدا نشد.',conn:'در حال اتصال…',ai:'هوش مصنوعی',dq:'سطح سوال‌ها',mix:'ترکیبی',tm:'زمان هر سوال',bz:'سبک بازی',norm:'عادی (همه پاسخ می‌دهند)',fast:'⚡ سریع‌ترین پاسخ',bzh:'هر کس زودتر پاسخ دهد: اگر درست باشد ۱ امتیاز می‌گیرد و اگر غلط باشد حریف ۱ امتیاز می‌گیرد. امتیاز نهایی نسبت به تعداد کل سوال‌ها نمایش داده می‌شود (مثلاً ۷ از ۱۰).'},
+en:{title:'🧠 Who Is Smarter?',modes:['Solo','Vs. AI','Local (one device)','Nearby (same Wi-Fi)','Online with friends'],near:'📡 Find a nearby player',nearHint:'Two people on the same Wi-Fi or internet connection both tap this button and the game starts. If you cannot find each other, use Online with friends with a room code.',nonear:'This mode only works on the game\'s own server.',lv4:['Easy','Medium','Hard','Impossible 💀'],dqh:'Pick any mix of levels you like.',imph:'"Impossible" questions are mostly written answers: type your answer.',submit:'Submit',typeHere:'Type your answer…',cans:'Correct answer',nq:'Number of questions',lvl:'AI level',lv:['Easy','Medium','Hard'],np:'Players (max 5)',pn:'Player',pl:'Player',yn:'Your name',nm:'Name',room:'Online game (up to 5)',rand:'🔍 Find a random opponent',create:'Create new room',code:'Friend\'s room code',join:'Join room',start:'Start game',searching:'Searching for an opponent…',cancel:'Cancel search',lobby:'Game room',giveCode:'Share this code with friends',players:'Players',you:'you',qs:'questions',wait1:'Waiting for at least one friend…',begin:'Start game',wait2:'Waiting for the host to start…',exit:'Leave',end:'🏆 Game over',yourScore:'Your score',tie:'Tie!',winner:'Winner:',again:'Play again',turn:'Turn:',answered:'Answer submitted; waiting for the others…',qn:'Question',sec:'s',noroom:'Could not connect to the game server. Online play only works when the game is opened from the game server\'s own address.',badcode:'Invalid room code.',fail:'Connection failed.',nf:'No room found with this code.',conn:'Connecting…',ai:'AI',dq:'Question level',mix:'Mixed',tm:'Time per question',bz:'Game style',norm:'Normal (everyone answers)',fast:'⚡ Fastest answer',bzh:'First to answer: a correct answer earns 1 point; a wrong answer gives the opponent 1 point. The final score is shown out of the total number of questions (e.g. 7 of 10).'}};
+const t=k=>L[cfg.lang][k];
+function mkShim(){const B=location.origin,subs={};let id=null,near=null,q=Promise.resolve();const pid=Array.from({length:12},()=>'abcdefghijklmnopqrstuvwxyz0123456789'[Math.random()*36|0]).join(''),pres={};
+ const R=n=>subs[n]||(subs[n]={on:{},pl:[],pe:[]});
+ const post=b=>q=q.then(()=>fetch(B+'/send',{method:'POST',body:JSON.stringify({...b,id})}).catch(()=>{}));
+ const room=n=>({emit:(t,d)=>post({op:'emit',room:n,topic:t,data:d}),
+  on:(t,f)=>{(R(n).on[t]=R(n).on[t]||[]).push(f);return()=>{R(n).on[t]=R(n).on[t].filter(x=>x!==f)}},
+  presence:pt=>{pres[n]=Object.assign(pres[n]||{},pt);return post({op:'presence',room:n,patch:pt})},peers:()=>R(n).pl,
+  onPeers:f=>{R(n).pe.push(f);return()=>{R(n).pe=R(n).pe.filter(x=>x!==f)}},
+  leave:()=>{post({op:'leave',room:n});delete subs[n]},connected:()=>true});
+ return async()=>{
+  try{const r=await fetch(B+'/ping',{signal:AbortSignal.timeout(2500)});if(!(await r.json()).qk)return null}catch(e){return null}
+  await new Promise((ok,no)=>{const es=new EventSource(B+'/sse?pid='+pid);setTimeout(no,8000);
+   es.onmessage=e=>{const d=JSON.parse(e.data),r=subs[d.room];
+    if(d.t=='hello'){const first=id===null;id=d.id;near=d.near||null;if(first)ok();else if(!d.resumed)for(const n in subs){post({op:'join',room:n});if(pres[n])post({op:'presence',room:n,patch:pres[n]})}}
+    else if(d.t=='msg'&&r&&r.on[d.topic]){const me=d.peer==id;r.on[d.topic].forEach(f=>f({topic:d.topic,data:d.data,peer:d.peer,isMe:me,sameTab:me,kind:'viewer',guest:false}))}
+    else if(d.t=='peers'&&r){r.pl=d.peers.map(p=>({peer:p.peer,presence:p.pr||{},isMe:p.peer==id,sameTab:p.peer==id,kind:'viewer',guest:false}));r.pe.forEach(f=>f({peers:r.pl}))}}});
+  const L=room('');R('');await post({op:'join',room:''});
+  L.join=async n=>{R(n);await post({op:'join',room:n});return room(n)};L.near=()=>near;return L}}
+let SH=null;
+async function useRoom(){try{if(window.claude){const r=await claude.use('room');if(r)return r}}catch(e){}
+ if(!SH)SH=mkShim()();try{return await SH}catch(e){return null}}
+const SB={},peerSeen={},BL=2600;
+function seenOf(l){if(!SB[l]){let u=null;try{const v=localStorage.getItem('wis-'+l);if(v)u=Uint8Array.from(atob(v),c=>c.charCodeAt(0))}catch(e){}SB[l]=new Uint8Array(BL);if(u)SB[l].set(u.slice(0,BL))}return SB[l]}
+const enc=u=>btoa(String.fromCharCode(...u)),dec=z=>{const u=Uint8Array.from(atob(z),c=>c.charCodeAt(0));return u.length==BL?u:null};
+const hasB=(u,i)=>u[i>>3]>>(i&7)&1;
+function mark(id,l){l=l||cfg.lang;const u=seenOf(l);u[id>>3]|=1<<(id&7);try{localStorage.setItem('wis-'+l,enc(u))}catch(e){}}
+function isSeen(id){const l=cfg.lang;if(hasB(seenOf(l),id))return true;if(G&&G.mode=='online')for(const k in peerSeen){if(!G.pl.some(p=>p.id==k))continue;const u=peerSeen[k][l];if(u&&hasB(u,id))return true}return false}
+const sco=p=>fa(p.s)+(cfg.lang=='fa'?' از ':' of ')+fa(G.n);
+const PB=[.4,.7,.92],DL=[[8,13],[5,9],[2,6]];
+const fa=n=>cfg.lang=='fa'?Number(n).toLocaleString('fa'):String(n);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+let cfg={mode:'solo',n:10,lvl:1,np:2,me:'',names:[],code:'',lang:'fa',time:15,buzz:false,dq:3,ds:[true,true,true,false],cat:'all',qt:'mc',snd:(()=>{try{return localStorage.getItem('wis-snd')!='0'}catch(e){return true}})()},G=null,host=true,room=null,gid=0,msg='';
+const MODES=()=>t('modes').map((x,i)=>[['solo','ai','local','near','online'][i],x]);
+const seg=(a,vals,cur)=>'<div class="row">'+vals.map(([v,t])=>`<button class="b${v==cur?' on':''}" data-a="${a}" data-v="${v}">${t}</button>`).join('')+'</div>';
+const clean=s=>String(s||'').replace(/[<>&"]/g,'').slice(0,14)||t('pl');
+
+function menu(){dirs();if(view=='lb')return lbView();if(srch)return app.innerHTML=`<h1>${t('title')}</h1><div class="card c"><p>${t('searching')}</p></div><button class="go" data-a="cancel">${t('cancel')}</button>`;
+ let h='<div class="row" style="margin-bottom:10px"><button class="b'+(cfg.lang=='fa'?' on':'')+'" data-a="lang" data-v="fa">فارسی</button><button class="b'+(cfg.lang=='en'?' on':'')+'" data-a="lang" data-v="en">English</button></div><h1>'+t('title')+'</h1><div class="card">'+seg('mode',MODES(),cfg.mode)+'</div>'+extra();
+ h+='<div class="card"><p class="lb">'+t('nq')+'</p>'+seg('n',[10,25,50].map(x=>[x,fa(x)]),cfg.n)+'</div>';
+ h+='<div class="card"><p class="lb">'+t('tm')+'</p>'+seg('time',[5,10,15,20,25,30].map(x=>[x,fa(x)+' '+t('sec')]),cfg.time)+'</div>';
+ h+='<div class="card"><p class="lb">'+t('dq')+'</p><div class="row">'+t('lv4').map((x,i)=>`<button class="b d${i}${cfg.ds[i]?' on':''}" data-a="dtog" data-v="${i}">${x}</button>`).join('')+'</div><p class="mu" style="margin:8px 0 0;font-size:14px">'+t('dqh')+(cfg.ds[3]?' '+t('imph'):'')+'</p></div>';
+ if(cfg.mode=='ai'||cfg.mode=='online'||cfg.mode=='near')h+='<div class="card"><p class="lb">'+t('bz')+'</p>'+seg('buzz',[[0,t('norm')],[1,t('fast')]],cfg.buzz?1:0)+(cfg.buzz?'<p class="mu" style="margin:8px 0 0;font-size:14px">'+t('bzh')+'</p>':'')+'</div>';
+ if(cfg.mode=='ai')h+='<div class="card"><p class="lb">'+t('lvl')+'</p>'+seg('lvl',t('lv').map((x,i)=>[i,x]),cfg.lvl)+'</div>';
+ if(cfg.mode=='local'){h+='<div class="card"><p class="lb">'+t('np')+'</p>'+seg('np',[2,3,4,5].map(x=>[x,fa(x)]),cfg.np);
+  for(let i=0;i<cfg.np;i++)h+=`<input data-i="${i}" placeholder="${t('pn')} ${fa(i+1)}" value="${esc(cfg.names[i]||'')}">`;h+='</div>'}
+ else h+=`<div class="card"><p class="lb">${t('yn')}</p><input id="nm" placeholder="${t('nm')}" value="${esc(cfg.me)}"></div>`;
+ if(cfg.mode=='online')h+=`<div class="card"><p class="lb">${t('room')}</p><button class="go" data-a="rand">${t('rand')}</button><button class="go" data-a="create">${t('create')}</button><input id="cd" dir="ltr" placeholder="${t('code')}" value="${esc(cfg.code)}" maxlength="6"><button class="go" data-a="join">${t('join')}</button><p class="mu c">${msg}</p></div>`;
+ else if(cfg.mode=='near')h+=`<div class="card"><p class="mu c">${t('nearHint')}</p><button class="go" data-a="near">${t('near')}</button><p class="mu c">${msg}</p></div>`;
+ else h+='<button class="go" data-a="start">'+t('start')+'</button>';
+ app.innerHTML=h}
+
+const CT="ایران|تهران|Iran|Tehran|0|0;عراق|بغداد|Iraq|Baghdad|0|1;ترکیه|آنکارا|Turkey|Ankara|0|1;افغانستان|کابل|Afghanistan|Kabul|0|1;پاکستان|اسلام‌آباد|Pakistan|Islamabad|0|1;هند|دهلی نو|India|New Delhi|0|0;چین|پکن|China|Beijing|0|0;ژاپن|توکیو|Japan|Tokyo|0|0;کره جنوبی|سئول|South Korea|Seoul|0|0;تایلند|بانکوک|Thailand|Bangkok|0|1;ویتنام|هانوی|Vietnam|Hanoi|0|1;اندونزی|جاکارتا|Indonesia|Jakarta|0|1;فیلیپین|مانیل|Philippines|Manila|0|1;مالزی|کوالالامپور|Malaysia|Kuala Lumpur|0|1;عربستان سعودی|ریاض|Saudi Arabia|Riyadh|0|1;امارات|ابوظبی|UAE|Abu Dhabi|0|2;قطر|دوحه|Qatar|Doha|0|1;عمان|مسقط|Oman|Muscat|0|2;اردن|عمّان|Jordan|Amman|0|1;لبنان|بیروت|Lebanon|Beirut|0|1;سوریه|دمشق|Syria|Damascus|0|1;ارمنستان|ایروان|Armenia|Yerevan|0|2;گرجستان|تفلیس|Georgia|Tbilisi|0|2;آذربایجان|باکو|Azerbaijan|Baku|0|1;قزاقستان|آستانه|Kazakhstan|Astana|0|2;ازبکستان|تاشکند|Uzbekistan|Tashkent|0|2;نپال|کاتماندو|Nepal|Kathmandu|0|1;بنگلادش|داکا|Bangladesh|Dhaka|0|2;مغولستان|اولان‌باتور|Mongolia|Ulaanbaatar|0|2;فرانسه|پاریس|France|Paris|1|0;آلمان|برلین|Germany|Berlin|1|0;ایتالیا|رم|Italy|Rome|1|0;اسپانیا|مادرید|Spain|Madrid|1|0;پرتغال|لیسبون|Portugal|Lisbon|1|1;بریتانیا|لندن|United Kingdom|London|1|0;ایرلند|دوبلین|Ireland|Dublin|1|1;هلند|آمستردام|Netherlands|Amsterdam|1|1;بلژیک|بروکسل|Belgium|Brussels|1|1;سوئیس|برن|Switzerland|Bern|1|2;اتریش|وین|Austria|Vienna|1|1;لهستان|ورشو|Poland|Warsaw|1|1;چک|پراگ|Czechia|Prague|1|1;مجارستان|بوداپست|Hungary|Budapest|1|1;یونان|آتن|Greece|Athens|1|0;سوئد|استکهلم|Sweden|Stockholm|1|1;نروژ|اسلو|Norway|Oslo|1|1;دانمارک|کپنهاگ|Denmark|Copenhagen|1|1;فنلاند|هلسینکی|Finland|Helsinki|1|1;روسیه|مسکو|Russia|Moscow|1|0;اوکراین|کی‌یف|Ukraine|Kyiv|1|1;رومانی|بخارست|Romania|Bucharest|1|2;بلغارستان|صوفیه|Bulgaria|Sofia|1|2;صربستان|بلگراد|Serbia|Belgrade|1|2;کرواسی|زاگرب|Croatia|Zagreb|1|2;ایسلند|ریکیاویک|Iceland|Reykjavik|1|2;مصر|قاهره|Egypt|Cairo|2|0;مراکش|رباط|Morocco|Rabat|2|2;الجزایر|الجزیره|Algeria|Algiers|2|2;تونس|تونس|Tunisia|Tunis|2|2;لیبی|طرابلس|Libya|Tripoli|2|2;نیجریه|ابوجا|Nigeria|Abuja|2|2;غنا|آکرا|Ghana|Accra|2|2;کنیا|نایروبی|Kenya|Nairobi|2|1;اتیوپی|آدیس‌آبابا|Ethiopia|Addis Ababa|2|2;آفریقای جنوبی|پرتوریا|South Africa|Pretoria|2|2;سنگال|داکار|Senegal|Dakar|2|2;تانزانیا|دودوما|Tanzania|Dodoma|2|2;اوگاندا|کامپالا|Uganda|Kampala|2|2;آمریکا|واشنگتن|USA|Washington, D.C.|3|0;کانادا|اتاوا|Canada|Ottawa|3|1;مکزیک|مکزیکوسیتی|Mexico|Mexico City|3|1;کوبا|هاوانا|Cuba|Havana|3|1;جامائیکا|کینگستون|Jamaica|Kingston|3|2;پاناما|پاناما|Panama|Panama City|3|2;برزیل|برازیلیا|Brazil|Brasilia|4|1;آرژانتین|بوئنوس‌آیرس|Argentina|Buenos Aires|4|1;شیلی|سانتیاگو|Chile|Santiago|4|1;پرو|لیما|Peru|Lima|4|1;کلمبیا|بوگوتا|Colombia|Bogota|4|1;ونزوئلا|کاراکاس|Venezuela|Caracas|4|2;اکوادور|کیتو|Ecuador|Quito|4|2;اروگوئه|مونته‌ویدئو|Uruguay|Montevideo|4|2;استرالیا|کانبرا|Australia|Canberra|5|1;نیوزیلند|ولینگتون|New Zealand|Wellington|5|1;فیجی|سووا|Fiji|Suva|5|2",EL="هیدروژن|Hydrogen|H|0;هلیم|Helium|He|0;لیتیم|Lithium|Li|1;کربن|Carbon|C|0;نیتروژن|Nitrogen|N|0;اکسیژن|Oxygen|O|0;سدیم|Sodium|Na|1;منیزیم|Magnesium|Mg|1;آلومینیوم|Aluminum|Al|1;سیلیسیم|Silicon|Si|1;فسفر|Phosphorus|P|1;گوگرد|Sulfur|S|1;کلر|Chlorine|Cl|1;پتاسیم|Potassium|K|1;کلسیم|Calcium|Ca|1;آهن|Iron|Fe|1;مس|Copper|Cu|1;روی|Zinc|Zn|2;نقره|Silver|Ag|1;طلا|Gold|Au|1;جیوه|Mercury|Hg|2;سرب|Lead|Pb|2;قلع|Tin|Sn|2;نیکل|Nickel|Ni|2;نئون|Neon|Ne|1;آرگون|Argon|Ar|2;ید|Iodine|I|2;اورانیوم|Uranium|U|2;پلاتین|Platinum|Pt|2;تنگستن|Tungsten|W|2",CF=['آسیا','اروپا','آفریقا','آمریکای شمالی','آمریکای جنوبی','اقیانوسیه'],CE=['Asia','Europe','Africa','North America','South America','Oceania'];
+const dsel=(o,g,v)=>{const r=[];for(const z of o){const x=g(z);if(x!=v&&!r.includes(x))r.push(x);if(r.length==3)break}return r};
+function geo(){const fk=cfg.lang=='fa',K=fk?CF:CE,R=[],C=CT.split(';').map(l=>{const p=l.split('|'),i=fk?0:2;return{n:p[i],c:p[i+1],k:+p[4],x:+p[5]}});
+ for(const c of C){const o=shuf(C.filter(z=>z!==c)).sort((a,b)=>(b.k==c.k)-(a.k==c.k));
+  R.push({r:[fk?`پایتخت ${c.n} کجاست؟`:`What is the capital of ${c.n}?`,c.c,...dsel(o,z=>z.c,c.c)],x:c.x});
+  R.push({r:[fk?`${c.c} پایتخت کدام کشور است؟`:`${c.c} is the capital of which country?`,c.n,...dsel(shuf(o),z=>z.n,c.n)],x:c.x});
+  R.push({r:[fk?`${c.n} در کدام قاره است؟`:`Which continent is ${c.n} in?`,K[c.k],...shuf([0,1,2,3,4,5].filter(i=>i!=c.k)).slice(0,3).map(i=>K[i])],x:Math.min(c.x,1)})}
+ return R}
+function elem(){const fk=cfg.lang=='fa',R=[],E=EL.split(';').map(l=>{const p=l.split('|');return{n:fk?p[0]:p[1],s:p[2],x:+p[3]}});
+ for(const e of E){const o=shuf(E.filter(z=>z!==e));
+  R.push({r:[fk?`نماد شیمیایی ${e.n} کدام است؟`:`What is the chemical symbol of ${e.n}?`,e.s,o[0].s,o[1].s,o[2].s],x:e.x});
+  R.push({r:[fk?`نماد ${e.s} مربوط به کدام عنصر است؟`:`Which element has the symbol ${e.s}?`,e.n,o[0].n,o[1].n,o[2].n],x:e.x})}
+ return R}
+function mathPool(){const P=[],lv=(v,a,b)=>v<=a?0:v<=b?1:2;
+ for(let a=2;a<=30;a++)for(let b=2;b<=30;b++)P.push([0,a,b,lv(Math.max(a,b),10,20)]);
+ for(let a=11;a<=60;a++)for(let b=11;b<=60;b++)P.push([1,a,b,lv(Math.max(a,b),29,44)]);
+ for(let a=30;a<=79;a++)for(let b=11;b<=29;b++)P.push([2,a,b,lv(a,49,64)]);
+ for(let n=2;n<=60;n++){P.push([3,n,0,lv(n,12,25)]);P.push([4,n,0,lv(n,12,25)])}
+ for(const p of [10,20,25,50,75])for(let n=20;n<=400;n+=20)P.push([5,p,n,p==10||p==50?0:p==20?1:2]);
+ for(let b=2;b<=12;b++)for(let q=2;q<=30;q++)P.push([6,b*q,b,lv(q,10,20)]);
+ return P}
+function mrow(T){const[k,x,y]=T,I=z=>'\u2066'+z+'\u2069',fk=cfg.lang=='fa';let e,a;
+ if(k==0){e=fa(x)+' × '+fa(y);a=x*y}else if(k==1){e=fa(x)+' + '+fa(y);a=x+y}else if(k==2){e=fa(x)+' − '+fa(y);a=x-y}
+ else if(k==3){e=fa(x)+'²';a=x*x}else if(k==4){e='√'+fa(x*x);a=x}
+ else if(k==5){e=fa(x)+'%';a=x*y/100}else{e=fa(x)+' ÷ '+fa(y);a=x/y}
+ let q=fk?'حاصل ':'Compute ';q+=I(e);if(k==5)q+=(fk?' از ':' of ')+fa(y);q+=fk?'؟':'?';
+ const d=shuf([1,-1,2,-2,3,-3,5,-5,10,-10,11,-11]).filter(v=>a+v>=0).slice(0,3).map(v=>fa(a+v));
+ return[q,fa(a),...d]}
+const nz=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[۰-۹]/g,c=>c.charCodeAt(0)-1776).replace(/[٠-٩]/g,c=>c.charCodeAt(0)-1632).replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[آأإ]/g,'ا').replace(/[\u200c\u200d\u064b-\u065f\s.,٫'’"\-_()«»]/g,'');
+const lev=(a,b)=>{const m=a.length,n=b.length,d=Array.from({length:m+1},(_,i)=>[i]);for(let j=1;j<=n;j++)d[0][j]=j;for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[m][n]};
+const chk=(q,v)=>{const u=nz(v);if(!u)return false;return[q.ca].concat(q.a||[]).some(x=>{const w=nz(x);if(u==w)return true;const tol=w.length>=11?2:w.length>=5?1:0;return tol>0&&lev(u,w)<=tol})};
+// سوال‌های «غیرممکن» تشریحی: [سوال فارسی، سوال انگلیسی، پاسخ فارسی، پاسخ انگلیسی، [پاسخ‌های قابل‌قبول دیگر]]
+const IMP=[
+['پایتخت بورکینافاسو کجاست؟','What is the capital of Burkina Faso?','واگادوگو','Ouagadougou',['wagadugu']],
+['عنصری با عدد اتمی ۷۴ کدام است؟','Which element has atomic number 74?','تنگستن','Tungsten',['wolfram','تانگستن']],
+['قضیه‌ی آخر فرما را چه کسی ثابت کرد؟','Who proved Fermat\'s Last Theorem?','اندرو وایلز','Andrew Wiles',['وایلز','wiles']],
+['فتح قسطنطنیه به دست عثمانی‌ها در چه سالی بود؟','In what year did Constantinople fall to the Ottomans?','۱۴۵۳','1453'],
+['طولانی‌ترین رود اروپا کدام است؟','What is the longest river in Europe?','ولگا','Volga'],
+['نویسنده‌ی «استاد و مارگاریتا» کیست؟','Who wrote "The Master and Margarita"?','میخائیل بولگاکف','Mikhail Bulgakov',['بولگاکف','bulgakov']],
+['کوچک‌ترین عدد اول بزرگ‌تر از ۱۰۰ چیست؟','What is the smallest prime number greater than 100?','۱۰۱','101'],
+['پایتخت بوتان کجاست؟','What is the capital of Bhutan?','تیمپو','Thimphu',['thimpu','تیمفو']],
+['پایتخت سورینام کجاست؟','What is the capital of Suriname?','پاراماریبو','Paramaribo'],
+['قضایای ناتمامیت را چه کسی ثابت کرد؟','Who proved the incompleteness theorems?','کورت گودل','Kurt Gödel',['گودل','godel']],
+['نخستین زنی که جایزه‌ی نوبل گرفت چه کسی بود؟','Who was the first woman to win a Nobel Prize?','ماری کوری','Marie Curie',['کوری','curie']],
+['کدام ایرانی در سال ۲۰۱۴ مدال فیلدز گرفت؟','Which Iranian won the Fields Medal in 2014?','مریم میرزاخانی','Maryam Mirzakhani',['میرزاخانی','mirzakhani']],
+['در عبارت «P در برابر NP»، حرف P مخفف چیست؟','In "P vs NP", what does P stand for?','چندجمله‌ای','Polynomial',['پولینومیال','polynomial time']],
+['دوازده‌وجهی منتظم چند وجه دارد؟','How many faces does a regular dodecahedron have?','۱۲','12'],
+['مشتق ln(x) چیست؟','What is the derivative of ln(x)?','1/x','1/x'],
+['اصل عدم قطعیت را چه کسی مطرح کرد؟','Who formulated the uncertainty principle?','ورنر هایزنبرگ','Werner Heisenberg',['هایزنبرگ','heisenberg']],
+['عدد نپر (e) تا دو رقم اعشار چند است؟','What is Euler\'s number e to two decimal places?','۲٫۷۲','2.72'],
+['پایتخت مغولستان کجاست؟','What is the capital of Mongolia?','اولان‌باتور','Ulaanbaatar',['اولان باتور','ulan bator','ulanbator']],
+['بزرگ‌ترین بیابان جهان (با احتساب بیابان‌های قطبی) کدام است؟','What is the largest desert on Earth (counting polar deserts)?','جنوبگان','Antarctica',['قطب جنوب','انتارکتیکا','antarctic']],
+['«منطق‌الطیر» اثر کیست؟','Who wrote "The Conference of the Birds" (Mantiq al-Tayr)?','عطار نیشابوری','Attar of Nishapur',['عطار','attar']],
+['سازنده‌ی «آیین بهار» (The Rite of Spring) کیست؟','Who composed "The Rite of Spring"?','ایگور استراوینسکی','Igor Stravinsky',['استراوینسکی','stravinsky']],
+['عمیق‌ترین دریاچه‌ی جهان کدام است؟','What is the deepest lake in the world?','بایکال','Baikal',['lake baikal']],
+['بزرگ‌ترین قمر مشتری چه نام دارد؟','What is the name of Jupiter\'s largest moon?','گانیمد','Ganymede'],
+['ناپلئون در سال ۱۸۱۵ در کدام نبرد شکست نهایی را خورد؟','In which 1815 battle was Napoleon finally defeated?','واترلو','Waterloo'],
+['۱۷ × ۲۳ چند می‌شود؟','What is 17 × 23?','۳۹۱','391'],
+['کدام اندامک سلول بیشترِ ATP را تولید می‌کند؟','Which cell organelle produces most of the ATP?','میتوکندری','Mitochondrion',['mitochondria'] ]
+];
+// چندگزینه‌ای سخت: [سوال فا، سوال en، گزینه‌های فا (اولی درست)، گزینه‌های en]
+const IMC=[
+['کدام عدد «کامل» است؟','Which of these numbers is perfect?',['۲۸','۲۰','۳۰','۳۶'],['28','20','30','36']],
+['انقلاب فرانسه در چه سالی آغاز شد؟','In what year did the French Revolution begin?',['۱۷۸۹','۱۷۷۶','۱۷۹۹','۱۸۰۴'],['1789','1776','1799','1804']],
+['کدام عنصر بیشترین الکترونگاتیوی را دارد؟','Which element has the highest electronegativity?',['فلوئور','اکسیژن','کلر','نیتروژن'],['Fluorine','Oxygen','Chlorine','Nitrogen']],
+['سرعت نور تقریباً چند کیلومتر بر ثانیه است؟','About how fast is light, in km/s?',['۳۰۰٬۰۰۰','۱۵۰٬۰۰۰','۳۰٬۰۰۰','۳٬۰۰۰٬۰۰۰'],['300,000','150,000','30,000','3,000,000']]
+];
+// ۱۲۰ سوال تشریحی دیگر برای سطح «غیرممکن»
+const IMP2=[
+["پایتخت قرقیزستان کدام شهر است؟", "What is the capital of Kyrgyzstan?", "بیشکک", "Bishkek"],
+["پایتخت ترکمنستان کدام شهر است؟", "What is the capital of Turkmenistan?", "عشق‌آباد", "Ashgabat", ["عشق آباد", "ashkhabad"]],
+["پایتخت تاجیکستان کدام شهر است؟", "What is the capital of Tajikistan?", "دوشنبه", "Dushanbe"],
+["پایتخت لائوس کدام شهر است؟", "What is the capital of Laos?", "وینتیان", "Vientiane"],
+["پایتخت کامبوج کدام شهر است؟", "What is the capital of Cambodia?", "پنوم‌پن", "Phnom Penh", ["پنوم پن", "phnompenh"]],
+["پایتخت میانمار کدام شهر است؟", "What is the capital of Myanmar?", "نایپیداو", "Naypyidaw", ["naypyitaw", "نی‌پی‌تاو", "نایپی‌تاو"]],
+["پایتخت اتیوپی کدام شهر است؟", "What is the capital of Ethiopia?", "آدیس‌آبابا", "Addis Ababa", ["آدیس آبابا"]],
+["پایتخت نیجریه کدام شهر است؟", "What is the capital of Nigeria?", "ابوجا", "Abuja"],
+["پایتخت تانزانیا کدام شهر است؟", "What is the capital of Tanzania?", "دودوما", "Dodoma"],
+["پایتخت مراکش کدام شهر است؟", "What is the capital of Morocco?", "رباط", "Rabat"],
+["پایتخت استرالیا کدام شهر است؟", "What is the capital of Australia?", "کانبرا", "Canberra"],
+["پایتخت رسمی ساحل عاج کدام شهر است؟", "What is the official capital of Ivory Coast?", "یاموسوکرو", "Yamoussoukro"],
+["پایتخت ایسلند کدام شهر است؟", "What is the capital of Iceland?", "ریکیاویک", "Reykjavik", ["reykjavík"]],
+["پایتخت لیتوانی کدام شهر است؟", "What is the capital of Lithuania?", "ویلنیوس", "Vilnius"],
+["پایتخت لتونی کدام شهر است؟", "What is the capital of Latvia?", "ریگا", "Riga"],
+["پایتخت استونی کدام شهر است؟", "What is the capital of Estonia?", "تالین", "Tallinn"],
+["پایتخت مالدیو کدام شهر است؟", "What is the capital of the Maldives?", "ماله", "Malé", ["male"]],
+["پایتخت اروگوئه کدام شهر است؟", "What is the capital of Uruguay?", "مونته‌ویدئو", "Montevideo", ["مونته ویدئو", "مونتویدئو"]],
+["پایتخت پاراگوئه کدام شهر است؟", "What is the capital of Paraguay?", "آسونسیون", "Asunción", ["asuncion"]],
+["پایتخت اکوادور کدام شهر است؟", "What is the capital of Ecuador?", "کیتو", "Quito"],
+["پایتخت سنگال کدام شهر است؟", "What is the capital of Senegal?", "داکار", "Dakar"],
+["پایتخت مالی کدام شهر است؟", "What is the capital of Mali?", "باماکو", "Bamako"],
+["پایتخت نیجر کدام شهر است؟", "What is the capital of Niger?", "نیامی", "Niamey"],
+["پایتخت چاد کدام شهر است؟", "What is the capital of Chad?", "انجامنا", "N'Djamena", ["ndjamena", "ندجامنا"]],
+["پایتخت اریتره کدام شهر است؟", "What is the capital of Eritrea?", "اسمره", "Asmara", ["آسمارا"]],
+["پایتخت زامبیا کدام شهر است؟", "What is the capital of Zambia?", "لوزاکا", "Lusaka"],
+["بلندترین آبشار جهان کدام است؟", "What is the tallest waterfall in the world?", "آبشار آنجل", "Angel Falls", ["انجل", "آنجل", "angel"]],
+["بزرگ‌ترین دریاچه‌ی جهان از نظر مساحت کدام است؟", "What is the largest lake in the world by area?", "دریای خزر", "Caspian Sea", ["خزر", "caspian"]],
+["بزرگ‌ترین جزیره‌ی جهان کدام است؟", "What is the largest island in the world?", "گرینلند", "Greenland"],
+["قله‌ی ⁦K2⁩ در کدام رشته‌کوه است؟", "In which mountain range is K2?", "قراقروم", "Karakoram", ["karakorum"]],
+["بلندترین قله‌ی آفریقا کدام است؟", "What is the highest mountain in Africa?", "کلیمانجارو", "Kilimanjaro"],
+["عمیق‌ترین نقطه‌ی اقیانوس‌های جهان کجاست؟", "Where is the deepest point of the world's oceans?", "گودال ماریانا", "Mariana Trench", ["ماریانا", "mariana", "challenger deep"]],
+["بزرگ‌ترین کشور محصور در خشکی (بدون ساحل) کدام است؟", "What is the largest landlocked country?", "قزاقستان", "Kazakhstan"],
+["قله‌ی دماوند در کدام رشته‌کوه قرار دارد؟", "In which mountain range is Mount Damavand?", "البرز", "Alborz", ["elburz"]],
+["بزرگ‌ترین دریاچه‌ی آب شیرین جهان از نظر مساحت کدام است؟", "Which freshwater lake is the largest in the world by area?", "سوپریور", "Lake Superior", ["superior", "دریاچه سوپریور"]],
+["کدام تنگه، دریای مدیترانه را از غرب به اقیانوس اطلس وصل می‌کند؟", "Which strait connects the Mediterranean to the Atlantic?", "جبل‌الطارق", "Strait of Gibraltar", ["جبل الطارق", "gibraltar"]],
+["کدام کانال دریای سرخ را به مدیترانه وصل می‌کند؟", "Which canal links the Red Sea to the Mediterranean?", "کانال سوئز", "Suez Canal", ["سوئز", "suez", "سوییز"]],
+["کدام تنگه، خلیج فارس را به دریای عمان وصل می‌کند؟", "Which strait connects the Persian Gulf to the Gulf of Oman?", "تنگه‌ی هرمز", "Strait of Hormuz", ["هرمز", "hormuz"]],
+["سبک‌ترین عنصر جدول تناوبی کدام است؟", "What is the lightest element?", "هیدروژن", "Hydrogen"],
+["نماد شیمیایی ⁦Na⁩ مربوط به کدام عنصر است؟", "Which element has the chemical symbol Na?", "سدیم", "Sodium"],
+["نماد شیمیایی ⁦K⁩ مربوط به کدام عنصر است؟", "Which element has the chemical symbol K?", "پتاسیم", "Potassium"],
+["نماد شیمیایی ⁦Pb⁩ مربوط به کدام عنصر است؟", "Which element has the chemical symbol Pb?", "سرب", "Lead"],
+["نماد شیمیایی ⁦Hg⁩ مربوط به کدام عنصر است؟", "Which element has the chemical symbol Hg?", "جیوه", "Mercury"],
+["نماد شیمیایی ⁦Sn⁩ مربوط به کدام عنصر است؟", "Which element has the chemical symbol Sn?", "قلع", "Tin"],
+["عدد اتمی آهن چند است؟", "What is the atomic number of iron?", "۲۶", "26"],
+["عدد اتمی اورانیوم چند است؟", "What is the atomic number of uranium?", "۹۲", "92"],
+["گاز غالب در جو مریخ کدام است؟", "Which gas dominates the atmosphere of Mars?", "کربن دی‌اکسید", "Carbon dioxide", ["co2", "گاز کربنیک", "دی اکسید کربن"]],
+["کدام سیاره بیشترین قمر تأییدشده را دارد؟", "Which planet has the most confirmed moons?", "زحل", "Saturn"],
+["نزدیک‌ترین ستاره به زمین پس از خورشید کدام است؟", "What is the nearest star to Earth after the Sun?", "پروکسیما قنطورس", "Proxima Centauri", ["پروکسیما سنتوری", "proxima"]],
+["بزرگ‌ترین عضو بدن انسان کدام است؟", "What is the largest organ of the human body?", "پوست", "Skin"],
+["کوچک‌ترین استخوان بدن انسان چه نام دارد؟", "What is the smallest bone in the human body?", "رکابی", "Stapes", ["استخوان رکابی", "stirrup"]],
+["کمبود کدام ویتامین باعث بیماری اسکوربوت می‌شود؟", "Deficiency of which vitamin causes scurvy?", "ویتامین ث", "Vitamin C", ["ث", "c", "ویتامین c"]],
+["فلز مرکزی مولکول کلروفیل کدام است؟", "Which metal sits at the centre of the chlorophyll molecule?", "منیزیم", "Magnesium"],
+["فلز مرکزی مولکول هموگلوبین کدام است؟", "Which metal sits at the centre of haemoglobin?", "آهن", "Iron"],
+["یکای ⁦SI⁩ نیرو چیست؟", "What is the SI unit of force?", "نیوتن", "Newton"],
+["یکای ⁦SI⁩ فشار چیست؟", "What is the SI unit of pressure?", "پاسکال", "Pascal"],
+["یکای ⁦SI⁩ توان چیست؟", "What is the SI unit of power?", "وات", "Watt"],
+["یکای ⁦SI⁩ بسامد (فرکانس) چیست؟", "What is the SI unit of frequency?", "هرتز", "Hertz"],
+["یکای ⁦SI⁩ مقاومت الکتریکی چیست؟", "What is the SI unit of electrical resistance?", "اهم", "Ohm"],
+["یکای ⁦SI⁩ ظرفیت خازن چیست؟", "What is the SI unit of capacitance?", "فاراد", "Farad"],
+["ذره‌ی حامل نیروی الکترومغناطیسی چه نام دارد؟", "Which particle carries the electromagnetic force?", "فوتون", "Photon"],
+["کدام ذره به «ذره‌ی خدا» معروف است؟", "Which particle is nicknamed the \"God particle\"?", "بوزون هیگز", "Higgs boson", ["هیگز", "higgs"]],
+["قوانین حرکت سیارات را چه کسی تدوین کرد؟", "Who formulated the laws of planetary motion?", "یوهانس کپلر", "Johannes Kepler", ["کپلر", "kepler"]],
+["نظریه‌ی تکامل با انتخاب طبیعی را چه کسی ارائه کرد؟", "Who proposed the theory of evolution by natural selection?", "چارلز داروین", "Charles Darwin", ["داروین", "darwin"]],
+["جدول تناوبی عناصر را چه کسی ارائه کرد؟", "Who devised the periodic table of the elements?", "دمیتری مندلیف", "Dmitri Mendeleev", ["مندلیف", "mendeleev"]],
+["رادیواکتیویته را در سال ۱۸۹۶ چه کسی کشف کرد؟", "Who discovered radioactivity in 1896?", "هانری بکرل", "Henri Becquerel", ["بکرل", "becquerel"]],
+["الکترون را چه کسی کشف کرد؟", "Who discovered the electron?", "جی. جی. تامسون", "J. J. Thomson", ["تامسون", "thomson", "جی جی تامسون"]],
+["کتاب «اصول» (Elements) در هندسه اثر کیست؟", "Who wrote the \"Elements\" of geometry?", "اقلیدس", "Euclid"],
+["پدر هندسه‌ی تحلیلی چه کسی شناخته می‌شود؟", "Who is regarded as the father of analytic geometry?", "رنه دکارت", "René Descartes", ["دکارت", "descartes"]],
+["کدام ریاضی‌دان همزمان با نیوتن حساب دیفرانسیل و انتگرال را ابداع کرد؟", "Which mathematician co-invented calculus alongside Newton?", "لایبنیتس", "Leibniz", ["گوتفرید لایبنیتس", "لایب‌نیتس", "gottfried leibniz"]],
+["جذر ۲ تا دو رقم اعشار چند است؟", "What is the square root of 2 to two decimal places?", "۱٫۴۱", "1.41"],
+["عدد پی (π) تا چهار رقم اعشار چند است؟", "What is pi to four decimal places?", "۳٫۱۴۱۶", "3.1416"],
+["حاصل ۷ فاکتوریل (!۷) چند است؟", "What is 7 factorial (7!)?", "۵۰۴۰", "5040"],
+["حاصل ۲ به توان ۱۶ چند است؟", "What is 2 to the power of 16?", "۶۵۵۳۶", "65536"],
+["حاصل ۱۳ × ۱۷ چند است؟", "What is 13 × 17?", "۲۲۱", "221"],
+["مجموع زاویه‌های داخلی یک شش‌ضلعی چند درجه است؟", "What is the sum of the interior angles of a hexagon, in degrees?", "۷۲۰", "720"],
+["مجموع زاویه‌های داخلی یک پنج‌ضلعی چند درجه است؟", "What is the sum of the interior angles of a pentagon, in degrees?", "۵۴۰", "540"],
+["یک ده‌ضلعی چند قطر دارد؟", "How many diagonals does a decagon have?", "۳۵", "35"],
+["مشتق ⁦sin(x)⁩ چیست؟", "What is the derivative of sin(x)?", "cos(x)", "cos(x)", ["cosx"]],
+["عدد ۱۰۰ در مبنای ۲ چگونه نوشته می‌شود؟", "How is 100 written in binary?", "۱۱۰۰۱۰۰", "1100100"],
+["عدد ۲۵۵ در مبنای ۱۶ چگونه نوشته می‌شود؟", "How is 255 written in hexadecimal?", "FF", "FF"],
+["یک شبانه‌روز چند ثانیه است؟", "How many seconds are in a day?", "۸۶۴۰۰", "86400"],
+["چند عدد اول کوچک‌تر از ۱۰۰ وجود دارد؟", "How many prime numbers are there below 100?", "۲۵", "25"],
+["در دنباله‌ی فیبوناچی ۱، ۱، ۲، ۳، ۵، ۸ عدد بعدی چیست؟", "In the Fibonacci sequence 1, 1, 2, 3, 5, 8, what comes next?", "۱۳", "13"],
+["جمله‌ی دهم دنباله‌ی فیبوناچی (۱، ۱، ۲، ۳، …) چند است؟", "What is the 10th term of the Fibonacci sequence (1, 1, 2, 3, …)?", "۵۵", "55"],
+["«قانون در طب» اثر کدام دانشمند ایرانی است؟", "Which Iranian scholar wrote \"The Canon of Medicine\"?", "ابن‌سینا", "Avicenna", ["بوعلی سینا", "ابن سینا", "ibn sina"]],
+["کدام ایرانی در سال ۲۰۰۳ برنده‌ی جایزه‌ی صلح نوبل شد؟", "Which Iranian won the Nobel Peace Prize in 2003?", "شیرین عبادی", "Shirin Ebadi", ["عبادی", "ebadi"]],
+["کتیبه‌ی بیستون به دستور کدام پادشاه نوشته شد؟", "Which king ordered the Behistun inscription?", "داریوش بزرگ", "Darius the Great", ["داریوش", "داریوش اول", "darius", "darius i"]],
+["بنیان‌گذار امپراتوری هخامنشی کیست؟", "Who founded the Achaemenid Empire?", "کوروش بزرگ", "Cyrus the Great", ["کوروش", "cyrus"]],
+["بنیان‌گذار سلسله‌ی صفوی کیست؟", "Who founded the Safavid dynasty?", "شاه اسماعیل اول", "Shah Ismail I", ["شاه اسماعیل", "اسماعیل صفوی", "shah ismail", "ismail i"]],
+["بنیان‌گذار سلسله‌ی ساسانی کیست؟", "Who founded the Sasanian dynasty?", "اردشیر بابکان", "Ardashir I", ["اردشیر", "ardashir"]],
+["بنیان‌گذار سلسله‌ی قاجار کیست؟", "Who founded the Qajar dynasty?", "آقامحمدخان", "Agha Mohammad Khan", ["آغامحمدخان", "آقا محمدخان"]],
+["بنیان‌گذار سلسله‌ی زندیه کیست؟", "Who founded the Zand dynasty?", "کریم‌خان زند", "Karim Khan Zand", ["کریم خان زند", "کریم‌خان", "karim khan"]],
+["امیرکبیر صدراعظم کدام پادشاه بود؟", "Amir Kabir was chief minister to which king?", "ناصرالدین‌شاه", "Naser al-Din Shah", ["ناصرالدین شاه", "ناصرالدین‌شاه قاجار", "nasser al-din shah", "nasir al-din shah", "naser ad-din shah"]],
+["دارالفنون به همت چه کسی تأسیس شد؟", "Who founded Dar ul-Funun?", "امیرکبیر", "Amir Kabir", ["میرزا تقی خان", "amirkabir"]],
+["انقلاب مشروطه‌ی ایران در چه سالی (شمسی) رخ داد؟", "In what Iranian (solar Hijri) year did the Constitutional Revolution begin?", "۱۲۸۵", "1285", ["1906"]],
+["اعلامیه‌ی استقلال آمریکا در چه سالی صادر شد؟", "In what year was the US Declaration of Independence adopted?", "۱۷۷۶", "1776"],
+["جنگ جهانی اول در چه سالی آغاز شد؟", "In what year did World War I begin?", "۱۹۱۴", "1914"],
+["دیوار برلین در چه سالی فروریخت؟", "In what year did the Berlin Wall fall?", "۱۹۸۹", "1989"],
+["کریستف کلمب در چه سالی به قاره‌ی آمریکا رسید؟", "In what year did Columbus reach the Americas?", "۱۴۹۲", "1492"],
+["نخستین انسانی که به فضا رفت چه کسی بود؟", "Who was the first human in space?", "یوری گاگارین", "Yuri Gagarin", ["گاگارین", "gagarin"]],
+["نخستین انسانی که روی ماه قدم گذاشت چه کسی بود؟", "Who was the first person to walk on the Moon?", "نیل آرمسترانگ", "Neil Armstrong", ["آرمسترانگ", "armstrong"]],
+["نخستین ماهواره‌ی مصنوعی جهان چه نام داشت؟", "What was the first artificial satellite called?", "اسپوتنیک ۱", "Sputnik 1", ["اسپوتنیک", "sputnik"]],
+["کتاب «شهریار» را چه کسی نوشت؟", "Who wrote \"The Prince\"?", "نیکولو ماکیاولی", "Niccolò Machiavelli", ["ماکیاولی", "machiavelli", "niccolo machiavelli"]],
+["کتاب «ثروت ملل» اثر کیست؟", "Who wrote \"The Wealth of Nations\"?", "آدام اسمیت", "Adam Smith"],
+["کتاب «سرمایه» (Das Kapital) اثر کیست؟", "Who wrote \"Das Kapital\"?", "کارل مارکس", "Karl Marx", ["مارکس", "marx"]],
+["در نبرد ماراتن (۴۹۰ پیش از میلاد) یونانیان کدام امپراتوری را شکست دادند؟", "Which empire did the Greeks defeat at the Battle of Marathon (490 BC)?", "امپراتوری هخامنشی", "Persian Empire", ["هخامنشی", "ایران", "پارس", "persia", "persian", "achaemenid", "iran"]],
+["رمان «بوف کور» اثر کیست؟", "Who wrote the novel \"The Blind Owl\"?", "صادق هدایت", "Sadegh Hedayat", ["هدایت", "hedayat"]],
+["رمان «سووشون» اثر کیست؟", "Who wrote the novel \"Savushun\"?", "سیمین دانشور", "Simin Daneshvar", ["دانشور", "daneshvar"]],
+["رمان «جای خالی سلوچ» اثر کیست؟", "Who wrote \"The Empty Place of Soluch\"?", "محمود دولت‌آبادی", "Mahmoud Dowlatabadi", ["دولت‌آبادی", "دولت آبادی", "dowlatabadi"]],
+["«مثنوی معنوی» سروده‌ی کیست؟", "Who composed the \"Masnavi\"?", "مولوی", "Rumi", ["مولانا", "جلال‌الدین رومی", "جلال الدین محمد بلخی", "molavi", "mowlavi", "jalal ad-din rumi"]],
+["«خمسه» سروده‌ی کدام شاعر است؟", "Which poet composed the \"Khamsa\" (Quintet)?", "نظامی گنجوی", "Nizami Ganjavi", ["نظامی", "nezami", "nizami"]],
+["«تاریخ بیهقی» را چه کسی نوشت؟", "Who wrote \"Tarikh-e Beyhaqi\"?", "ابوالفضل بیهقی", "Abolfazl Beyhaqi", ["بیهقی", "beyhaqi", "bayhaqi"]],
+["رمان «جنایت و مکافات» اثر کیست؟", "Who wrote \"Crime and Punishment\"?", "داستایفسکی", "Dostoevsky", ["داستایوفسکی", "فئودور داستایفسکی", "dostoyevsky", "fyodor dostoevsky"]],
+["رمان «جنگ و صلح» اثر کیست؟", "Who wrote \"War and Peace\"?", "لو تولستوی", "Leo Tolstoy", ["تولستوی", "لف تولستوی", "tolstoy"]],
+["رمان «صد سال تنهایی» اثر کیست؟", "Who wrote \"One Hundred Years of Solitude\"?", "گابریل گارسیا مارکز", "Gabriel García Márquez", ["مارکز", "garcia marquez", "marquez"]],
+["«کمدی الهی» اثر کیست؟", "Who wrote the \"Divine Comedy\"?", "دانته آلیگیری", "Dante Alighieri", ["دانته", "dante"]],
+["داستان «مسخ» اثر کیست؟", "Who wrote \"The Metamorphosis\"?", "فرانتس کافکا", "Franz Kafka", ["کافکا", "kafka"]],
+["تابلوی «شب پرستاره» اثر کدام نقاش است؟", "Which painter made \"The Starry Night\"?", "ونسان ون‌گوگ", "Vincent van Gogh", ["ون گوگ", "ونگوگ", "ون‌گوگ", "van gogh", "vangogh"]],
+["«فصل‌های چهارگانه» اثر کدام آهنگساز است؟", "Which composer wrote \"The Four Seasons\"?", "آنتونیو ویوالدی", "Antonio Vivaldi", ["ویوالدی", "vivaldi"]]
+];
+// ۱۲۰ سوال تشریحی دیگر (دسته‌ی سوم) برای سطح «غیرممکن»
+const IMP3=[
+["پایتخت برونئی کجاست؟", "What is the capital of Brunei?", "بندر سری بگاوان", "Bandar Seri Begawan", ["بندرسری‌بگاوان", "bandar seri begawan"]],
+["پایتخت تیمور شرقی کجاست؟", "What is the capital of East Timor?", "دیلی", "Dili", ["دیلی"]],
+["پایتخت پاپوآ گینه نو کجاست؟", "What is the capital of Papua New Guinea?", "پورت مورزبی", "Port Moresby", ["پورت مورسبی"]],
+["پایتخت ماداگاسکار کجاست؟", "What is the capital of Madagascar?", "آنتاناناریوو", "Antananarivo", ["تاناناریو"]],
+["پایتخت موزامبیک کجاست؟", "What is the capital of Mozambique?", "ماپوتو", "Maputo"],
+["پایتخت آنگولا کجاست؟", "What is the capital of Angola?", "لواندا", "Luanda"],
+["پایتخت زیمبابوه کجاست؟", "What is the capital of Zimbabwe?", "هراره", "Harare"],
+["پایتخت بوتسوانا کجاست؟", "What is the capital of Botswana?", "گابورون", "Gaborone", ["گابارون"]],
+["پایتخت نامیبیا کجاست؟", "What is the capital of Namibia?", "ویندهوک", "Windhoek"],
+["پایتخت رواندا کجاست؟", "What is the capital of Rwanda?", "کیگالی", "Kigali"],
+["پایتخت مالاوی کجاست؟", "What is the capital of Malawi?", "لیلونگوه", "Lilongwe", ["لیلونگوی"]],
+["پایتخت کامرون کجاست؟", "What is the capital of Cameroon?", "یائونده", "Yaounde", ["یاوندی", "yaoundé"]],
+["پایتخت سودان کجاست؟", "What is the capital of Sudan?", "خارطوم", "Khartoum", ["خرطوم"]],
+["پایتخت اسلواکی کجاست؟", "What is the capital of Slovakia?", "براتیسلاوا", "Bratislava"],
+["پایتخت اسلوونی کجاست؟", "What is the capital of Slovenia?", "لیوبلیانا", "Ljubljana", ["لیوبلیانا"]],
+["پایتخت مقدونیه شمالی کجاست؟", "What is the capital of North Macedonia?", "اسکوپیه", "Skopje", ["اسکوپیه"]],
+["پایتخت آلبانی کجاست؟", "What is the capital of Albania?", "تیرانا", "Tirana"],
+["پایتخت مولداوی کجاست؟", "What is the capital of Moldova?", "کیشینف", "Chisinau", ["chișinău", "کیشینو"]],
+["پایتخت مالت کجاست؟", "What is the capital of Malta?", "والتا", "Valletta", ["والِتا"]],
+["پایتخت کره‌ی شمالی کجاست؟", "What is the capital of North Korea?", "پیونگ‌یانگ", "Pyongyang", ["پیونگیانگ"]],
+["پایتخت قبرس کجاست؟", "What is the capital of Cyprus?", "نیکوزیا", "Nicosia", ["لفکوشا"]],
+["پایتخت بحرین کجاست؟", "What is the capital of Bahrain?", "منامه", "Manama"],
+["پایتخت یمن کجاست؟", "What is the capital of Yemen?", "صنعا", "Sanaa", ["sana'a", "sana", "صنعاء"]],
+["پایتخت لیختن‌اشتاین کجاست؟", "What is the capital of Liechtenstein?", "وادوتس", "Vaduz", ["فادوتس"]],
+["مرتفع‌ترین قله‌ی آمریکای جنوبی کدام است؟", "What is the highest mountain in South America?", "آکونکاگوا", "Aconcagua"],
+["رودی که بیشترین آبدهی را در جهان دارد کدام است؟", "Which river has the greatest discharge in the world?", "آمازون", "Amazon", ["amazon river"]],
+["بزرگ‌ترین بیابان گرم جهان کدام است؟", "What is the largest hot desert in the world?", "صحرای بزرگ آفریقا", "Sahara", ["صحرا", "صحرای کبیر", "sahara desert"]],
+["کوه کلیمانجارو در کدام کشور است؟", "In which country is Mount Kilimanjaro?", "تانزانیا", "Tanzania"],
+["پرجمعیت‌ترین کشور آفریقا کدام است؟", "Which is the most populous country in Africa?", "نیجریه", "Nigeria"],
+["کوچک‌ترین کشور جهان از نظر مساحت کدام است؟", "What is the smallest country in the world by area?", "واتیکان", "Vatican City", ["vatican", "شهر واتیکان"]],
+["بلندترین کوه منظومه‌ی شمسی چه نام دارد؟", "What is the tallest mountain in the solar system?", "المپوس مونس", "Olympus Mons", ["اولمپوس مونس", "olympus"]],
+["رود دانوب به کدام دریا می‌ریزد؟", "Into which sea does the Danube flow?", "دریای سیاه", "Black Sea", ["سیاه"]],
+["کانال پاناما اقیانوس آرام را به کدام اقیانوس وصل می‌کند؟", "The Panama Canal links the Pacific to which ocean?", "اطلس", "Atlantic", ["اقیانوس اطلس", "atlantic ocean"]],
+["شهر باستانی ماچوپیچو در کدام کشور است؟", "In which country is Machu Picchu?", "پرو", "Peru"],
+["بلندترین قله‌ی اروپا (مطابق مرز قفقاز) کدام است؟", "What is the highest mountain in Europe (by the Caucasus boundary)?", "البروس", "Elbrus", ["السبروس", "البرز قفقاز"]],
+["بزرگ‌ترین جزیره‌ی دریای مدیترانه کدام است؟", "What is the largest island in the Mediterranean Sea?", "سیسیل", "Sicily"],
+["دریاچه‌ی ویکتوریا در کدام قاره است؟", "On which continent is Lake Victoria?", "آفریقا", "Africa"],
+["تنگه‌ی بسفر در کنار کدام شهر بزرگ است؟", "Which major city lies on the Bosphorus strait?", "استانبول", "Istanbul"],
+["نماد شیمیایی طلا چیست؟", "What is the chemical symbol of gold?", "Au", "Au", ["au"]],
+["نماد شیمیایی نقره چیست؟", "What is the chemical symbol of silver?", "Ag", "Ag", ["ag"]],
+["نماد شیمیایی مس چیست؟", "What is the chemical symbol of copper?", "Cu", "Cu", ["cu"]],
+["عنصری با عدد اتمی ۷۹ کدام است؟", "Which element has atomic number 79?", "طلا", "Gold"],
+["عنصری با عدد اتمی ۸۲ کدام است؟", "Which element has atomic number 82?", "سرب", "Lead"],
+["فرمول شیمیایی نمک خوراکی چیست؟", "What is the chemical formula of table salt?", "NaCl", "NaCl", ["nacl"]],
+["فرمول شیمیایی گاز کربنیک چیست؟", "What is the chemical formula of carbon dioxide?", "CO2", "CO2", ["co2"]],
+["pH آب خالص در ۲۵ درجه چند است؟", "What is the pH of pure water at 25 °C?", "۷", "7", ["هفت", "seven"]],
+["کوچک‌ترین سیاره‌ی منظومه‌ی شمسی کدام است؟", "What is the smallest planet in the solar system?", "عطارد", "Mercury", ["تیر"]],
+["داغ‌ترین سیاره‌ی منظومه‌ی شمسی کدام است؟", "What is the hottest planet in the solar system?", "زهره", "Venus", ["ناهید"]],
+["دورترین سیاره از خورشید کدام است؟", "Which planet is farthest from the Sun?", "نپتون", "Neptune"],
+["واحد SI انرژی چیست؟", "What is the SI unit of energy?", "ژول", "Joule", ["joule"]],
+["ویتامینی که با نور خورشید در پوست ساخته می‌شود کدام است؟", "Which vitamin is made in the skin by sunlight?", "ویتامین D", "Vitamin D", ["D", "د", "ویتامین دی"]],
+["گروه خونی «گیرنده‌ی همگانی» کدام است؟", "Which blood group is the universal recipient?", "AB", "AB", ["ab", "ab+", "ای بی"]],
+["سلول‌های بدن انسان چند کروموزوم دارند؟", "How many chromosomes are in a human body cell?", "۴۶", "46", ["چهل و شش"]],
+["قلب انسان چند حفره دارد؟", "How many chambers does the human heart have?", "۴", "4", ["چهار", "four"]],
+["سخت‌ترین ماده‌ی طبیعی کدام است؟", "What is the hardest natural substance?", "الماس", "Diamond"],
+["بزرگ‌ترین جانور روی زمین کدام است؟", "What is the largest animal on Earth?", "نهنگ آبی", "Blue whale", ["whale", "the blue whale"]],
+["فراوان‌ترین گاز هوای زمین کدام است؟", "What is the most abundant gas in Earth's atmosphere?", "نیتروژن", "Nitrogen", ["ازت"]],
+["فراوان‌ترین فلز پوسته‌ی زمین کدام است؟", "What is the most abundant metal in Earth's crust?", "آلومینیوم", "Aluminum", ["aluminium", "آلومینیم"]],
+["نقطه‌ی انجماد آب چند درجه‌ی فارنهایت است؟", "What is the freezing point of water in degrees Fahrenheit?", "۳۲", "32", ["سی و دو"]],
+["جذر ۲۵۶ چند است؟", "What is the square root of 256?", "۱۶", "16", ["شانزده"]],
+["۱۵ به توان ۲ چند می‌شود؟", "What is 15 squared?", "۲۲۵", "225"],
+["۶ فاکتوریل (!۶) چند است؟", "What is 6 factorial (6!)?", "۷۲۰", "720"],
+["۲ به توان ۱۰ چند است؟", "What is 2 to the power of 10?", "۱۰۲۴", "1024"],
+["حاصل ۱۹ × ۲۱ چند است؟", "What is 19 × 21?", "۳۹۹", "399"],
+["مجموع زوایای داخلی یک هشت‌ضلعی چند درجه است؟", "What is the sum of the interior angles of an octagon, in degrees?", "۱۰۸۰", "1080"],
+["عدد دودویی ۱۰۱۱ در مبنای ۱۰ چند است؟", "What is the binary number 1011 in decimal?", "۱۱", "11", ["یازده"]],
+["بزرگ‌ترین عدد اول کوچک‌تر از ۱۰۰ کدام است؟", "What is the largest prime number below 100?", "۹۷", "97"],
+["نخستین عدد اول بعد از ۵۰ کدام است؟", "What is the first prime number after 50?", "۵۳", "53"],
+["ریشه‌ی سوم (مکعب) عدد ۱۲۵ چند است؟", "What is the cube root of 125?", "۵", "5", ["پنج"]],
+["جنگ جهانی دوم در چه سالی پایان یافت؟", "In what year did World War II end?", "۱۹۴۵", "1945"],
+["انقلاب اسلامی ایران در چه سالی (میلادی یا شمسی) پیروز شد؟", "In what year did the Iranian Revolution succeed?", "۱۳۵۷", "1979", ["1979", "۱۹۷۹", "1357"]],
+["امپراتوری روم غربی در چه سالی سقوط کرد؟", "In what year did the Western Roman Empire fall?", "۴۷۶", "476"],
+["کوروش بزرگ در چه سالی پیش از میلاد بابل را گشود؟", "In what year BC did Cyrus the Great take Babylon?", "۵۳۹", "539", ["539", "۵۳۹ پ.م"]],
+["معاهده‌ی ورسای پس از کدام جنگ امضا شد؟", "After which war was the Treaty of Versailles signed?", "جنگ جهانی اول", "World War I", ["جنگ جهانی یکم", "wwi", "world war 1", "world war one"]],
+["نخستین رئیس‌جمهور آمریکا که بود؟", "Who was the first president of the United States?", "جورج واشینگتن", "George Washington", ["واشینگتن", "washington"]],
+["کدام فرمانده‌ی فرانسوی خود را امپراتور کرد؟", "Which French general crowned himself emperor in 1804?", "ناپلئون بناپارت", "Napoleon Bonaparte", ["ناپلئون", "napoleon"]],
+["بمب اتمی نخست در ۱۹۴۵ بر کدام شهر ژاپن افتاد؟", "On which Japanese city was the first atomic bomb dropped in 1945?", "هیروشیما", "Hiroshima"],
+["امپراتوری مغول را چه کسی بنیان گذاشت؟", "Who founded the Mongol Empire?", "چنگیزخان", "Genghis Khan", ["چنگیز", "genghis", "chinggis khan"]],
+["پایتخت تیمور لنگ کدام شهر بود؟", "Which city was the capital of Timur (Tamerlane)?", "سمرقند", "Samarkand"],
+["جنگ چالدران میان صفویان و کدام امپراتوری رخ داد؟", "The Battle of Chaldiran was fought between the Safavids and which empire?", "عثمانی", "Ottoman Empire", ["امپراتوری عثمانی", "ottomans", "ottoman"]],
+["نادرشاه در ۱۷۳۹ کدام شهر هند را تصرف کرد؟", "Which Indian city did Nader Shah capture in 1739?", "دهلی", "Delhi", ["دهلی نو"]],
+["نخستین کسی که در ۱۹۱۱ به قطب جنوب رسید کیست؟", "Who was the first person to reach the South Pole in 1911?", "روآل آموندسن", "Roald Amundsen", ["آموندسن", "amundsen"]],
+["کشتی تایتانیک در چه سالی غرق شد؟", "In what year did the Titanic sink?", "۱۹۱۲", "1912"],
+["اتحاد جماهیر شوروی در چه سالی فروپاشید؟", "In what year did the Soviet Union dissolve?", "۱۹۹۱", "1991"],
+["پایتخت ساسانیان کدام شهر بود؟", "Which city was the Sasanian capital?", "تیسفون", "Ctesiphon", ["تیسفون", "ctesiphon"]],
+["پایتخت تابستانی هخامنشیان کدام شهر بود؟", "Which city was the summer capital of the Achaemenids?", "هگمتانه", "Ecbatana", ["اکباتان", "همدان", "hamadan"]],
+["شاه عباس صفوی پایتخت را به کدام شهر برد؟", "To which city did Shah Abbas I move the Safavid capital?", "اصفهان", "Isfahan", ["esfahan"]],
+["نخستین سفر دریایی دور دنیا (۱۵۱۹–۱۵۲۲) به نام کدام دریانورد آغاز شد؟", "Whose expedition began the first circumnavigation of the globe (1519–22)?", "ماژلان", "Magellan", ["فردیناند ماژلان", "ferdinand magellan"]],
+["نویسنده‌ی «هملت» کیست؟", "Who wrote \"Hamlet\"?", "ویلیام شکسپیر", "William Shakespeare", ["شکسپیر", "shakespeare"]],
+["نویسنده‌ی «بینوایان» کیست؟", "Who wrote \"Les Misérables\"?", "ویکتور هوگو", "Victor Hugo", ["هوگو", "hugo"]],
+["نویسنده‌ی «دن‌کیشوت» کیست؟", "Who wrote \"Don Quixote\"?", "سروانتس", "Cervantes", ["میگل دو سروانتس", "miguel de cervantes"]],
+["«ایلیاد» را چه کسی سروده است؟", "Who is credited with composing the \"Iliad\"?", "هومر", "Homer", ["هومروس"]],
+["نویسنده‌ی «شازده کوچولو» کیست؟", "Who wrote \"The Little Prince\"?", "آنتوان دو سنت‌اگزوپری", "Antoine de Saint-Exupéry", ["سنت اگزوپری", "saint-exupery", "saint exupery", "اگزوپری"]],
+["«گلستان» و «بوستان» اثر کدام شاعر است؟", "Who wrote the \"Gulistan\" and the \"Bustan\"?", "سعدی", "Saadi", ["سعدی شیرازی", "sadi", "sa'di"]],
+["دیوان غزل‌های کدام شاعر شیرازی برای فال گرفتن استفاده می‌شود؟", "Whose divan of ghazals, by a poet from Shiraz, is used for divination?", "حافظ", "Hafez", ["حافظ شیرازی", "hafiz", "خواجه حافظ"]],
+["«رباعیات» منسوب به کدام شاعر و ریاضی‌دان نیشابوری است؟", "The \"Rubaiyat\" is attributed to which poet-mathematician of Nishapur?", "خیام", "Omar Khayyam", ["عمر خیام", "khayyam"]],
+["«شاهنامه» را چه کسی سروده است؟", "Who composed the \"Shahnameh\"?", "فردوسی", "Ferdowsi", ["firdausi", "firdawsi", "حکیم فردوسی"]],
+["آهنگساز «سمفونی نهم» با «سرود شادی» کیست؟", "Who composed the Ninth Symphony with the \"Ode to Joy\"?", "بتهوون", "Beethoven", ["بتهوون", "ludwig van beethoven"]],
+["نقاش تابلوی «گرنیکا» کیست؟", "Who painted \"Guernica\"?", "پابلو پیکاسو", "Pablo Picasso", ["پیکاسو", "picasso"]],
+["مجسمه‌ی «داوود» اثر کدام هنرمند رنسانس است؟", "Which Renaissance artist sculpted \"David\" (1501–04)?", "میکل‌آنژ", "Michelangelo", ["میکلانژ", "میکل آنژ"]],
+["نویسنده‌ی «موبی دیک» کیست؟", "Who wrote \"Moby-Dick\"?", "هرمان ملویل", "Herman Melville", ["ملویل", "melville"]],
+["نویسنده‌ی «غرور و تعصب» کیست؟", "Who wrote \"Pride and Prejudice\"?", "جین آستین", "Jane Austen", ["آستین", "austen", "جین آستن"]],
+["نویسنده‌ی رمان «کلیدر» کیست؟", "Who wrote the Persian novel \"Kelidar\"?", "محمود دولت‌آبادی", "Mahmoud Dowlatabadi", ["دولت آبادی", "دولت‌آبادی", "dowlatabadi", "doulatabadi"]],
+["نویسنده‌ی «چشم‌هایش» کیست؟", "Who wrote the Persian novel \"Her Eyes\" (Cheshmhayash)?", "بزرگ علوی", "Bozorg Alavi", ["علوی", "alavi"]],
+["نویسنده‌ی «تاریخ جهانگشا» کیست؟", "Who wrote \"Tarikh-i Jahangushay\"?", "عطاملک جوینی", "Ata-Malik Juvayni", ["جوینی", "juvayni", "juvaini", "عطا ملک جوینی"]],
+["نویسنده‌ی «سیاست‌نامه» که وزیر سلجوقیان بود کیست؟", "Who wrote the \"Siyasatnama\" and was a Seljuk vizier?", "خواجه نظام‌الملک", "Nizam al-Mulk", ["نظام‌الملک", "نظام الملک", "nizam ul mulk"]],
+["مخترع وب جهان‌گستر (WWW) کیست؟", "Who invented the World Wide Web?", "تیم برنرز لی", "Tim Berners-Lee", ["برنرز لی", "berners lee", "berners-lee", "تیم برنرز-لی"]],
+["مخترع تلفن کیست؟", "Who is credited with inventing the telephone?", "الکساندر گراهام بل", "Alexander Graham Bell", ["گراهام بل", "bell", "graham bell"]],
+["مخترع موتور بخار بهبودیافته که واحد توان به نام اوست کیست؟", "Who improved the steam engine and gave his name to the unit of power?", "جیمز وات", "James Watt", ["وات", "watt"]],
+["مخترع پیل الکتریکی (باتری) نخستین کیست؟", "Who invented the first electric battery (voltaic pile)?", "آلساندرو ولتا", "Alessandro Volta", ["ولتا", "volta"]],
+["مخترع نخستین سیستم رادیویی عملی کیست؟", "Who developed the first practical radio telegraph system?", "مارکونی", "Guglielmo Marconi", ["گولیلمو مارکونی", "marconi"]],
+["نخستین رایانه‌ی الکترونیکی همه‌منظوره چه نام داشت؟", "What was the first general-purpose electronic computer called?", "انیاک", "ENIAC", ["eniac"]],
+["سازنده‌ی زبان برنامه‌نویسی پایتون کیست؟", "Who created the Python programming language?", "گیدو فان روسوم", "Guido van Rossum", ["گیدو ون روسوم", "van rossum", "guido"]],
+["CPU مخفف چیست؟", "What does CPU stand for?", "واحد پردازش مرکزی", "Central Processing Unit", ["central processing unit"]],
+["نخستین ماهواره‌ی ایرانی که با موشک ایرانی به فضا رفت چه نام داشت؟", "What was the first Iranian satellite launched on an Iranian rocket?", "امید", "Omid", ["omid"]],
+["جام جهانی فوتبال ۲۰۲۲ در کدام کشور برگزار شد؟", "Which country hosted the 2022 FIFA World Cup?", "قطر", "Qatar"],
+["قهرمان جام جهانی فوتبال ۲۰۱۴ کدام تیم بود؟", "Which team won the 2014 FIFA World Cup?", "آلمان", "Germany"],
+["کدام کشور بیشترین قهرمانی جام جهانی فوتبال (۵ بار) را دارد؟", "Which country has won the most men's FIFA World Cups (five)?", "برزیل", "Brazil"],
+["در شطرنج مهره‌ای که حرکت «L» شکل دارد چه نام دارد؟", "In chess, which piece moves in an \"L\" shape?", "اسب", "Knight", ["knight", "horse"]],
+["در شطرنج هر بازیکن در آغاز بازی چند مهره دارد؟", "How many pieces does each chess player start with?", "۱۶", "16", ["شانزده"]]
+];
+const impSeen=()=>{try{return JSON.parse(localStorage.getItem('wis-imp')||'[]')}catch(e){return[]}};
+const markImp=i=>{try{const a=impSeen();if(!a.includes(i)){a.push(i);localStorage.setItem('wis-imp',JSON.stringify(a))}}catch(e){}};
+function build(){const fk=cfg.lang=='fa',D=fk?DFA:DFE,n=cfg.n,S=cfg.ds,lv=[0,1,2,3].filter(i=>S[i]);
+ const H=bank(),g=geo(),e=elem(),M=mathPool(),o1=H.length,o2=o1+g.length,o3=o2+e.length,o4=o3+M.length;
+ const mc=({r,id,k:kk})=>{const q=shuf([0,1,2,3]);return{id,k:kk,q:r[0],o:q.map(k=>r[k+1]),c:q.indexOf(0)}};
+ const NB=NEWQ.map((T,i)=>({x:T[11],id:o4+i,cat:T[0],mk:()=>mc({r:fk?T.slice(1,6):T.slice(6,11),id:o4+i,k:T[0]})}));const F=facts(),o5=o4+NEWQ.length,oY=o5+F.length,IM0=IMP.length+IMC.length+IMP2.length+IMP3.length,is0=impSeen();const YQ=F.Y.map((o,i)=>({x:o.x,id:oY+i,cat:o.k,mk:()=>ynq(o,oY+i)})),TYP=F.TY.map((o,i)=>({x:o.x,imp:IM0+i,seen:is0.includes(IM0+i),cat:o.k,mk:()=>({id:null,imp:IM0+i,k:o.k,q:o.q,o:[],c:0,ty:1,ca:fk?o.a[0]:o.a[1],a:o.a})}));NB.push(...F.map((o,i)=>({x:o.x,id:o5+i,cat:o.k,mk:()=>mc({r:o.r,id:o5+i,k:o.k})})));let base=H.map((r,i)=>({x:r[5]!==undefined?r[5]:D[i],id:i,cat:'gen',mk:()=>mc({r,id:i,k:'gen'})})).concat(g.map((o,i)=>({x:o.x,id:o1+i,cat:'geo',mk:()=>mc({r:o.r,id:o1+i,k:'geo'})})),e.map((o,i)=>({x:o.x,id:o2+i,cat:'sci',mk:()=>mc({r:o.r,id:o2+i,k:'sci'})})),NB);
+ const mp=M.map((T,i)=>({x:T[3],id:o3+i,mk:()=>mc({r:mrow(T),id:o3+i,k:'math'})}));
+ const is=impSeen(),imp=IMP.map((T,i)=>({x:3,imp:i,seen:is.includes(i),mk:()=>({id:null,imp:i,q:fk?T[0]:T[1],o:[],c:0,ty:1,ca:fk?T[2]:T[3],a:[T[2],T[3]].concat(T[4]||[])})})).concat(IMC.map((T,j)=>{const i=IMP.length+j;return{x:3,imp:i,seen:is.includes(i),mk:()=>{const q=mc({r:[fk?T[0]:T[1]].concat(fk?T[2]:T[3]),id:null});q.imp=i;return q}}})).concat(IMP2.map((T,j)=>{const i=IMP.length+IMC.length+j;return{x:3,imp:i,seen:is.includes(i),mk:()=>({id:null,imp:i,q:fk?T[0]:T[1],o:[],c:0,ty:1,ca:fk?T[2]:T[3],a:[T[2],T[3]].concat(T[4]||[])})}})).concat(IMP3.map((T,j)=>{const i=IMP.length+IMC.length+IMP2.length+j;return{x:3,imp:i,seen:is.includes(i),mk:()=>({id:null,imp:i,q:fk?T[0]:T[1],o:[],c:0,ty:1,ca:fk?T[2]:T[3],a:[T[2],T[3]].concat(T[4]||[])})}}));
+ const sn=o=>o.imp!=null?o.seen:isSeen(o.id),dist=o=>Math.min(...lv.map(l=>Math.abs(o.x-l)));
+ const take=(list,k)=>{const res=[],used=new Set(),add=a=>{for(const o of a){if(res.length>=k)return;if(!used.has(o)){used.add(o);res.push(o)}}};
+  lv.forEach((l,i)=>add(shuf(list.filter(o=>o.x==l&&!sn(o))).slice(0,Math.floor(k/lv.length)+(i<k%lv.length?1:0))));
+  add(shuf(list.filter(o=>!sn(o))).sort((a,b)=>dist(a)-dist(b)));
+  add(shuf(list.filter(sn)).sort((a,b)=>dist(a)-dist(b)));
+  return res};
+ const TQ=cfg.qt=='ty',YN=cfg.qt=='yn'||cfg.qt=='rev',CA=cfg.cat,ALL=base.concat(imp),ALB=base.slice();if(CA!='all')base=base.filter(o=>o.cat==CA);const lo=lv.filter(l=>l<3).length,mk=lo&&CA=='all'&&!YN?Math.min(Math.ceil(n*.12*lo/lv.length),n):0;
+ if(TQ||YN){const pool=TQ?(CA=='all'?TYP.concat(imp):TYP.filter(o=>o.cat==CA)):(CA=='all'?YQ:YQ.filter(o=>o.cat==CA)),pk=take(pool,n);if(pk.length<n)pk.push(...take((TQ?TYP:YQ).filter(o=>!pk.includes(o)),n-pk.length));return shuf(pk.map(o=>o.mk()))}const pk=take(CA=='all'&&!YN?ALL:base,n-mk).concat(take(mp,mk));if(pk.length<n)pk.push(...take((YN?ALB:ALL).filter(o=>!pk.includes(o)),n-pk.length));return shuf(pk.map(o=>YN?yn(o.mk()):o.mk()))}
+function newG(pl,mode){return{mode,pl,qs:(window.QQ=build()),n:QQ.length,i:-1,ans:{},phase:'q',turn:0,id:++gid,t:cfg.time,buzz:cfg.buzz&&(mode=='ai'||mode=='online'),lg:cfg.lang}}
+function start(){
+ const m=cfg.mode,nm=clean(cfg.me),pl=[];
+ if(m=='local')for(let i=0;i<cfg.np;i++)pl.push({id:'l'+i,name:clean(cfg.names[i]||t('pn')+' '+fa(i+1)),s:0});
+ else{pl.push({id:'me',name:nm,s:0});if(m=='ai')pl.push({id:'bot',name:'🤖 '+t('ai')+' ('+t('lv')[cfg.lvl]+')',s:0,ai:1})}
+ host=true;G=newG(pl,m);next()}
+function snap(){const q=G.qs&&G.qs[G.i],a={};for(const k in G.ans)a[k]=G.phase=='q'?1:G.ans[k];
+ return{t:G.t,buzz:G.buzz,phase:G.phase,i:G.i,n:G.n,pl:G.pl,mode:G.mode,turn:G.turn,code:G.code,ans:a,rem:Math.max(0,(G.dl||0)-Date.now()),
+ lg:G.lg,tc:G.tc,cur:q&&{id:q.id,q:q.q,o:q.o,ty:q.ty,ca:G.phase=='q'?undefined:q.ca,c:G.phase=='q'?undefined:q.c}}}
+function pub(){render();if(G.mode=='online'&&room)room.emit('state',snap())}
+function next(){G.i++;if(G.i>=G.n){G.phase='end';return pub()}
+ G.phase='q';G.ans={};G.turn=0;{const q0=G.qs[G.i];G.tc=q0.ty?Math.max(G.t,30):G.t;G.dl=Date.now()+G.tc*1000;if(q0.id!=null)mark(q0.id,G.lg);else if(q0.imp!=null)markImp(q0.imp)}
+ if(G.mode=='ai'){const L=cfg.lvl,i=G.i,g=G.id,q=G.qs[i],[a,b]=DL[L],d=(a+Math.random()*(b-a))*1000*((G.tc||G.t)/15);
+  setTimeout(()=>{if(G&&G.id==g&&G.i==i){const w=q.o.map((_,i)=>i).filter(x=>x!=q.c);answer('bot',Math.random()<Math.min(.97,Math.max(.05,(PB[L]+((G.sk=G.sk||{})[q.k]??=(Math.random()-.5)*.6))*(q.ty?.5:1)))?q.c:(q.ty?-2:w[Math.random()*w.length|0]))}},d)}
+ pub()}
+function answer(pid,c){
+ if(G.phase!='q'||pid in G.ans)return;const q=G.qs[G.i],p=G.pl.find(x=>x.id==pid);if(!p)return;
+ G.ans[pid]=c;if(G.buzz){if(c==q.c)p.s++;else if(c>=0)G.pl.forEach(x=>{if(x.id!=pid)x.s++});return reveal()}if(c==q.c)p.s++;
+ if(G.mode=='local'){G.turn++;G.dl=Date.now()+(G.tc||G.t)*1000}
+ if(G.pl.every(x=>x.id in G.ans))reveal();else pub()}
+function reveal(){G.pl.forEach(p=>{if(!(p.id in G.ans))G.ans[p.id]=-1});G.phase='r';pub();const g=G.id,i=G.i;setTimeout(()=>{if(G&&G.id==g&&G.i==i&&G.phase=='r')next()},(G.qs&&G.qs[i]&&G.qs[i].ty)?2300:1300)}
+function myId(){if(host)return G.mode=='online'?'host':'me';const p=room&&room.peers().find(x=>x.isMe&&x.sameTab);return p&&p.peer}
+
+function render(){
+ dirs();if(!G)return menu();
+ const my=myId(),sc=G.pl.map(p=>`<span class="chip">${esc(p.name)}: ${sco(p)}</span>`).join('');
+ if(G.phase=='lobby'){
+  let h=`<h1>${t('lobby')}</h1><div class="card"><p class="lb c">${t('giveCode')}</p><div class="code">${esc(G.code)}</div></div><div class="card"><p class="lb">${t('players')} (${fa(G.pl.length)}/${fa(5)})</p>${G.pl.map(p=>`<div class="rk">${esc(p.name)}${p.id==my?' ('+t('you')+')':''}</div>`).join('')}<p class="mu">${fa(G.n)} ${t('qs')}</p></div>`;
+  h+=host?(G.pl.length>1?'<button class="go" data-a="begin">'+t('begin')+'</button>':'<p class="mu c">'+t('wait1')+'</p>'):'<p class="mu c">'+t('wait2')+'</p>';
+  return app.innerHTML=h+'<button class="b" style="width:100%;margin-top:10px" data-a="home">'+t('exit')+'</button>'}
+ if(G.phase=='end'){saveRes();
+  const r=G.pl.slice().sort((a,b)=>b.s-a.s),w=r[0],tie=r[1]&&r[1].s==w.s;
+  return app.innerHTML=`<h1>${t('end')}</h1><div class="card c"><div class="big">${medal()}</div><p style="font-size:20px">${G.pl.length<2?t('yourScore'):tie?t('tie'):t('winner')+' '+esc(w.name)}</p></div><div class="card">${r.map((p,i)=>`<div class="rk"><span>${fa(i+1)}. ${esc(p.name)}</span><b>${sco(p)}</b></div>`).join('')}</div><button class="b" style="width:100%;margin-bottom:8px" data-a="lb">🏅 ${CN[cfg.lang].lb}</button><button class="go" data-a="home">${t('again')}</button>`}
+ const q=G.cur||{q:G.qs[G.i].q,o:G.qs[G.i].o,ty:G.qs[G.i].ty,ca:G.phase=='q'?undefined:G.qs[G.i].ca,c:G.phase=='q'?undefined:G.qs[G.i].c},rv=G.phase=='r',me=G.ans[my];fx(q,rv,me);
+ let turnTxt='';
+ if(G.mode=='local'&&!rv)turnTxt=`<p class="c" style="font-weight:700">${t('turn')} ${esc(G.pl[G.turn].name)}</p>`;
+ else if(!rv&&me!==undefined)turnTxt='<p class="c mu">'+t('answered')+'</p>';
+ const picked=G.mode=='local'?null:me;
+ let h=`<div class="chips">${sc}</div><p class="mu c">${t('qn')} ${fa(G.i+1)}/${fa(G.n)} · <span id="tt"></span> ${t('sec')}</p><div class="bar"><i id="tb"></i></div><div class="q">${esc(q.q)}</div>`;
+ h+=q.ty?typedUI(q,rv,me,turnTxt):q.o.map((t,k)=>`<button class="o${rv&&k==q.c?' cr':rv&&k===picked?' wr':rv?' dim':''}" data-a="pick" data-v="${k}"${rv||(G.mode!='local'&&me!==undefined)?' disabled':''}>${rv&&k==q.c?'✓ ':rv&&k===picked?'✗ ':''}${esc(t)}</button>`).join('')+turnTxt;
+ if(rv)h+='<div class="chips">'+G.pl.map(p=>`<span class="chip">${esc(p.name)} ${G.ans[p.id]==-1?'—':G.ans[p.id]==q.c?'✅':'❌'}</span>`).join('')+'</div>';
+ const ke=$('#ti'),kv=ke?ke.value:'',kf=ke&&document.activeElement===ke;app.innerHTML=h;const ne=$('#ti');if(ne&&ke){ne.value=kv;if(kf)ne.focus()}tick()}
+function typedUI(q,rv,me,tt){if(rv)return`<div class="o ok ty">${t('cans')}: ${esc(q.ca||'')}</div>`;if(G.mode!='local'&&me!==undefined)return tt;return`<input id="ti" class="ti" autocomplete="off" placeholder="${t('typeHere')}"><button class="go" data-a="submit">${t('submit')}</button>`+tt}
+function tick(){
+ if(!G||G.phase!='q')return;const r=Math.max(0,G.dl-Date.now()),t=$('#tt'),b=$('#tb');
+ if(t){t.textContent=fa(Math.ceil(r/1000));b.style.width=r/((G.tc||G.t||15)*10)+'%';t.classList.toggle('low',r<5000);b.parentNode.classList.toggle('low',r<5000)}
+ if(host&&r<=0){G.mode=='local'?answer(G.pl[G.turn].id,-1):reveal()}}
+setInterval(tick,250);
+
+async function online(create,mc){
+ room=null;hp=null;const R=await useRoom();
+ if(!R){msg=t('noroom');pend=null;return menu()}
+ const code=mc||(create?rc():($('#cd').value||'').trim().toLowerCase());
+ if(!/^[a-z0-9]{3,6}$/.test(code)){msg=t('badcode');return menu()}
+ if(!mc)cfg.me=$('#nm').value;msg=t('conn');menu();
+ try{room=await R.join('qk-'+code)}catch(e){msg=t('fail');pend=null;room=null;return menu()}
+ host=create;const name=clean(cfg.me);
+ room.on('ans',m=>{if(!(host&&G&&!m.isMe&&m.data&&G.pl.some(p=>p.id==m.peer)&&RL(m.peer)))return;const q=G.qs&&G.qs[G.i];if(q&&q.ty){if(typeof m.data.s=='string')answer(m.peer,chk(q,m.data.s.slice(0,60))?q.c:-2)}else if([0,1,2,3].includes(m.data.c))answer(m.peer,m.data.c)});
+ room.on('state',m=>{if(host||m.isMe||!m.data)return;if(!hp)hp=m.peer;if(m.peer!=hp)return;G=m.data;G.dl=Date.now()+(G.rem||0);if(G.phase=='q'&&G.cur&&G.cur.id!=null)mark(G.cur.id,G.lg);render()});
+ if(create){
+  room.on('join',m=>{if(!host||m.isMe||!G||!RL('j'+m.peer))return;if(G.phase=='lobby'&&G.pl.length<5&&!G.pl.some(p=>p.id==m.peer))G.pl.push({id:m.peer,name:clean(m.data&&m.data.name),s:0});try{peerSeen[m.peer]={fa:dec(m.data.sf),en:dec(m.data.se)}}catch(e){}if(G.auto&&G.pl.length==2)return act.begin();pub()});
+  G={mode:'online',phase:'lobby',pl:[{id:'host',name,s:0}],n:cfg.n,code,qs:[],i:-1,ans:{},id:++gid};render();if(pend){lob.emit('match',{a:pend.a,b:pend.b,code});pend=null;G.auto=1}}
+ else{const send=()=>room.emit('join',{name,sf:enc(seenOf('fa')),se:enc(seenOf('en'))}),inRoom=()=>G&&(G.phase!='lobby'||(G.pl||[]).some(p=>p.id==myId()));send();let tries=0;const iv=setInterval(()=>{if(!room||inRoom()){clearInterval(iv);return}if(++tries>=8){clearInterval(iv);msg=t('nf');room.leave();room=null;G=null;menu();return}send()},1500)
+  }}
+
+async function search(near){
+ cfg.me=($('#nm')||{}).value||cfg.me;
+ const R0=await useRoom();if(!R0){msg=t('noroom');return menu()}
+ let R=R0;
+ if(near){const k=R0.near&&R0.near();if(!k){msg=t('nonear');return menu()}try{R=await R0.join('near-'+k)}catch(e){msg=t('fail');return menu()}}
+ lob=R;srch=true;menu();
+ const rk=near?'n':'r';
+ if(!regs[rk]){regs[rk]=1;
+  R.on('match',m=>{const d=m.data||{},me=R.peers().find(p=>p.isMe&&p.sameTab);if(srch&&me&&d.b==me.peer&&/^[a-z0-9]{4,6}$/.test(d.code||'')){srch=false;R.presence({srch:null});online(false,d.code)}});
+  R.onPeers(ch=>{if(!srch||pend)return;const me=ch.peers.find(p=>p.isMe&&p.sameTab);if(!me)return;
+   const l=ch.peers.filter(p=>p.kind=='viewer'&&p.presence&&p.presence.srch&&(!p.isMe||p.sameTab)).sort((a,b)=>a.peer<b.peer?-1:1);
+   if(l.length>1&&l[0].peer==me.peer){srch=false;pend={a:me.peer,b:l[1].peer};R.presence({srch:null});online(true,rc())}})}
+ R.presence({srch:1})}
+const act={
+ lang(v){cfg.lang=v;menu()},lb(){if(room){room.leave();room=null}G=null;host=true;view='lb';menu()},back(){view='';menu()},tab(v){lbT=v;menu()},cat(v){cfg.cat=v;menu()},qt(v){cfg.qt=v;menu()},snd(){cfg.snd=!cfg.snd;try{localStorage.setItem('wis-snd',cfg.snd?'1':'0')}catch(e){}menu()},dq(v){cfg.dq=+v;menu()},time(v){cfg.time=+v;menu()},buzz(v){cfg.buzz=v=='1';menu()},rand(){search()},near(){search(true)},cancel(){srch=false;if(lob)lob.presence({srch:null});menu()},
+ mode(v){cfg.mode=v;msg='';menu()},n(v){cfg.n=+v;menu()},lvl(v){cfg.lvl=+v;menu()},np(v){cfg.np=+v;menu()},
+ start(){cfg.me=($('#nm')||{}).value||cfg.me;start()},
+ create(){online(true)},join(){online(false)},
+ begin(){G.t=cfg.time;G.buzz=cfg.buzz;G.lg=cfg.lang;G.qs=build();G.n=G.qs.length;G.i=-1;G.pl.forEach(p=>p.s=0);next()},
+ home(){if(room){room.leave();room=null}G=null;host=true;msg='';menu()},
+ dtog(v){const i=+v;cfg.ds[i]=!cfg.ds[i];if(!cfg.ds.some(Boolean))cfg.ds[i]=true;menu()},
+ submit(){if(!G||G.phase!='q')return;const el=$('#ti'),v=el?el.value:'';
+  if(!host){const id=myId();if(id&&!(id in G.ans)){G.ans[id]=1;room.emit('ans',{s:String(v).slice(0,60)});render()}return}
+  const q=G.qs[G.i];if(!q||!q.ty)return;if(el)el.value='';
+  answer(G.mode=='local'?G.pl[G.turn].id:G.mode=='online'?'host':'me',chk(q,v)?q.c:-2)},
+ pick(v){if(!G||G.phase!='q')return;const c=+v;
+  if(!host){const id=myId();if(id&&!(id in G.ans)){G.ans[id]=c;room.emit('ans',{c});render()}return}
+  answer(G.mode=='local'?G.pl[G.turn].id:G.mode=='online'?'host':'me',c)}};
+function yn(q){const ok=Math.random()<.5,fk=cfg.lang=='fa',rv=cfg.qt=='rev',a=ok?q.o[q.c]:shuf(q.o.filter((_,i)=>i!=q.c))[0];return{id:q.id,k:q.k,q:(rv?(fk?'🔄 برعکس جواب بده! ':'🔄 Answer the opposite! '):'')+(fk?q.q+' آیا پاسخ «'+a+'» است؟':q.q+' Is the answer "'+a+'"?'),o:fk?['آره','نه']:['Yes','No'],c:(ok?0:1)^(rv?1:0)}}
+function ynq(o,id){const fk=cfg.lang=='fa',rv=cfg.qt=='rev';return{id,k:o.k,q:(rv?(fk?'🔄 برعکس جواب بده! ':'🔄 Answer the opposite! '):'')+(fk?'آیا این جمله درست است؟ «'+o.t+'»':'Is this statement true? "'+o.t+'"'),o:fk?['آره','نه']:['Yes','No'],c:(o.v?0:1)^(rv?1:0)}}
+const RLm={},RL=p=>{const n=Date.now();if(n-(RLm[p]||0)<250)return false;RLm[p]=n;return true};
+const rc=()=>Array.from(crypto.getRandomValues(new Uint8Array(6)),v=>'abcdefghjkmnpqrstuvwxyz23456789'[v%31]).join('');
+const pc=v=>fa(v)+(cfg.lang=='fa'?'٪':'%');
+function ac(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state=='suspended')AC.resume()}catch(e){}}
+function beep(ok){if(!cfg.snd)return;try{if(AC)(ok?[660,880]:[220,165]).forEach((h,i)=>{const o=AC.createOscillator(),g=AC.createGain(),s=AC.currentTime+i*.12;o.type=ok?'sine':'sawtooth';o.frequency.value=h;g.gain.setValueAtTime(.1,s);g.gain.exponentialRampToValueAtTime(.001,s+.18);o.connect(g);g.connect(AC.destination);o.start(s);o.stop(s+.2)});navigator.vibrate&&navigator.vibrate(ok?30:[60,40,60])}catch(e){}}
+function fx(q,rv,me){if(!rv)return;const k=(G.code||'')+'|'+G.id+'|'+G.i;if(lastK==k)return;lastK=k;if(G.mode=='local'||me===undefined)return;beep(me===q.c)}
+function confetti(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;for(let i=0;i<28;i++){const e=document.createElement('span');e.className='cf';e.textContent=['🎉','⭐','🎊','✨'][i%4];e.style.left=Math.random()*95+'vw';e.style.animationDelay=Math.random()*.8+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),3600)}}
+function saveRes(){if(G.saved)return;G.saved=1;if(G.mode=='local')return;const my=myId(),p=G.pl.find(x=>x.id==my)||G.pl[0],v=Math.round(p.s*100/G.n);G.pcv=v;try{const a=JSON.parse(localStorage.getItem('wis-lb')||'[]');a.push({nm:p.name,s:p.s,n:G.n,pc:v,m:G.mode,d:Date.now()});localStorage.setItem('wis-lb',JSON.stringify(a.slice(-200)))}catch(e){}if(v>=70)setTimeout(()=>{beep(true);confetti()},150)}
+const medal=()=>G.pcv==null?'🏁':(G.pcv>=90?'🏆':G.pcv>=70?'🥇':G.pcv>=50?'🥈':'🎯')+'<div style="font-size:20px">'+pc(G.pcv)+'</div>';
+const extra=()=>{const T=CN[cfg.lang];return`<div class="card"><p class="lb">${T.qt}</p>${seg('qt',[['mc',T.mc],['yn',T.yn],['rev',T.rev],['ty',T.ty]],cfg.qt)}${cfg.qt=='rev'?'<p class="mu" style="margin:8px 0 0;font-size:14px">'+T.rh+'</p>':cfg.qt=='yn'?'<p class="mu" style="margin:8px 0 0;font-size:14px">'+T.yh+'</p>':cfg.qt=='ty'?'<p class="mu" style="margin:8px 0 0;font-size:14px">'+T.th+'</p>':''}</div><div class="card"><p class="lb">${T.cat}</p><div class="row">${['all',...CATS].map(k=>`<button class="b${cfg.cat==k?' on':''}" data-a="cat" data-v="${k}">${T[k]}</button>`).join('')}</div></div><div class="row" style="margin-bottom:12px"><button class="b" data-a="lb">🏅 ${T.lb}</button><button class="b" data-a="snd">${cfg.snd?'🔊':'🔇'}</button></div>`};
+function lbView(){const T=CN[cfg.lang],P={d:864e5,w:6048e5,a:1e15},now=Date.now();let a=[];try{a=JSON.parse(localStorage.getItem('wis-lb')||'[]')}catch(e){}
+const L2=a.filter(x=>now-x.d<P[lbT]).sort((x,y)=>y.pc-x.pc||y.n-x.n).slice(0,10),best=a.length?Math.max(...a.map(x=>x.pc)):0;
+app.innerHTML=`<h1>🏅 ${T.lb}</h1><div class="card">${seg('tab',[['d',T.d],['w',T.w],['a',T.a]],lbT)}</div><div class="card c"><p class="lb">${T.b}</p><div class="big">${pc(best)}</div></div><div class="card">${L2.length?L2.map((x,i)=>`<div class="rk"><span>${fa(i+1)}. ${esc(x.nm)}</span><b>${pc(x.pc)} · ${fa(x.s)}/${fa(x.n)}</b></div>`).join(''):`<p class="mu c">${T.e}</p>`}<p class="mu c" style="font-size:13px">${T.note}</p></div><button class="go" data-a="back">${T.bk}</button>`}
+app.onclick=e=>{ac();const b=e.target.closest('[data-a]');if(b&&!b.disabled)act[b.dataset.a](b.dataset.v)};
+app.onkeydown=e=>{if(e.key=='Enter'&&e.target.id=='ti')act.submit()};
+app.oninput=e=>{const t=e.target;if(t.dataset.i!==undefined)cfg.names[+t.dataset.i]=t.value;else if(t.id=='nm')cfg.me=t.value};
+menu();
+</script>
+</body>
+</html>
